@@ -32,7 +32,7 @@ Enables random mode, where next image to load is chosen randomly from the file l
 
 == Slideshow ==
 
-Slideshow enables runtime image changes, during user work. Quite sexy;)
+Slideshow enables runtime image changes, during user work. Value defines number of milliseconds between image change. Quite sexy;)
 
 == File list ==
 
