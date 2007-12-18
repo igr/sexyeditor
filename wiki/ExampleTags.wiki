@@ -2,7 +2,7 @@
 
 = Tag different file types =
 
-One usage scenario is to tag file types with images. For example, user can put little duke in bottom-right corner for all java files (*.java):
+One usage scenario is to tag file types with images. For example, user can put little duke in bottom-right corner for all java files:
 
 
 [http://idea-sexyeditor.googlecode.com/files/duke1.jpg]
