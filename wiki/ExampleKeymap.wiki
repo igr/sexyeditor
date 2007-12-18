@@ -1,0 +1,6 @@
+#summary SexyEditor example #3
+
+= IDEA Keymap =
+
+Since right part of the editor is often unused, user can add image with most important keymaps to it:
+
