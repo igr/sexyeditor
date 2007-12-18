@@ -36,4 +36,4 @@ Slideshow enables runtime image changes, during user work. Value defines number 
 
 == File list ==
 
-Editable list of all images files. Each file has to be in one row.
+Editable list of all images files. Each file has to be in one row. Invalid files are simply ignored.
