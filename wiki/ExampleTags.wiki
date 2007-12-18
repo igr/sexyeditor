@@ -2,12 +2,6 @@
 
 = Tag different file types =
 
+One usage scenario is to tag file types with images. For example, user can put little duke in bottom-right corner for all java files (*.java):
 
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+[duke1.jpg]
