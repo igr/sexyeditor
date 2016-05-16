@@ -20,7 +20,6 @@ public class SexyEditor implements ApplicationComponent {
 	private Icon[] pluginIcons;
 
 	public SexyEditor() {
-		System.out.println("11111111");
 	}
 
 	public static SexyEditor getInstance() {
