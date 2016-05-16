@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-	<id>net.intellij.plugins.sexyeditor.SexyEditor</id>
+	<id>Sexy Editor</id>
 	<name>Sexy Editor</name>
 	<version>2.0</version>
 	<vendor email="igor@jodd.org" url="http://oblac.com">Oblac.com</vendor>
