@@ -28,7 +28,7 @@ money; I will be polite and take it all. Here are some sponsorship
 packages for you:
 
 + **2 $** _SUPPORTER_
-  you get beautiful email with solid background
+  You get beautiful email with solid background
   and random poem. You get also _one bonus photo_ you can use as a
   background!
 + **5 $** _HUPSTER_
@@ -45,6 +45,10 @@ packages for you:
 ## Links
 
 + [Usage](wiki/Usage.wiki)
-+ [Example: Gallery](wiki/ExampleGallery.md)
-+ [Example: Keymap](wiki/ExampleKeymap.md)
-+ [Example: Tags](wiki/ExampleTags.md)
++ [Example: Gallery](doc/ExampleGallery.md)
++ [Example: Keymap](doc/ExampleKeymap.md)
++ [Example: Tags](doc/ExampleTags.md)
+
+## See also
+
+[Jodd](http://jodd.org)
