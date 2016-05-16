@@ -25,15 +25,15 @@ Wow! I know, you are impressed. Totally. It's ok, you can donate
 money; I will be polite and take it all. Here are some sponsorship
 packages for you:
 
-+ **2 $** _Supporter_\\
++ **2 $** _Supporter_ \
   you get beautiful email with solid background
   and random poem. You get also _one bonus photo_ you can use as a
   background!
-+ **5 $** _Hipster_\\
++ **5 $** _Hipster_ \
   you earned our eternal gratitude! Plus, you get _five_ photos
   you can use for background, maybe made by some of the most
   famous photographers!
-+ **10 $** _Uber-cool_\\
++ **10 $** _Uber-cool_ \
   Now we are talking. Not only that you will get _ten_ (10!) photos
   for your background, but they will also contain 2^31 colors -
   and you will love every one of it! But that is not all!
