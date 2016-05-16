@@ -21,6 +21,8 @@ And then what? You can put any image as editor background! Like:
 That is not all! You can set multiple backgrounds! They can change like
 slideshow, or they can change randomly.
 
+![](sexyeditor.jpg)
+
 Wow! I know, you are impressed. Totally. It's ok, you can donate
 money; I will be polite and take it all. Here are some sponsorship
 packages for you:
