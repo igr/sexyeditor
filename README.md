@@ -45,6 +45,6 @@ packages for you:
 ## Links
 
 + [Usage](wiki/Usage.wiki)
-+ [Example Gallery](wiki/ExampleGallery.wiki)
-+ [Example Keymap](wiki/ExampleKeymap.wiki)
-+ [Example Tags](wiki/ExampleTags.wiki)
++ [Example: Gallery](wiki/ExampleGallery.md)
++ [Example: Keymap](wiki/ExampleKeymap.md)
++ [Example: Tags](wiki/ExampleTags.md)
