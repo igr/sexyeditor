@@ -2,7 +2,7 @@
 
 = Configuration screen =
 
-[http://idea-sexyeditor.googlecode.com/files/config.jpg]
+![](config.png)
 
 = Details =
 

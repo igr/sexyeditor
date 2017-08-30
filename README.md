@@ -3,7 +3,7 @@
 Editors are so booooring. White background. Black background.
 <Put-your-color-here/> background. Meh.
 
-Not any more! With **Sexy** editor, even your IntelliJ IDE will become...
+Not anymore! With **Sexy** editor, even your IntelliJ IDE will become...
 err... sexy! If you wonder how an editor can become sexy, just don't -
 simply install the plugin :)
 
@@ -28,12 +28,12 @@ money; I will be polite and take it all. Here are some sponsorship
 packages for you:
 
 + **2 $** _SUPPORTER_
-  You get beautiful email with solid background
-  and random poem. You get also _one bonus photo_ you can use as a
+  You get a beautiful email with a solid background
+  and a random poem. You also get _one bonus photo_ you can use as a
   background!
-+ **5 $** _HUPSTER_
++ **5 $** _HOOPSTER_
   you earned our eternal gratitude! Plus, you get _five_ photos
-  you can use for background, maybe made by some of the most
+  you can use for a background, maybe made by some of the most
   famous photographers!
 + **10 $** _UBER-COOL_
   Now we are talking. Not only that you will get _ten_ (10!) photos
@@ -44,7 +44,7 @@ packages for you:
 
 ## Links
 
-+ [Usage](wiki/Usage.wiki)
++ [Usage](doc/Usage.md)
 + [Example: Gallery](doc/ExampleGallery.md)
 + [Example: Keymap](doc/ExampleKeymap.md)
 + [Example: Tags](doc/ExampleTags.md)
