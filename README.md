@@ -44,7 +44,11 @@ packages for you:
 
 ## Links
 
+<<<<<<< HEAD
 + [Usage](doc/Usage.md)
+=======
++ [Usage](doc/Usage.wiki)
+>>>>>>> 1238e37dbd4b476c7aa97a6f016dca43f0cc0ee1
 + [Example: Gallery](doc/ExampleGallery.md)
 + [Example: Keymap](doc/ExampleKeymap.md)
 + [Example: Tags](doc/ExampleTags.md)
