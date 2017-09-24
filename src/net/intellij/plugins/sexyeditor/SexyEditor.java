@@ -31,6 +31,9 @@ public class SexyEditor implements ApplicationComponent {
 	 */
 	public void initComponent() {
 		SexyEditorState state = SexyEditorState.getInstance();
+		if (state == null) {
+			return;
+		}
 
 		if (state.configs.isEmpty()) {
 			state.configs.add(new BackgroundConfiguration());

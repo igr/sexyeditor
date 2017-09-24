@@ -1,5 +1,7 @@
 package net.intellij.plugins.sexyeditor;
 
+import com.intellij.ui.JBColor;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -48,7 +50,7 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		add(new JLabel("Preview:"), BorderLayout.NORTH);
 		label = new JLabel();
-		label.setBackground(Color.WHITE);
+		label.setBackground(JBColor.WHITE);
 		label.setOpaque(true);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setPreferredSize(new Dimension(previewSize, previewSize));

@@ -44,6 +44,10 @@ public class SexyEditorConfigurable implements Configurable {
 	public void apply() throws ConfigurationException {
 		SexyEditorState state = SexyEditorState.getInstance();
 
+		if (state == null) {
+			return;
+		}
+
 		state.configs = configurationComponent.save();
 
 		state.configs.forEach(BackgroundConfiguration::repaintAllEditors);

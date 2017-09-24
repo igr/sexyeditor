@@ -256,24 +256,21 @@ public class BackgroundConfiguration {
 		if (slideshowThread != null) {
 			return;
 		}
-		slideshowThread = new Thread() {
-				@Override
-				public void run() {
-					while (slideshow) {
-						try {
-							sleep(slideshowPause);
-						} catch (InterruptedException iex) {
-							if (!slideshow) {
-								break;
-							}
-						}
-						for (BackgroundBorder border : allBorders) {
-							String nextImage = getNextImage();
-							border.loadImage(nextImage);
-						}
+		slideshowThread = new Thread(() -> {
+			while (slideshow) {
+				try {
+					Thread.sleep(slideshowPause);
+				} catch (InterruptedException iex) {
+					if (!slideshow) {
+						break;
 					}
 				}
-			};
+				for (BackgroundBorder border : allBorders) {
+					String nextImage = getNextImage();
+					border.loadImage(nextImage);
+				}
+			}
+		});
 		slideshowThread.setDaemon(true);
 		slideshowThread.setPriority(Thread.MIN_PRIORITY);
 		slideshowThread.start();

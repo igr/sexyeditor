@@ -1,5 +1,7 @@
 package net.intellij.plugins.sexyeditor;
 
+import com.intellij.util.ui.JBUI;
+
 import javax.imageio.ImageIO;
 import javax.swing.JViewport;
 import javax.swing.border.Border;
@@ -107,7 +109,7 @@ public class BackgroundBorder implements Border {
 	 * Returns the insets of the border.
 	 */
 	public Insets getBorderInsets(Component c) {
-		return new Insets(0, 0, 0, 0);
+		return JBUI.emptyInsets();
 	}
 
 	/**
@@ -124,12 +126,7 @@ public class BackgroundBorder implements Border {
 	 * Repaints parent component of this border.
 	 */
 	public void loadImage(final String fileName) {
-		new Thread() {
-			@Override
-			public void run() {
-				loadImageNow(fileName);
-			}
-		}.start();
+		new Thread(() -> loadImageNow(fileName)).start();
 	}
 
 	/**
