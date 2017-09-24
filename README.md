@@ -1,27 +1,40 @@
 # IntelliJ Sexy Editor
 
 Editors are so booooring. White background. Black background.
-<Put-your-color-here/> background. Meh.
+<Choose-your-color-here/> background. Meh.
 
-Not anymore! With **Sexy** editor, even your IntelliJ IDE will become...
-err... sexy! If you wonder how an editor can become sexy, just don't -
-simply install the plugin :)
+Not anymore! With **Sexy Editor**, your IntelliJ IDE will become...
+err... sexy! By choosing one or more background images, your
+everyday IntelliJ editor gets _super beautiful_. 
 
-And then what? You can put any image as editor background! Like:
+But that's not all! It doesn't have to be just a pretty image.
+Put a motivational quote of your choice, instead! By simply looking
+at it, _every hour_ of every working day, you will soon become
+whatever you are striving for! 
+
+## Examples
+
+Or, what you can use to make IntelliJ sexy:
 
 + awesome picture of yourself;
 + embarrassing photo of your colleague;
 + funny photo of your dog;
-+ hot girl, that keeps you motivated to stare at the code all day;
++ cute photo of your cat;
++ logo of your favorite sports club;
++ good looking ppl, to help you staring at the code all day;
++ photoshot of your secret crush;
 + hotkeys for your ide;
-+ photo of your mom or wedding (please, don't!);
-+ motivational quote
++ photo of your mom (please, don't!);
++ motivational quote;
++ photo of you boss (bonus guaranteed!)
 + ...
 
-That is not all! You can set multiple backgrounds! They can change like
-slideshow, or they can change randomly.
+Wait! You can set multiple backgrounds! They can change like
+a slideshow, or they can change randomly.
 
 ![](sexyeditor.jpg)
+
+## Feeling Sexy?
 
 Wow! I know, you are impressed. Totally. It's ok, you can donate
 money; I will be polite and take it all. Here are some sponsorship
