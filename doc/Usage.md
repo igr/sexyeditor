@@ -2,7 +2,7 @@
 
 ## Configuration screen
 
-![](config.png)
+![](config2.png)
 
 ## Editor
 
@@ -16,13 +16,21 @@ Name is just user-friendly group label. Match is semi-column (;) separated list 
 
 Image relative position in editor window. Offset is a gap in pixels between image and nearest editor edges.
 
+## Fixed position
+
+If checked, image will not follow scrolling the view area of your editor.
+
+## Shrink to fit
+
+Big images will be scaled to fit the visible area.
+
 ## Opacity
 
 Makes images transparent.
 
-## Shrink to fit
+## Resize
 
-If this option is set, large images will be shrink to fit the *desktop* size. Note it is a desktop size, not IDEA size, therefore, images will be still a bit larger then editor. Therefore it is possible to set amount of shrinking: 100% means images will fit to desktop, 50% means images will fit the one quarter of the screen.
+If this option is set, large images will be resized to fit the *desktop* size. Note it is a desktop size, not IDEA size, therefore, images will be still a bit larger then editor. Therefore it is possible to set amount of resizing: 100% means images will fit to desktop, 50% means images will fit the one quarter of the screen.
 
 ## Random
 
@@ -34,4 +42,4 @@ Slideshow enables runtime image changes, during user work. Value defines number 
 
 ## File list
 
-Editable list of all images files. Each file has to be in one row. Invalid files are simply ignored.
+List of all images files. Each file has to be in one row. Invalid files are simply ignored.

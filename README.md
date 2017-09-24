@@ -1,16 +1,18 @@
-# IntelliJ Sexy Editor
+# IntelliJ Sexy Editor 💟💻
 
 Editors are so booooring. White background. Black background.
 <Choose-your-color-here/> background. Meh.
 
 Not anymore! With **Sexy Editor**, your IntelliJ IDE will become...
 err... sexy! By choosing one or more background images, your
-everyday IntelliJ editor gets _super beautiful_. 
+everyday IntelliJ editor gets _super beautiful_.
 
 But that's not all! It doesn't have to be just a pretty image.
 Put a motivational quote of your choice, instead! By simply looking
 at it, _every hour_ of every working day, you will soon become
-whatever you are striving for! 
+whatever you are striving for!
+
+Don't forget to [vote for the plugin!](https://plugins.jetbrains.com/plugin/1833-sexy-editor)
 
 ## Examples
 
@@ -62,6 +64,19 @@ packages for you:
 + [Example: Keymap](doc/ExampleKeymap.md)
 + [Example: Tags](doc/ExampleTags.md)
 
+# Success Stories
+
+Over time, we have received a large amount of beautiful feedback on how **Sexy Editor** changed people lives. We are sharing here just few.
+
+> "I was just a junior developer in this high-end, enterprise, company. No one really listened to my ideas, they just delegated the most boring tasks to me. Until one day, the principal consultant saw my IntelliJ IDEA opened. He came to my place and asked about the plugin... and a month later, I was promoted and started working directly for the consultant guy. Guys, thank you so much." - Greg, New York, USA
+
+> "I had a huge crash on our new internship guy. I put his image as a background, I was really in love. One day he saw his image beyond my Java code. He liked both the code and the plugin. Year later we got our first kid. He was named Ed, in honor of Sexy Editor." - Jacqueline, Paris, France
+
+> "I stopped smoking thanx to you guys! I spent like hundreds of dollars for all kind of California terapists, and nothing helped. I was despaired. Then I just made a pic with simple sentence: I am not smoking. That was it. I guess my brain processed this message even I was not directly looking at it. Two months later, I was a new guy!" - Brian, San Francisco, USA
+
+> "Everyone in my office wants to figure the secret how I made my IDEA so beautiful. I am not telling them, ha ha... And I love this feeling!" - Anonymous.
+
+
 ## See also
 
-[Jodd](http://jodd.org)
+Why not [Jodd](http://jodd.org)?
