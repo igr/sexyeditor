@@ -70,7 +70,8 @@ public class BackgroundBorder implements Border {
 
 		int position = config.getPosition();
 		int positionOffset = config.getPositionOffset();
-		boolean fixedLocation = config.isFixedPosition();
+		final boolean fixedLocation = config.isFixedPosition();
+		final boolean shrinkToFit = config.isShrinkToFit();
 		// x axis
 
 		if (fixedLocation) {
@@ -115,7 +116,33 @@ public class BackgroundBorder implements Border {
 		}
 
 		// draw
-		g2d.drawImage(image, x, y, jv);
+		if (!shrinkToFit) {
+			g2d.drawImage(image, x, y, jv);
+		}
+		else {
+			int newImageWidth = imageWidth;
+			int newImageHeight = imageHeight;
+
+			final int visibleWidth = width - 2 * positionOffset;
+			final int visibleHeight = height - 2 * positionOffset;
+
+			if (newImageWidth > visibleWidth) {
+				// reduce image height
+				double scale = visibleWidth / (double)newImageWidth;
+
+				newImageWidth = visibleWidth;
+				newImageHeight = (int) (newImageHeight * scale);
+			}
+			if (newImageHeight > visibleHeight) {
+				// reduce image width
+				double scale = visibleHeight / (double)newImageHeight;
+
+				newImageHeight = visibleHeight;
+				newImageWidth = (int) (newImageWidth * scale);
+			}
+
+			g2d.drawImage(image, x, y, newImageWidth, newImageHeight, jv);
+		}
 	}
 
 	private boolean isOnBottom(int position) {

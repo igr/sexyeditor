@@ -79,6 +79,8 @@ public class BackgroundConfiguration {
 	 */
 	protected boolean fixedPosition = true;
 
+	protected boolean shrinkToFit = false;
+
 	// ---------------------------------------------------------------- access
 
 	public String getName() {
@@ -180,6 +182,14 @@ public class BackgroundConfiguration {
 
 	public void setFixedPosition(boolean fixedPosition) {
 		this.fixedPosition = fixedPosition;
+	}
+
+	public boolean isShrinkToFit() {
+		return shrinkToFit;
+	}
+
+	public void setShrinkToFit(boolean shrinkToFit) {
+		this.shrinkToFit = shrinkToFit;
 	}
 
 	// ---------------------------------------------------------------- runtime
