@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="borderConfigPanel" layout-manager="GridLayoutManager" row-count="9" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="663" height="443"/>
+      <xy x="20" y="20" width="827" height="443"/>
     </constraints>
     <properties/>
     <border type="none" title="Editor group configuration"/>
@@ -26,6 +26,7 @@
           </grid>
         </constraints>
         <properties>
+          <text value=""/>
           <toolTipText value="User-friendly editor group name." noi18n="true"/>
         </properties>
       </component>
@@ -140,7 +141,6 @@
           </grid>
         </constraints>
         <properties>
-          <labelFor value="d51a1"/>
           <text value="File list:"/>
         </properties>
       </component>
@@ -157,7 +157,7 @@
         </constraints>
         <properties>
           <icon value="net/intellij/plugins/sexyeditor/gfx/images.png"/>
-          <text value="Insert..."/>
+          <text value="Add image(s)..."/>
         </properties>
       </component>
       <component id="f1dae" class="javax.swing.JLabel">
@@ -188,14 +188,16 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="d51a1" class="javax.swing.JTextArea" binding="fileListTextArea">
+          <component id="299ae" class="javax.swing.JList" binding="fileList">
             <constraints/>
             <properties>
-              <columns value="35"/>
-              <rows value="10"/>
-              <text value=""/>
-              <toolTipText value="&lt;html&gt;&#10;File list of images."/>
+              <model/>
+              <selectionMode value="1"/>
+              <toolTipText value="File list"/>
             </properties>
+            <clientProperties>
+              <List.isFileList class="java.lang.Boolean" value="true"/>
+            </clientProperties>
           </component>
         </children>
       </scrollpane>
@@ -238,6 +240,14 @@
           <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="95909" class="javax.swing.JButton" binding="removeFilesButton">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Remove"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

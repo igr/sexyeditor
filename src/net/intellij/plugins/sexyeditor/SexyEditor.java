@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
-import java.util.Random;
 
 /**
  * Sexy editor plugin.
@@ -16,8 +15,7 @@ import java.util.Random;
 public class SexyEditor implements ApplicationComponent {
 
 	public static final String COMPONENT_NAME = "SexyEditor";
-	private static Random rnd = new Random();
-	private Icon[] pluginIcons;
+	private Icon pluginIcon;
 
 	public SexyEditor() {
 	}
@@ -62,13 +60,10 @@ public class SexyEditor implements ApplicationComponent {
 	 */
 	@Nullable
 	public Icon getIcon() {
-		if (pluginIcons == null) {
-			pluginIcons = new Icon[5];
-			for (int i = 0; i < pluginIcons.length; i++) {
-				pluginIcons[i] = IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/girl" + (i + 1) +".png");
-			}
+		if (pluginIcon == null) {
+			pluginIcon = IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/heart.png");
 		}
-		return pluginIcons[rnd.nextInt(pluginIcons.length)];
+		return pluginIcon;
 	}
 
 }

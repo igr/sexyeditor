@@ -1,17 +1,7 @@
 package net.intellij.plugins.sexyeditor;
 
-import javax.swing.JTextField;
-import javax.swing.JSlider;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Dimension;
-import java.util.StringTokenizer;
 import java.io.File;
 
 /**
@@ -31,9 +21,11 @@ public class BorderConfig {
 	private JPanel borderConfigPanel;
 	private JTextField matchTextField;
 	private JButton insertFilesButton;
-	private JTextArea fileListTextArea;
 	private JTextField positionOffsetTextField;
 	private JLabel imageLabel;
+	private JList<String> fileList;
+	private JButton removeFilesButton;
+	private DefaultListModel<String> fileListModel;
 
 	private DefaultComboBoxModel positionComboBoxModel;
 
@@ -47,7 +39,9 @@ public class BorderConfig {
 	/**
 	 * Initialization.
 	 */
+	@SuppressWarnings("unchecked")
 	private void init() {
+		this.fileListModel = (DefaultListModel<String>) fileList.getModel();
 		positionComboBoxModel = (DefaultComboBoxModel) positionComboBox.getModel();
 		positionComboBox.setRenderer(new PositionComboBoxRenderer());
 		for (int i = 0; i < PositionComboBoxRenderer.POSITIONS.length; i++) {
@@ -71,6 +65,19 @@ public class BorderConfig {
 		slideshowCheckBox.addActionListener(
 			e -> slideShowPause.setEnabled(slideshowCheckBox.isSelected()));
 
+		// remove files
+		removeFilesButton.addActionListener(e -> {
+			int min = fileList.getMinSelectionIndex();
+			if (min == -1) {
+				return;
+			}
+			int max = fileList.getMaxSelectionIndex();
+			if (max == -1) {
+				return;
+			}
+			fileListModel.removeRange(min, max);
+		});
+
 		// insert files
 		insertFilesButton.addActionListener(
 			e -> {
@@ -83,11 +90,9 @@ public class BorderConfig {
 				int returnVal = chooser.showOpenDialog(borderConfigPanel);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File[] selectedFiles = chooser.getSelectedFiles();
-					StringBuilder result = new StringBuilder();
 					for (File file : selectedFiles) {
-						result.append(file.getAbsolutePath()).append('\n');
+						fileListModel.addElement(file.getAbsolutePath());
 					}
-					fileListTextArea.setText(fileListTextArea.getText() + result.toString());
 				}
 			}
 		);
@@ -123,7 +128,12 @@ public class BorderConfig {
 		}
 
 		slideShowPause.setText(String.valueOf(config.getSlideshowPause()));
-		fileListTextArea.setText(stringArrayToString(config.getFileNames()));
+		fileListModel.clear();
+		if (config.getFileNames() != null) {
+			for (String fileName : config.getFileNames()) {
+				fileListModel.addElement(fileName);
+			}
+		}
 	}
 
 	/**
@@ -143,7 +153,11 @@ public class BorderConfig {
 		config.setRandom(randomCheckBox.isSelected());
 		config.setSlideshow(slideshowCheckBox.isSelected());
 		config.setSlideshowPause(Integer.parseInt(slideShowPause.getText()));
-		config.setFileNames(stringToStringArray(fileListTextArea.getText()));
+
+		String[] files = new String[fileListModel.size()];
+		fileListModel.copyInto(files);
+
+		config.setFileNames(files);
 		return config;
 	}
 
@@ -172,40 +186,25 @@ public class BorderConfig {
 				|| randomCheckBox.isSelected() != config.isRandom()
 				|| slideshowCheckBox.isSelected() != config.isSlideshow()
 				|| !slideShowPause.getText().equals(String.valueOf(config.getSlideshowPause()))
-				|| !fileListTextArea.getText().equals(stringArrayToString(config.getFileNames()))
+				|| !equalFileListModel(config.getFileNames())
 				;
 	}
 
-	// ---------------------------------------------------------------- util
+	private boolean equalFileListModel(String[] otherList) {
+		int size = fileListModel.getSize();
+		if (otherList == null) {
+			return size == 0;
+		}
+		if (size != otherList.length) {
+			return false;
+		}
 
-	private String stringArrayToString(String... strarr) {
-		if (strarr == null) {
-			return "";
+		for (int i = 0; i < size; i++) {
+			if (!fileListModel.get(i).equals(otherList[i])) {
+				return false;
+			}
 		}
-		StringBuilder result = new StringBuilder();
-		for (String s : strarr) {
-			result.append(s).append('\n');
-		}
-		return result.toString();
+
+		return true;
 	}
-
-	private String[] stringToStringArray(String s) {
-		if (s == null) {
-			return null;
-		}
-		s = s.trim();
-		if (s.length() == 0) {
-			return null;
-		}
-		StringTokenizer st = new StringTokenizer(s, "\n\r");
-		int total = st.countTokens();
-		String[] result = new String[total];
-		int i = 0;
-		while (st.hasMoreTokens()) {
-			result[i] = st.nextToken().trim();
-			i++;
-		}
-		return result;
-	}
-
 }
