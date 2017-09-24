@@ -25,6 +25,7 @@ public class BorderConfig {
 	private JLabel imageLabel;
 	private JList<String> fileList;
 	private JButton removeFilesButton;
+	private JCheckBox fixedPositionCheckBox;
 	private DefaultListModel<String> fileListModel;
 
 	private DefaultComboBoxModel positionComboBoxModel;
@@ -119,6 +120,10 @@ public class BorderConfig {
 
 		shrinkSlider.setValue(config.getShrinkValue());
 
+		if (fixedPositionCheckBox.isSelected() != config.isFixedPosition()) {
+			fixedPositionCheckBox.doClick();
+		}
+
 		if (randomCheckBox.isSelected() != config.isRandom()) {
 			randomCheckBox.doClick();
 		}
@@ -151,6 +156,7 @@ public class BorderConfig {
 		config.setShrink(shrinkCheckBox.isSelected());
 		config.setShrinkValue(shrinkSlider.getValue());
 		config.setRandom(randomCheckBox.isSelected());
+		config.setFixedPosition(fixedPositionCheckBox.isSelected());
 		config.setSlideshow(slideshowCheckBox.isSelected());
 		config.setSlideshowPause(Integer.parseInt(slideShowPause.getText()));
 
@@ -184,6 +190,7 @@ public class BorderConfig {
 				|| shrinkCheckBox.isSelected() != config.isShrink()
 				|| shrinkSlider.getValue() != config.getShrinkValue()
 				|| randomCheckBox.isSelected() != config.isRandom()
+				|| fixedPositionCheckBox.isSelected() != config.isFixedPosition()
 				|| slideshowCheckBox.isSelected() != config.isSlideshow()
 				|| !slideShowPause.getText().equals(String.valueOf(config.getSlideshowPause()))
 				|| !equalFileListModel(config.getFileNames())

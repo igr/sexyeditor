@@ -70,39 +70,88 @@ public class BackgroundBorder implements Border {
 
 		int position = config.getPosition();
 		int positionOffset = config.getPositionOffset();
+		boolean fixedLocation = config.isFixedPosition();
 		// x axis
 
-		if (position == POSITION_TOP_LEFT ||
-				position == POSITION_MIDDLE_LEFT ||
-				position == POSITION_BOTTOM_LEFT) {
-			x += positionOffset;
-		} else if (position == POSITION_TOP_MIDDLE ||
-				position == POSITION_CENTER ||
-				position == POSITION_BOTTOM_MIDDLE) {
-			x += (width - imageWidth) >> 1;
-		} else if (position == POSITION_TOP_RIGHT ||
-				position == POSITION_MIDDLE_RIGHT ||
-				position == POSITION_BOTTOM_RIGHT) {
-			x += width - imageWidth - positionOffset;
-		}
+		if (fixedLocation) {
+			// image is not moved on scroll
 
-		// y axis
-		if (position == POSITION_TOP_LEFT ||
-				position == POSITION_TOP_MIDDLE ||
-				position == POSITION_TOP_RIGHT) {
-			y += positionOffset;
-		} else if (position == POSITION_MIDDLE_LEFT ||
-				position == POSITION_CENTER ||
-				position == POSITION_MIDDLE_RIGHT) {
-			y += (height - imageHeight) >> 1;
-		} else if (position == POSITION_BOTTOM_LEFT ||
-				position == POSITION_BOTTOM_MIDDLE ||
-				position == POSITION_BOTTOM_RIGHT) {
-			y += height - imageHeight - positionOffset;
+			if (isOnLeftSide(position)) {
+				x += positionOffset;
+			} else if (isVerticallyCentered(position)) {
+				x += (width - imageWidth) >> 1;
+			} else if (isOnRightSide(position)) {
+				x += width - imageWidth - positionOffset;
+			}
+
+			// y axis
+			if (isOnTop(position)) {
+				y += positionOffset;
+			} else if (isHorizontallyCentered(position)) {
+				y += (height - imageHeight) >> 1;
+			} else if (isOnBottom(position)) {
+				y += height - imageHeight - positionOffset;
+			}
+		}
+		else {
+			// image is move with scroll
+			if (isOnLeftSide(position)) {
+				x = positionOffset;
+			} else if (isVerticallyCentered(position)) {
+				x = (width - imageWidth) >> 1;
+			} else if (isOnRightSide(position)) {
+				x = width - imageWidth - positionOffset;
+			}
+
+			// y axis
+			if (isOnTop(position)) {
+				y = positionOffset;
+			} else if (isHorizontallyCentered(position)) {
+				y = (height - imageHeight) >> 1;
+			} else if (isOnBottom(position)) {
+				y = height - imageHeight - positionOffset;
+			}
+
 		}
 
 		// draw
 		g2d.drawImage(image, x, y, jv);
+	}
+
+	private boolean isOnBottom(int position) {
+		return position == POSITION_BOTTOM_LEFT ||
+			position == POSITION_BOTTOM_MIDDLE ||
+			position == POSITION_BOTTOM_RIGHT;
+	}
+
+	private boolean isHorizontallyCentered(int position) {
+		return position == POSITION_MIDDLE_LEFT ||
+			position == POSITION_CENTER ||
+			position == POSITION_MIDDLE_RIGHT;
+	}
+
+	private boolean isOnTop(int position) {
+		return position == POSITION_TOP_LEFT ||
+			position == POSITION_TOP_MIDDLE ||
+			position == POSITION_TOP_RIGHT;
+	}
+
+	private boolean isOnRightSide(int position) {
+		return position == POSITION_TOP_RIGHT ||
+			position == POSITION_MIDDLE_RIGHT ||
+			position == POSITION_BOTTOM_RIGHT;
+	}
+
+	private boolean isVerticallyCentered(int position) {
+		return position == POSITION_TOP_MIDDLE ||
+			position == POSITION_CENTER ||
+			position == POSITION_BOTTOM_MIDDLE;
+	}
+
+	private boolean isOnLeftSide(int position) {
+		return position == POSITION_TOP_LEFT ||
+			position == POSITION_MIDDLE_LEFT ||
+			position == POSITION_BOTTOM_LEFT;
 	}
 
 	/**

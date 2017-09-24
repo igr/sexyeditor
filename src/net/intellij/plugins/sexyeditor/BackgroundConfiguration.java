@@ -74,6 +74,10 @@ public class BackgroundConfiguration {
 	 */
 	protected int slideshowPause = 3000;
 
+	/**
+	 * If background is located at fixed position and does not move with scrolling.
+	 */
+	protected boolean fixedPosition = true;
 
 	// ---------------------------------------------------------------- access
 
@@ -168,6 +172,14 @@ public class BackgroundConfiguration {
 
 	public void setShrinkValue(int shrinkValue) {
 		this.shrinkValue = shrinkValue;
+	}
+
+	public boolean isFixedPosition() {
+		return fixedPosition;
+	}
+
+	public void setFixedPosition(boolean fixedPosition) {
+		this.fixedPosition = fixedPosition;
 	}
 
 	// ---------------------------------------------------------------- runtime
