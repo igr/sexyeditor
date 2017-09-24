@@ -5,19 +5,20 @@
 	<vendor email="igor@jodd.org" url="http://oblac.com">Oblac.com</vendor>
 
 	<description><![CDATA[
-	Make your IDE editor <b>sexy</b> by putting an image in the editor background :)
+	Make your IntelliJ IDE editor <b>sexy</b> with a background image in your editor's area :)
 	Use different image(s) for different file sets, on various positions, in random mode,
 	or even in slide-show mode!
 	<br/><br/>
 	This plugin is totally useless, but, hey, you'll become a major geek in the office:)
-	Beware: usage of this plugin may produce some jealousy among your co-workers,
-	and may attract some hot-looking-females: use it on your own risk!
+	Beware: usage of this plugin may produce some jealousy among your co-workers;
+	or it may attract some romantic and passionate love: use it on your own risk!
 	<br/><br/>
-	https://github.com/igorspasic/idea-sexyeditor
+	https://github.com/igr/idea-sexyeditor
     ]]></description>
 
 	<change-notes><![CDATA[
 	<ul>
+		<li>2.1 - Added two more features: shrink to fit and fixed position.</li>
         <li>2.0 - Plugin rewritten</li>
      </ul>
     ]]>
