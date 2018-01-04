@@ -70,7 +70,7 @@ Over time, we have received a large amount of beautiful feedback on how **Sexy E
 
 > "I was just a junior developer in this high-end, enterprise, company. No one really listened to my ideas, they just delegated the most boring tasks to me. Until one day, the principal consultant saw my IntelliJ IDEA opened. He came to my place and asked about the plugin... and a month later, I was promoted and started working directly for the consultant guy. Guys, thank you so much." - Greg, New York, USA
 
-> "I had a huge crash on our new internship guy. I put his image as a background, I was really in love. One day he saw his image beyond my Java code. He liked both the code and the plugin. Year later we got our first kid. He was named Ed, in honor of Sexy Editor." - Jacqueline, Paris, France
+> "I had a huge crush on our new internship guy. I put his image as a background, I was really in love. One day he saw his image beyond my Java code. He liked both the code and the plugin. Year later we got our first kid. He was named Ed, in honor of Sexy Editor." - Jacqueline, Paris, France
 
 > "I stopped smoking thanx to you guys! I spent like hundreds of dollars for all kind of California terapists, and nothing helped. I was despaired. Then I just made a pic with simple sentence: I am not smoking. That was it. I guess my brain processed this message even I was not directly looking at it. Two months later, I was a new guy!" - Brian, San Francisco, USA
 
