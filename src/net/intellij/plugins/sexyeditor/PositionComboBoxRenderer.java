@@ -2,10 +2,7 @@ package net.intellij.plugins.sexyeditor;
 
 import com.intellij.openapi.util.IconLoader;
 
-import javax.swing.JLabel;
-import javax.swing.ListCellRenderer;
-import javax.swing.JList;
-import javax.swing.Icon;
+import javax.swing.*;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -18,15 +15,15 @@ public class PositionComboBoxRenderer extends JLabel implements ListCellRenderer
 			"Top-Left", "Top-Middle", "Top-Right", "Middle-Left", "Center", "Middle-Right", "Bottom-Left", "Bottom-Middle", "Bottom-Right"};
 
 	public static final Icon[] POSITION_ICONS = new Icon[] {
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-left.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-middle.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-right.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/middle-left.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/center.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/middle-right.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-left.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-middle.png"),
-			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-right.png")
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-left.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-middle.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/top-right.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/middle-left.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/center.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/middle-right.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-left.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-middle.png", PositionComboBoxRenderer.class),
+			IconLoader.getIcon("/net/intellij/plugins/sexyeditor/gfx/bottom-right.png", PositionComboBoxRenderer.class)
 	};
 
 	public PositionComboBoxRenderer() {
@@ -36,8 +33,8 @@ public class PositionComboBoxRenderer extends JLabel implements ListCellRenderer
 		setPreferredSize(new Dimension(160, 20));
 	}
 
-	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		int selectedIndex = (Integer) value;
+	public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean cellHasFocus) {
+		final int selectedIndex = (Integer) value;
 		if (isSelected) {
 			setBackground(list.getSelectionBackground());
 			setForeground(list.getSelectionForeground());

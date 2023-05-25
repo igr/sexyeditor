@@ -87,7 +87,7 @@ public class BackgroundConfiguration {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -95,7 +95,7 @@ public class BackgroundConfiguration {
 		return editorGroup;
 	}
 
-	public void setEditorGroup(String editorGroup) {
+	public void setEditorGroup(final String editorGroup) {
 		this.editorGroup = editorGroup;
 	}
 
@@ -103,7 +103,7 @@ public class BackgroundConfiguration {
 		return opacity;
 	}
 
-	public void setOpacity(float opacity) {
+	public void setOpacity(final float opacity) {
 		this.opacity = opacity;
 	}
 
@@ -111,7 +111,7 @@ public class BackgroundConfiguration {
 		return position;
 	}
 
-	public void setPosition(int position) {
+	public void setPosition(final int position) {
 		this.position = position;
 	}
 
@@ -119,7 +119,7 @@ public class BackgroundConfiguration {
 		return positionOffset;
 	}
 
-	public void setPositionOffset(int positionOffset) {
+	public void setPositionOffset(final int positionOffset) {
 		this.positionOffset = positionOffset;
 	}
 
@@ -127,7 +127,7 @@ public class BackgroundConfiguration {
 		return fileNames;
 	}
 
-	public void setFileNames(String[] fileNames) {
+	public void setFileNames(final String[] fileNames) {
 		this.fileNames = fileNames;
 	}
 
@@ -135,7 +135,7 @@ public class BackgroundConfiguration {
 		return random;
 	}
 
-	public void setRandom(boolean random) {
+	public void setRandom(final boolean random) {
 		this.random = random;
 	}
 
@@ -143,7 +143,7 @@ public class BackgroundConfiguration {
 		return slideshow;
 	}
 
-	public synchronized void setSlideshow(boolean slideshow) {
+	public synchronized void setSlideshow(final boolean slideshow) {
 		this.slideshow = slideshow;
 		if (slideshow) {
 			createThread();
@@ -156,7 +156,7 @@ public class BackgroundConfiguration {
 		return slideshowPause;
 	}
 
-	public void setSlideshowPause(int slideshowPause) {
+	public void setSlideshowPause(final int slideshowPause) {
 		this.slideshowPause = slideshowPause;
 	}
 
@@ -164,7 +164,7 @@ public class BackgroundConfiguration {
 		return shrink;
 	}
 
-	public void setShrink(boolean shrink) {
+	public void setShrink(final boolean shrink) {
 		this.shrink = shrink;
 	}
 
@@ -172,7 +172,7 @@ public class BackgroundConfiguration {
 		return shrinkValue;
 	}
 
-	public void setShrinkValue(int shrinkValue) {
+	public void setShrinkValue(final int shrinkValue) {
 		this.shrinkValue = shrinkValue;
 	}
 
@@ -180,7 +180,7 @@ public class BackgroundConfiguration {
 		return fixedPosition;
 	}
 
-	public void setFixedPosition(boolean fixedPosition) {
+	public void setFixedPosition(final boolean fixedPosition) {
 		this.fixedPosition = fixedPosition;
 	}
 
@@ -188,23 +188,23 @@ public class BackgroundConfiguration {
 		return shrinkToFit;
 	}
 
-	public void setShrinkToFit(boolean shrinkToFit) {
+	public void setShrinkToFit(final boolean shrinkToFit) {
 		this.shrinkToFit = shrinkToFit;
 	}
 
 	// ---------------------------------------------------------------- runtime
 
-	private static Random rnd = new Random();
+	private static final Random rnd = new Random();
 
 	/**
 	 * Matches file name with editor group wildcard list.
 	 */
-	public boolean matchFileName(String fileName) {
-		StringTokenizer st = new StringTokenizer(editorGroup, ";");
+	public boolean matchFileName(final String fileName) {
+		final StringTokenizer st = new StringTokenizer(editorGroup, ";");
 		while (st.hasMoreTokens()) {
-			String token = st.nextToken().trim();
-			WildcardFileNameMatcher wfnm = new WildcardFileNameMatcher(token);
-			if (wfnm.accept(fileName)) {
+			final String token = st.nextToken().trim();
+			final var wfnm = new WildcardFileNameMatcher(token);
+			if (wfnm.acceptsCharSequence(fileName)) {
 				return true;
 			}
 		}
@@ -221,7 +221,7 @@ public class BackgroundConfiguration {
 		if (fileNames == null) {
 			return null;
 		}
-		int total = fileNames.length;
+		final int total = fileNames.length;
 		if (total == 0) {
 			return null;
 		}
@@ -241,19 +241,19 @@ public class BackgroundConfiguration {
 
 	// ---------------------------------------------------------------- borders and thread
 
-	private WeakSet<BackgroundBorder> allBorders = new WeakSet<>();
+	private final WeakSet<BackgroundBorder> allBorders = new WeakSet<>();
 
 	/**
 	 * Registers a border to its configuration.
 	 */
-	public synchronized void registerBorder(BackgroundBorder border) {
+	public synchronized void registerBorder(final BackgroundBorder border) {
 		allBorders.add(border);
 	}
 
 	/**
 	 * Unregisters border from its configuration.
 	 */
-	public synchronized void unregisterBorder(BackgroundBorder border) {
+	public synchronized void unregisterBorder(final BackgroundBorder border) {
 		allBorders.remove(border);
 	}
 
@@ -261,7 +261,7 @@ public class BackgroundConfiguration {
 	 * Repaints components of all registered borders.
 	 */
 	public synchronized void repaintAllEditors() {
-		for (BackgroundBorder bb : allBorders) {
+		for (final BackgroundBorder bb : allBorders) {
 			bb.getComponent().repaint();
 		}
 	}
@@ -282,13 +282,13 @@ public class BackgroundConfiguration {
 			while (slideshow) {
 				try {
 					Thread.sleep(slideshowPause);
-				} catch (InterruptedException iex) {
+				} catch (final InterruptedException iex) {
 					if (!slideshow) {
 						break;
 					}
 				}
-				for (BackgroundBorder border : allBorders) {
-					String nextImage = getNextImage();
+				for (final BackgroundBorder border : allBorders) {
+					final String nextImage = getNextImage();
 					border.loadImage(nextImage);
 				}
 			}
@@ -309,7 +309,7 @@ public class BackgroundConfiguration {
 		while (slideshowThread.isAlive()) {
 			try {
 				Thread.sleep(100);
-			} catch (InterruptedException iex) {
+			} catch (final InterruptedException iex) {
 				//ignore
 			}
 		}
