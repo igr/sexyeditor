@@ -1,16 +1,14 @@
 # IntelliJ Sexy Editor 💟💻
 
+<!-- Plugin description -->
 Editors are so booooring. White background. Black background.
 <Choose-your-color-here/> background. Meh.
 
-Not anymore! With **Sexy Editor**, your IntelliJ IDE will become...
-err... sexy! By choosing one or more background images, your
-everyday IntelliJ editor gets _super beautiful_.
+Not anymore! With **Sexy Editor**, your IntelliJ IDE will becomes _awesome_! By choosing one or more background images, your everyday IntelliJ editor gets _super beautiful_.
 
-But that's not all! It doesn't have to be just a pretty image.
-Put a motivational quote of your choice, instead! By simply looking
-at it, _every hour_ of every working day, you will soon become
-whatever you are striving for!
+That's not all! It doesn't have to be just a pretty image. Put a motivational quote of your choice, instead! By simply looking at it, _every hour_ of every working day, you will soon become whatever you are striving for!
+
+<!-- Plugin description end -->
 
 Don't forget to [vote for the plugin!](https://plugins.jetbrains.com/plugin/1833-sexy-editor)
 

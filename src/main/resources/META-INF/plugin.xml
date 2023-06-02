@@ -1,0 +1,24 @@
+<!--
+Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
+-->
+<idea-plugin>
+    <id>com.github.igr.sexyeditor</id>
+    <name>Sexy Editor</name>
+    <vendor>igr</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.SexyEditorBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
+                id="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
+                displayName="Sexy Editor"/>
+
+        <applicationService serviceImplementation="com.github.igr.sexyeditor.config.SexyEditorState" />
+        <applicationService serviceImplementation="com.github.igr.sexyeditor.services.BackgroundService" />
+    </extensions>
+
+</idea-plugin>

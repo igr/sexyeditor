@@ -1,5 +1,7 @@
 .idea
 out
 *.iml
-example-project
-Sexy Editor.jar
+.gradle
+.qodana
+build
+libs
