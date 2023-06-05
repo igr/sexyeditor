@@ -1,6 +1,8 @@
 package com.github.igr.sexyeditor.ui
 
 import com.intellij.openapi.ui.ComboBox
+import com.intellij.ui.components.JBList
+import com.intellij.ui.components.JBScrollPane
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
@@ -19,16 +21,16 @@ open class EditorConfigUI {
     protected val shrinkCheckBox: JCheckBox
     protected val shrinkSlider: JSlider
     protected val randomCheckBox: JCheckBox
-    protected var slideshowCheckBox: JCheckBox? = null
-    protected var slideShowPause: JTextField? = null
-    protected var insertFilesButton: JButton? = null
-    protected var matchTextField: JTextField? = null
+    protected val slideshowCheckBox: JCheckBox
+    protected val slideShowPause: JTextField
+    protected val insertFilesButton: JButton
+    protected val matchTextField: JTextField
     protected var positionOffsetTextField: JTextField? = null
     protected var imageLabel: JLabel? = null
     protected var removeFilesButton: JButton? = null
     protected var fixedPositionCheckBox: JCheckBox? = null
     protected var shrinkToFitCheckBox: JCheckBox? = null
-    protected val fileList: JList<String>
+    protected val fileList: JBList<String>
     protected var fileListModel: DefaultListModel<String>? = null
     protected val positionComboBoxModel: DefaultComboBoxModel<Int>
 
@@ -51,43 +53,20 @@ open class EditorConfigUI {
         shrinkCheckBox = createShrinkCheckBox()
         shrinkSlider = createShrinkSlider()
         randomCheckBox = createRandomCheckBox()
+        slideshowCheckBox = createSlideShowCheckBox()
+        slideShowPause = createSlideShowPause()
 
-        slideshowCheckBox = JCheckBox()
-        slideshowCheckBox!!.text = "Slideshow:"
-        slideshowCheckBox!!.toolTipText = "<html>\nIf set images in editor will change while you work:)"
         panel.add(
-            slideshowCheckBox,
-            GridConstraints(
-                8, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
-            )
-        )
-        slideShowPause = JTextField()
-        slideShowPause!!.columns = 10
-        slideShowPause!!.isEnabled = false
-        slideShowPause!!.toolTipText =
-            "<html>\nTime between changing the image<br>\nin slideshow mode (in milliseconds)."
-        panel.add(
-            slideShowPause,
-            GridConstraints(
-                8, 1, 1, 1,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(70, 20), null, 0, false
-            )
-        )
-        val label4 = JLabel()
-        label4.text = "File list:"
-        panel.add(
-            label4,
+            JLabel().apply {
+                text = "File list:"
+            },
             GridConstraints(
                 9, 0, 1, 1,
                 ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, Dimension(61, 14), null, 0, false
             )
         )
+
         val spacer1 = Spacer()
         panel.add(
             spacer1,
@@ -97,85 +76,12 @@ open class EditorConfigUI {
                 null, null, null, 0, false
             )
         )
-        insertFilesButton = JButton()
-        insertFilesButton!!.icon = iconOf("images")
-        insertFilesButton!!.text = "Add image(s)..."
-        panel.add(
-            insertFilesButton,
-            GridConstraints(
-                10, 1, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(70, 25), null, 0, false
-            )
-        )
-        val label5 = JLabel()
-        label5.text = "Match:"
-        panel.add(
-            label5,
-            GridConstraints(
-                1,
-                0,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(61, 14),
-                null,
-                0,
-                false
-            )
-        )
-        matchTextField = JTextField()
-        matchTextField!!.toolTipText =
-            "<html>\nList of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>\nFile belongs to the first group that it matches.<br>\n<i>Example</i>: *.java;*.jsp"
-        panel.add(
-            matchTextField,
-            GridConstraints(
-                1,
-                1,
-                1,
-                4,
-                ANCHOR_WEST,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(120, 20),
-                null,
-                0,
-                false
-            )
-        )
-        val scrollPane1 = JScrollPane()
-        panel.add(
-            scrollPane1,
-            GridConstraints(
-                9,
-                1,
-                1,
-                6,
-                ANCHOR_CENTER,
-                FILL_BOTH,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                null,
-                null,
-                null,
-                0,
-                false
-            )
-        )
 
-        fileList = JList<String>()
-        val defaultListModel1: DefaultListModel<String> = DefaultListModel<String>()
-        fileList.model = defaultListModel1
-        fileList.selectionMode = 1
-        fileList.toolTipText = "File list"
-        fileList.putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
-        scrollPane1.setViewportView(fileList)
+        insertFilesButton = createInsertFilesButton()
+        matchTextField = createMatchTextField()
+        fileList = createFileList()
+
+
         val label6 = JLabel()
         label6.text = "Offset:"
         panel.add(
@@ -364,7 +270,6 @@ open class EditorConfigUI {
                 false
             )
         )
-        label5.labelFor = matchTextField
         label6.labelFor = positionOffsetTextField
         label7.labelFor = positionComboBox
         label8.labelFor = positionComboBox
@@ -528,6 +433,107 @@ open class EditorConfigUI {
             )
         )
         return randomCheckBox
+    }
+
+    private fun createSlideShowCheckBox(): JCheckBox {
+        val slideshowCheckBox = JCheckBox().apply {
+            text = "Slideshow:"
+            toolTipText = "<html>\nIf set images in editor will change while you work:)"
+        }
+        panel.add(
+            slideshowCheckBox,
+            GridConstraints(
+                8, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
+                null, Dimension(61, 22), null, 0, false
+            )
+        )
+        return slideshowCheckBox
+    }
+
+    private fun createSlideShowPause(): JTextField {
+        val slideShowPause = JTextField().apply {
+            columns = 10
+            isEnabled = false
+            toolTipText = "<html>\nTime between changing the image<br>\nin slideshow mode (in milliseconds)."
+        }
+        panel.add(
+            slideShowPause,
+            GridConstraints(
+                8, 1, 1, 1,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(70, 20), null, 0, false
+            )
+        )
+        return slideShowPause
+    }
+
+    private fun createInsertFilesButton(): JButton {
+        val insertFilesButton = JButton().apply {
+            icon = iconOf("images")
+            text = "Add image(s)..."
+        }
+        panel.add(
+            insertFilesButton,
+            GridConstraints(
+                10, 1, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(70, 25), null, 0, false
+            )
+        )
+        return insertFilesButton
+    }
+
+    private fun createMatchTextField(): JTextField {
+        val matchTextField = JTextField().apply {
+            toolTipText = "<html>\nList of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>\nFile belongs to the first group that it matches.<br>\n<i>Example</i>: *.java;*.jsp"
+        }
+        panel.add(
+            JLabel().apply {
+                text = "Match:"
+                labelFor = matchTextField
+            },
+            GridConstraints(
+                1, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(61, 14), null, 0, false
+            )
+        )
+        panel.add(
+            matchTextField,
+            GridConstraints(
+                1, 1, 1, 4,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(120, 20), null, 0, false
+            )
+        )
+        return matchTextField
+    }
+
+    private fun createFileList(): JBList<String> {
+        val scrollPane = JBScrollPane()
+        panel.add(
+            scrollPane,
+            GridConstraints(
+                9, 1, 1, 6,
+                ANCHOR_CENTER, FILL_BOTH,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                null, null, null, 0, false
+            )
+        )
+
+        val fileList = JBList<String>().apply {
+            model = DefaultListModel()
+            selectionMode = 1
+            toolTipText = "File list"
+            putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
+        }
+        scrollPane.setViewportView(fileList)
+        return fileList
     }
 
 }
