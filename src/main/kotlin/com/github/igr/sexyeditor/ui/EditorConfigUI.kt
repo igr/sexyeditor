@@ -27,11 +27,11 @@ open class EditorConfigUI {
     protected val matchTextField: JTextField
     protected val positionOffsetTextField: JTextField
     protected val imageLabel: JLabel
-    protected var removeFilesButton: JButton? = null
-    protected var fixedPositionCheckBox: JCheckBox? = null
-    protected var shrinkToFitCheckBox: JCheckBox? = null
+    protected val removeFilesButton: JButton
+    protected val fixedPositionCheckBox: JCheckBox
+    protected val shrinkToFitCheckBox: JCheckBox
     protected val fileList: JBList<String>
-    protected var fileListModel: DefaultListModel<String>? = null
+    protected val fileListModel: DefaultListModel<String>
     protected val positionComboBoxModel: DefaultComboBoxModel<Int>
 
     val rootComponent: JComponent
@@ -83,7 +83,6 @@ open class EditorConfigUI {
         positionOffsetTextField = createPositionOffsetTextField()
         imageLabel = createImageLabel()
 
-
         val spacer2 = Spacer()
         panel.add(
             spacer2,
@@ -94,109 +93,9 @@ open class EditorConfigUI {
             )
         )
 
-
-        removeFilesButton = JButton()
-        removeFilesButton!!.text = "Remove"
-        panel.add(
-            removeFilesButton,
-            GridConstraints(
-                10, 3,
-                1,
-                1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                null,
-                null,
-                0,
-                false
-            )
-        )
-        val label7 = JLabel()
-        label7.text = "Fixed Position:"
-        panel.add(
-            label7,
-            GridConstraints(
-                3,
-                0,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(61, 14),
-                null,
-                0,
-                false
-            )
-        )
-        fixedPositionCheckBox = JCheckBox()
-        fixedPositionCheckBox!!.isSelected = true
-        fixedPositionCheckBox!!.text = ""
-        panel.add(
-            fixedPositionCheckBox,
-            GridConstraints(
-                3,
-                1,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                null,
-                null,
-                0,
-                false
-            )
-        )
-        val label8 = JLabel()
-        label8.text = "Shrink To Fit:"
-        panel.add(
-            label8,
-            GridConstraints(
-                4,
-                0,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(61, 14),
-                null,
-                0,
-                false
-            )
-        )
-        shrinkToFitCheckBox = JCheckBox()
-        shrinkToFitCheckBox!!.text = ""
-        panel.add(
-            shrinkToFitCheckBox,
-            GridConstraints(
-                4,
-                1,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                null,
-                null,
-                0,
-                false
-            )
-        )
-        label7.labelFor = positionComboBox
-        label8.labelFor = positionComboBox
+        removeFilesButton = createRemoveFileButton()
+        fixedPositionCheckBox = createFixedPositionCheckbox()
+        shrinkToFitCheckBox = createShrinkToFitCheckBox()
 
 
 
@@ -204,7 +103,7 @@ open class EditorConfigUI {
 
         fileListModel = fileList.model as DefaultListModel<String>
         positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<Int>
-        positionComboBox.setRenderer(PositionComboBoxRenderer())
+        positionComboBox.renderer = PositionComboBoxRenderer()
         for (i in 0 until PositionComboBoxRenderer.POSITIONS.size) {
             positionComboBoxModel.addElement(Integer.valueOf(i))
         }
@@ -507,6 +406,81 @@ open class EditorConfigUI {
             )
         )
         return imageLabel
+    }
+
+    private fun createRemoveFileButton(): JButton {
+        val removeFilesButton = JButton().apply {
+            text = "Remove"
+        }
+        panel.add(
+            removeFilesButton,
+            GridConstraints(
+                10, 3, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL,
+                SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        return removeFilesButton
+    }
+
+    private fun createFixedPositionCheckbox(): JCheckBox {
+        val fixedPositionCheckBox = JCheckBox().apply {
+            isSelected = true
+            text = ""
+        }
+        panel.add(
+            JLabel().apply {
+                text = "Fixed Position:"
+                labelFor = fixedPositionCheckBox
+            },
+            GridConstraints(
+                3, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(61, 14), null, 0, false
+            )
+        )
+        panel.add(
+            fixedPositionCheckBox,
+            GridConstraints(
+                3, 1, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        return fixedPositionCheckBox
+    }
+
+    private fun createShrinkToFitCheckBox(): JCheckBox {
+        val shrinkToFitCheckBox = JCheckBox().apply {
+            text = ""
+        }
+        panel.add(
+            JLabel().apply {
+                text = "Shrink To Fit:"
+                labelFor = shrinkToFitCheckBox
+            },
+            GridConstraints(
+                4, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(61, 14), null, 0, false
+            )
+        )
+        panel.add(
+            shrinkToFitCheckBox,
+            GridConstraints(
+                4, 1, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        return shrinkToFitCheckBox
     }
 
 }
