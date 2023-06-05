@@ -25,8 +25,8 @@ open class EditorConfigUI {
     protected val slideShowPause: JTextField
     protected val insertFilesButton: JButton
     protected val matchTextField: JTextField
-    protected var positionOffsetTextField: JTextField? = null
-    protected var imageLabel: JLabel? = null
+    protected val positionOffsetTextField: JTextField
+    protected val imageLabel: JLabel
     protected var removeFilesButton: JButton? = null
     protected var fixedPositionCheckBox: JCheckBox? = null
     protected var shrinkToFitCheckBox: JCheckBox? = null
@@ -80,102 +80,27 @@ open class EditorConfigUI {
         insertFilesButton = createInsertFilesButton()
         matchTextField = createMatchTextField()
         fileList = createFileList()
+        positionOffsetTextField = createPositionOffsetTextField()
+        imageLabel = createImageLabel()
 
 
-        val label6 = JLabel()
-        label6.text = "Offset:"
-        panel.add(
-            label6,
-            GridConstraints(
-                2,
-                3,
-                1,
-                1,
-                ANCHOR_EAST,
-                FILL_NONE,
-                SIZEPOLICY_WANT_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                null,
-                null,
-                0,
-                false
-            )
-        )
-        positionOffsetTextField = JTextField()
-        positionOffsetTextField!!.columns = 4
-        positionOffsetTextField!!.toolTipText = "<html>\nImage offset from nearest editor edges (in pixels)."
-        panel.add(
-            positionOffsetTextField,
-            GridConstraints(
-                2,
-                4,
-                1,
-                1,
-                ANCHOR_WEST,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(78, 20),
-                null,
-                0,
-                false
-            )
-        )
-        imageLabel = JLabel()
-        imageLabel!!.background = Color(-10066330)
-        imageLabel!!.foreground = Color(-6710887)
-        imageLabel!!.horizontalAlignment = 10
-        imageLabel!!.iconTextGap = 8
-        imageLabel!!.text =
-            "<html>\nHINTS:<br>\n+ Read <b>tooltips</b> for more help.<br>\n+ Reopen editors if changes are not visible.<br>\n+ Do not forget to apply changes before<br>\nchanging the editor group. "
-        imageLabel!!.verticalAlignment = 0
-        imageLabel!!.verticalTextPosition = 0
-        panel.add(
-            imageLabel,
-            GridConstraints(
-                0,
-                5,
-                3,
-                1,
-                ANCHOR_NORTHWEST,
-                FILL_NONE,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_FIXED,
-                null,
-                null,
-                null,
-                1,
-                false
-            )
-        )
         val spacer2 = Spacer()
         panel.add(
             spacer2,
             GridConstraints(
-                1,
-                6,
-                1,
-                1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_WANT_GROW,
-                1,
-                null,
-                null,
-                null,
-                0,
-                false
+                1, 6, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
+                null, null, null, 0, false
             )
         )
+
+
         removeFilesButton = JButton()
         removeFilesButton!!.text = "Remove"
         panel.add(
             removeFilesButton,
             GridConstraints(
-                10,
-                3,
+                10, 3,
                 1,
                 1,
                 ANCHOR_CENTER,
@@ -270,7 +195,6 @@ open class EditorConfigUI {
                 false
             )
         )
-        label6.labelFor = positionOffsetTextField
         label7.labelFor = positionComboBox
         label8.labelFor = positionComboBox
 
@@ -534,6 +458,55 @@ open class EditorConfigUI {
         }
         scrollPane.setViewportView(fileList)
         return fileList
+    }
+
+    private fun createPositionOffsetTextField(): JTextField {
+        val positionOffsetTextField = JTextField().apply {
+            columns = 4
+            toolTipText = "<html>\nImage offset from nearest editor edges (in pixels)."
+        }
+        panel.add(
+            JLabel().apply {
+                text = "Offset:"
+                labelFor = positionOffsetTextField
+            },
+            GridConstraints(
+                2, 3, 1, 1,
+                ANCHOR_EAST, FILL_NONE, SIZEPOLICY_WANT_GROW, SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        panel.add(
+            positionOffsetTextField,
+            GridConstraints(
+                2, 4, 1, 1,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(78, 20), null, 0, false
+            )
+        )
+        return positionOffsetTextField
+    }
+
+    private fun createImageLabel(): JLabel {
+        val imageLabel = JLabel().apply {
+            background = Color(-10066330)
+            foreground = Color(-6710887)
+            horizontalAlignment = 10
+            iconTextGap = 8
+            text =
+                "<html>\nHINTS:<br>\n+ Read <b>tooltips</b> for more help.<br>\n+ Reopen editors if changes are not visible.<br>\n+ Do not forget to apply changes before<br>\nchanging the editor group. "
+            verticalAlignment = 0
+            verticalTextPosition = 0
+        }
+        panel.add(
+            imageLabel,
+            GridConstraints(
+                0, 5, 3, 1,
+                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, null, null, 1, false
+            )
+        )
+        return imageLabel
     }
 
 }
