@@ -48,39 +48,10 @@ open class EditorConfigUI {
         nameTextField = createNameTextField()
         positionComboBox = createPositionComboBox()
         opacitySlider = createOpacitySlider()
-
         shrinkCheckBox = createShrinkCheckBox()
+        shrinkSlider = createShrinkSlider()
+        randomCheckBox = createRandomCheckBox()
 
-        shrinkSlider = JSlider().apply {
-            isEnabled = false
-            majorTickSpacing = 10
-            minimum = 0
-            minorTickSpacing = 5
-            paintLabels = true
-            paintTicks = true
-            toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>\n100% means image will be shrinked to <b>desktop</b> (and not IDEA) size."
-        }
-        panel.add(
-            shrinkSlider,
-            GridConstraints(
-                6, 1, 1, 4,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        randomCheckBox = JCheckBox().apply {
-            text = "Random"
-            toolTipText = "<html>\nIf set, next image from the list will be chosen randomly.<br>\nAffects file openings and slideshows."
-        }
-        panel.add(
-            randomCheckBox,
-            GridConstraints(
-                7, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
-            )
-        )
         slideshowCheckBox = JCheckBox()
         slideshowCheckBox!!.text = "Slideshow:"
         slideshowCheckBox!!.toolTipText = "<html>\nIf set images in editor will change while you work:)"
@@ -519,6 +490,44 @@ open class EditorConfigUI {
             )
         )
         return shrinkCheckBox
+    }
+
+    private fun createShrinkSlider(): JSlider {
+        val shrinkSlider = JSlider().apply {
+            isEnabled = false
+            majorTickSpacing = 10
+            minimum = 0
+            minorTickSpacing = 5
+            paintLabels = true
+            paintTicks = true
+            toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>\n100% means image will be shrinked to <b>desktop</b> (and not IDEA) size."
+        }
+        panel.add(
+            shrinkSlider,
+            GridConstraints(
+                6, 1, 1, 4,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        return shrinkSlider
+    }
+
+    private fun createRandomCheckBox(): JCheckBox {
+        val randomCheckBox = JCheckBox().apply {
+            text = "Random"
+            toolTipText = "<html>\nIf set, next image from the list will be chosen randomly.<br>\nAffects file openings and slideshows."
+        }
+        panel.add(
+            randomCheckBox,
+            GridConstraints(
+                7, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(61, 22), null, 0, false
+            )
+        )
+        return randomCheckBox
     }
 
 }
