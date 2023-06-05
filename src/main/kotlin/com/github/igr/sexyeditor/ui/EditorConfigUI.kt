@@ -1,6 +1,7 @@
 package com.github.igr.sexyeditor.ui
 
 import com.intellij.openapi.ui.ComboBox
+import com.intellij.ui.JBColor
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.uiDesigner.core.GridConstraints
@@ -8,7 +9,6 @@ import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
-import java.awt.Color
 import java.awt.Dimension
 import javax.swing.*
 import javax.swing.border.TitledBorder
@@ -24,10 +24,10 @@ open class EditorConfigUI {
     protected val randomCheckBox: JCheckBox
     protected val slideshowCheckBox: JCheckBox
     protected val slideShowPause: JTextField
-    protected val insertFilesButton: JButton
     protected val matchTextField: JTextField
     protected val positionOffsetTextField: JTextField
-    protected val removeFilesButton: JButton
+    private val insertFilesButton: JButton
+    private val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
     protected val shrinkToFitCheckBox: JCheckBox
     protected val fileList: JBList<String>
@@ -374,7 +374,7 @@ open class EditorConfigUI {
     private fun createPositionOffsetTextField(): JTextField {
         val positionOffsetTextField = JTextField().apply {
             columns = 4
-            toolTipText = "<html>\nImage offset from nearest editor edges (in pixels)."
+            toolTipText = "<html>Image offset from nearest editor edges (in pixels)."
         }
         panel.add(
             JLabel().apply {
@@ -401,12 +401,15 @@ open class EditorConfigUI {
     private fun createImageLabel() {
         panel.add(
             JLabel().apply {
-                background = Color(-10066330)
-                foreground = Color(-6710887)
+                background = JBColor(-10066330, -10066330)
+                foreground = JBColor(-6710887, -6710887)
                 horizontalAlignment = 10
                 iconTextGap = 8
                 text =
-                    "<html>\nHINTS:<br>\n+ Read <b>tooltips</b> for more help.<br>\n+ Reopen editors if changes are not visible.<br>\n+ Do not forget to apply changes before<br>\nchanging the editor group. "
+                    "<html>HINTS:<ul>" +
+                            "<li>Read <b>tooltips</b> for more help." +
+                            "<li> Reopen editors if changes are not visible." +
+                            "<li>Apply changes before changing the editor group. "
                 verticalAlignment = 0
                 verticalTextPosition = 0
             },
@@ -434,6 +437,17 @@ open class EditorConfigUI {
     private fun createRemoveFileButton(): JButton {
         val removeFilesButton = JButton().apply {
             text = "Remove"
+            addActionListener {
+                val min = fileList.minSelectionIndex
+                if (min == -1) {
+                    return@addActionListener
+                }
+                val max = fileList.maxSelectionIndex
+                if (max == -1) {
+                    return@addActionListener
+                }
+                fileListModel.removeRange(min, max)
+            }
         }
         panel.add(
             removeFilesButton,
@@ -505,22 +519,5 @@ open class EditorConfigUI {
         )
         return shrinkToFitCheckBox
     }
-
-//    private open fun initActions() {
-//
-//        // remove files
-//        removeFilesButton.addActionListener { e: ActionEvent? ->
-//            val min = fileList.minSelectionIndex
-//            if (min == -1) {
-//                return@addActionListener
-//            }
-//            val max = fileList.maxSelectionIndex
-//            if (max == -1) {
-//                return@addActionListener
-//            }
-//            fileListModel.removeRange(min, max)
-//        }
-//
-//    }
 
 }

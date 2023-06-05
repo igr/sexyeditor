@@ -2,6 +2,7 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.intellij.uiDesigner.core.GridConstraints
+import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.util.ui.JBUI
 import java.awt.Dimension
@@ -33,10 +34,9 @@ open class SexyEditorConfigUI {
             borderConfigPanel.rootComponent,
             GridConstraints(
                 4, 0, 1, 2,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+                ANCHOR_CENTER, FILL_BOTH,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 null, null, null, 0, false
             )
         )
@@ -46,9 +46,8 @@ open class SexyEditorConfigUI {
             addNewButton,
             GridConstraints(
                 0, 1, 1, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER, FILL_HORIZONTAL,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -58,9 +57,8 @@ open class SexyEditorConfigUI {
             removeButton,
             GridConstraints(
                 1, 1, 1, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER, FILL_HORIZONTAL,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -70,9 +68,8 @@ open class SexyEditorConfigUI {
             moveUpButton,
             GridConstraints(
                 2, 1, 1, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER, FILL_HORIZONTAL,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -82,48 +79,40 @@ open class SexyEditorConfigUI {
             moveDownButton,
             GridConstraints(
                 3, 1, 1, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER, FILL_HORIZONTAL,
+                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
 
+        val scrollPane = JScrollPane()
         val innerPanel = JPanel().apply {
             layout = GridLayoutManager(1, 1, JBUI.emptyInsets(), -1, -1)
             border = BorderFactory.createTitledBorder(
-                null,
-                "Editors",
+                null, "Editors",
                 TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
                 null, null
+            )
+            add(
+                scrollPane,
+                GridConstraints(
+                    0, 0, 1, 1,
+                    ANCHOR_CENTER, FILL_BOTH,
+                    SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                    SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                    null, Dimension(256, 88), null, 0, false
+                )
             )
         }
         panel.add(
             innerPanel,
             GridConstraints(
                 0, 0, 4, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_CAN_GROW,
-                null,
-                Dimension(300, 160),
-                null, 0, false
-            )
-        )
-        val scrollPane = JScrollPane()
-        innerPanel.add(
-            scrollPane,
-            GridConstraints(
-                0, 0, 1, 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
-                null,
-                Dimension(256, 88),
-                null, 0, false
+                ANCHOR_CENTER, FILL_BOTH,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_CAN_GROW,
+                null, Dimension(300, 160), null, 0, false
             )
         )
 

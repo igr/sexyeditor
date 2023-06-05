@@ -19,16 +19,17 @@ import kotlin.math.max
 class ImagePreviewPanel : JPanel(), PropertyChangeListener {
 
     private val label: JLabel
-    private var sure: JButton? = null
+    private val sure: JButton
     private var maxImgWidth = 0
 
-    private val previewSize: Int
+    private val previewSize = 200
+    // Sets maximal file size of image that will be previewed automatically.
+    // Setting this value to `-1` all images will be previewed.
     private var maxFileSize = 512 * 1024
-    private var showOnlyOnImages = false
+    private val showOnlyOnImages = false
     private val imageExtensions = arrayOf("gif", "jpg", "jpeg", "bmp", "png")
 
     init {
-        previewSize = 200
         layout = BorderLayout(5, 5)
         border = BorderFactory.createEmptyBorder(5, 5, 5, 5)
         add(JLabel("Preview:"), BorderLayout.NORTH)
@@ -47,8 +48,8 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
             isVisible = false
         }
         add(sure, BorderLayout.SOUTH)
-        sure!!.addActionListener { e: ActionEvent? ->
-            sure!!.isVisible = false
+        sure.addActionListener { e: ActionEvent? ->
+            sure.isVisible = false
             val icon: Icon? = loadImage()
             label.icon = icon
             this@ImagePreviewPanel.repaint()
@@ -85,8 +86,8 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
                             if (showOnlyOnImages) {
                                 this.isVisible = true
                             }
-                            sure!!.isVisible = maxFileSize != -1 && newFile!!.length() > maxFileSize
-                            if (!sure!!.isVisible) {
+                            sure.isVisible = maxFileSize != -1 && newFile!!.length() > maxFileSize
+                            if (!sure.isVisible) {
                                 icon = loadImage()
                             }
                             break
@@ -131,34 +132,5 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
             newFile = null
         }
         return null
-    }
-
-    // ---------------------------------------------------------------- accessories
-
-    /**
-     * Returns preview size.
-     */
-    fun getPreviewSize(): Int {
-        return previewSize
-    }
-
-    fun getMaxFileSize(): Int {
-        return maxFileSize
-    }
-
-    /**
-     * Sets maximal file size of image that will be previewed automatically.
-     * By setting this value to `-1` all images will be previewed.
-     */
-    fun setMaxFileSize(maxFileSize: Int) {
-        this.maxFileSize = maxFileSize
-    }
-
-    fun isShowOnlyOnImages(): Boolean {
-        return showOnlyOnImages
-    }
-
-    fun setShowOnlyOnImages(showOnlyOnImages: Boolean) {
-        this.showOnlyOnImages = showOnlyOnImages
     }
 }
