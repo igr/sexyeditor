@@ -10,8 +10,10 @@ import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
 import java.awt.Color
 import java.awt.Dimension
+import java.io.File
 import javax.swing.*
 import javax.swing.border.TitledBorder
+
 
 open class EditorConfigUI {
     protected val panel: JPanel = JPanel()
@@ -49,11 +51,11 @@ open class EditorConfigUI {
         nameTextField = createNameTextField()
         positionComboBox = createPositionComboBox()
         opacitySlider = createOpacitySlider()
-        shrinkCheckBox = createShrinkCheckBox()
         shrinkSlider = createShrinkSlider()
+        shrinkCheckBox = createShrinkCheckBox(shrinkSlider)
         randomCheckBox = createRandomCheckBox()
-        slideshowCheckBox = createSlideShowCheckBox()
         slideShowPause = createSlideShowPause()
+        slideshowCheckBox = createSlideShowCheckBox(slideShowPause)
         fileList = createFileList()
         createFileListLabel()
         createSpacer1()
@@ -194,11 +196,13 @@ open class EditorConfigUI {
         return opacitySlider
     }
 
-    private fun createShrinkCheckBox(): JCheckBox {
+    private fun createShrinkCheckBox(shrinkSlider: JSlider): JCheckBox {
         val shrinkCheckBox = JCheckBox().apply {
             text = "Resize"
             toolTipText = "<html>\nShrink large images to fit the editor."
+            addActionListener {  shrinkSlider.isEnabled = isSelected }
         }
+
         panel.add(
             shrinkCheckBox,
             GridConstraints(
@@ -250,10 +254,11 @@ open class EditorConfigUI {
         return randomCheckBox
     }
 
-    private fun createSlideShowCheckBox(): JCheckBox {
+    private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
         val slideshowCheckBox = JCheckBox().apply {
             text = "Slideshow:"
             toolTipText = "<html>\nIf set images in editor will change while you work:)"
+            addActionListener { slideShowPause.isEnabled = isSelected }
         }
         panel.add(
             slideshowCheckBox,
@@ -289,6 +294,23 @@ open class EditorConfigUI {
         val insertFilesButton = JButton().apply {
             icon = iconOf("images")
             text = "Add image(s)..."
+            addActionListener {
+                val chooser = JFileChooser().apply {
+                    isMultiSelectionEnabled = true
+                    dialogTitle = "Select images to insert..."
+                    preferredSize = Dimension(700, 500)
+                }
+                ImagePreviewPanel().apply {
+                    attachToFileChooser(chooser, "Only images")
+                }
+                val returnVal = chooser.showOpenDialog(panel)
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    val selectedFiles: Array<File> = chooser.selectedFiles
+                    for (file in selectedFiles) {
+                        fileListModel.addElement(file.getAbsolutePath())
+                    }
+                }
+            }
         }
         panel.add(
             insertFilesButton,
@@ -485,5 +507,22 @@ open class EditorConfigUI {
         )
         return shrinkToFitCheckBox
     }
+
+//    private open fun initActions() {
+//
+//        // remove files
+//        removeFilesButton.addActionListener { e: ActionEvent? ->
+//            val min = fileList.minSelectionIndex
+//            if (min == -1) {
+//                return@addActionListener
+//            }
+//            val max = fileList.maxSelectionIndex
+//            if (max == -1) {
+//                return@addActionListener
+//            }
+//            fileListModel.removeRange(min, max)
+//        }
+//
+//    }
 
 }
