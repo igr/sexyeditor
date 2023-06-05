@@ -85,7 +85,11 @@ open class SexyEditorConfigUI {
             )
         )
 
-        val scrollPane = JScrollPane()
+        val scrollPane = JScrollPane().apply {
+            border = null
+            verticalScrollBar.border = null
+            horizontalScrollBar.border = null
+        }
         val innerPanel = JPanel().apply {
             layout = GridLayoutManager(1, 1, JBUI.emptyInsets(), -1, -1)
             border = BorderFactory.createTitledBorder(
@@ -130,7 +134,6 @@ open class SexyEditorConfigUI {
         }
         scrollPane.setViewportView(editorsList)
     }
-
 
     private fun createAddNewButton() =
         JButton().apply {
