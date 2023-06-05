@@ -26,7 +26,6 @@ open class EditorConfigUI {
     protected val insertFilesButton: JButton
     protected val matchTextField: JTextField
     protected val positionOffsetTextField: JTextField
-    protected val imageLabel: JLabel
     protected val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
     protected val shrinkToFitCheckBox: JCheckBox
@@ -55,51 +54,21 @@ open class EditorConfigUI {
         randomCheckBox = createRandomCheckBox()
         slideshowCheckBox = createSlideShowCheckBox()
         slideShowPause = createSlideShowPause()
-
-        panel.add(
-            JLabel().apply {
-                text = "File list:"
-            },
-            GridConstraints(
-                9, 0, 1, 1,
-                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
-            )
-        )
-
-        val spacer1 = Spacer()
-        panel.add(
-            spacer1,
-            GridConstraints(
-                8, 2, 1, 2,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
-                null, null, null, 0, false
-            )
-        )
-
+        fileList = createFileList()
+        createFileListLabel()
+        createSpacer1()
         insertFilesButton = createInsertFilesButton()
         matchTextField = createMatchTextField()
-        fileList = createFileList()
         positionOffsetTextField = createPositionOffsetTextField()
-        imageLabel = createImageLabel()
-
-        val spacer2 = Spacer()
-        panel.add(
-            spacer2,
-            GridConstraints(
-                1, 6, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
-                null, null, null, 0, false
-            )
-        )
-
+        createImageLabel()
+        createSpacer2()
         removeFilesButton = createRemoveFileButton()
         fixedPositionCheckBox = createFixedPositionCheckbox()
         shrinkToFitCheckBox = createShrinkToFitCheckBox()
 
 
 
-
+        // setup
 
         fileListModel = fileList.model as DefaultListModel<String>
         positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<Int>
@@ -107,7 +76,30 @@ open class EditorConfigUI {
         for (i in 0 until PositionComboBoxRenderer.POSITIONS.size) {
             positionComboBoxModel.addElement(Integer.valueOf(i))
         }
+        // todo
         //imageLabel!!.icon = SexyEditor.getInstance().getIcon()
+    }
+
+    private fun createSpacer2() {
+        panel.add(
+            Spacer(),
+            GridConstraints(
+                1, 6, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
+                null, null, null, 0, false
+            )
+        )
+    }
+
+    private fun createSpacer1() {
+        panel.add(
+            Spacer(),
+            GridConstraints(
+                8, 2, 1, 2,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
+                null, null, null, 0, false
+            )
+        )
     }
 
     private fun createNameTextField(): JTextField {
@@ -386,26 +378,37 @@ open class EditorConfigUI {
         return positionOffsetTextField
     }
 
-    private fun createImageLabel(): JLabel {
-        val imageLabel = JLabel().apply {
-            background = Color(-10066330)
-            foreground = Color(-6710887)
-            horizontalAlignment = 10
-            iconTextGap = 8
-            text =
-                "<html>\nHINTS:<br>\n+ Read <b>tooltips</b> for more help.<br>\n+ Reopen editors if changes are not visible.<br>\n+ Do not forget to apply changes before<br>\nchanging the editor group. "
-            verticalAlignment = 0
-            verticalTextPosition = 0
-        }
+    private fun createImageLabel() {
         panel.add(
-            imageLabel,
+            JLabel().apply {
+                background = Color(-10066330)
+                foreground = Color(-6710887)
+                horizontalAlignment = 10
+                iconTextGap = 8
+                text =
+                    "<html>\nHINTS:<br>\n+ Read <b>tooltips</b> for more help.<br>\n+ Reopen editors if changes are not visible.<br>\n+ Do not forget to apply changes before<br>\nchanging the editor group. "
+                verticalAlignment = 0
+                verticalTextPosition = 0
+            },
             GridConstraints(
                 0, 5, 3, 1,
                 ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, null, null, 1, false
             )
         )
-        return imageLabel
+    }
+
+    private fun createFileListLabel() {
+        panel.add(
+            JLabel().apply {
+                text = "File list:"
+            },
+            GridConstraints(
+                9, 0, 1, 1,
+                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(61, 14), null, 0, false
+            )
+        )
     }
 
     private fun createRemoveFileButton(): JButton {
