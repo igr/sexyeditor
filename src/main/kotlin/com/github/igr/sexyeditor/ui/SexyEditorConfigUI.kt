@@ -2,22 +2,22 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.intellij.uiDesigner.core.GridConstraints
-import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.util.ui.JBUI
 import java.awt.Dimension
 import javax.swing.*
 import javax.swing.border.TitledBorder
 
-class SexyEditorConfigurationPanel {
-    private val panel: JPanel = JPanel()
-    private val editorsList: JList<BackgroundConfiguration>
-    private val addNewButton: JButton
-    private val removeButton: JButton
-    private val moveUpButton: JButton
-    private val moveDownButton: JButton
-    private val editorsListModel: DefaultListModel<BackgroundConfiguration>
-    private val borderConfigPanel: BorderConfigPanel
+open class SexyEditorConfigUI {
+
+    protected val panel: JPanel = JPanel()
+    protected val editorsList: JList<BackgroundConfiguration>
+    protected val addNewButton: JButton
+    protected val removeButton: JButton
+    protected val moveUpButton: JButton
+    protected val moveDownButton: JButton
+    protected val editorsListModel: DefaultListModel<BackgroundConfiguration>
+    protected val borderConfigPanel: BorderConfigPanel
 
     val rootComponent: JComponent
         get() = panel
@@ -33,10 +33,10 @@ class SexyEditorConfigurationPanel {
             borderConfigPanel.rootComponent,
             GridConstraints(
                 4, 0, 1, 2,
-                ANCHOR_CENTER,
-                FILL_BOTH,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_BOTH,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
                 null, null, null, 0, false
             )
         )
@@ -46,9 +46,9 @@ class SexyEditorConfigurationPanel {
             addNewButton,
             GridConstraints(
                 0, 1, 1, 1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -58,9 +58,9 @@ class SexyEditorConfigurationPanel {
             removeButton,
             GridConstraints(
                 1, 1, 1, 1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -70,9 +70,9 @@ class SexyEditorConfigurationPanel {
             moveUpButton,
             GridConstraints(
                 2, 1, 1, 1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -82,9 +82,9 @@ class SexyEditorConfigurationPanel {
             moveDownButton,
             GridConstraints(
                 3, 1, 1, 1,
-                ANCHOR_CENTER,
-                FILL_HORIZONTAL,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -103,10 +103,10 @@ class SexyEditorConfigurationPanel {
             innerPanel,
             GridConstraints(
                 0, 0, 4, 1,
-                ANCHOR_CENTER,
-                FILL_BOTH,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_CAN_GROW,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_BOTH,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_GROW,
                 null,
                 Dimension(300, 160),
                 null, 0, false
@@ -117,10 +117,10 @@ class SexyEditorConfigurationPanel {
             scrollPane,
             GridConstraints(
                 0, 0, 1, 1,
-                ANCHOR_CENTER,
-                FILL_BOTH,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                GridConstraints.ANCHOR_CENTER,
+                GridConstraints.FILL_BOTH,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
                 null,
                 Dimension(256, 88),
                 null, 0, false
@@ -215,76 +215,5 @@ class SexyEditorConfigurationPanel {
                 editorsList.setSelectedIndex(selected)
             }
         }
-
-    // ---------------------------------------------------------------- LSRM
-
-    private var configs: List<BackgroundConfiguration>? = null
-
-    /**
-     * Loads configuration list into the GUI and selects the very first element.
-     */
-    fun load(configs: List<BackgroundConfiguration>) {
-        this.configs = configs
-        editorsListModel.removeAllElements()
-        for (cfg in configs) {
-            editorsListModel.addElement(cfg)
-        }
-        if (editorsListModel.size >= 1) {
-            editorsList.selectedIndex = 0 // loads border config
-        }
-        editorsList.repaint()
-    }
-
-    /**
-     * Saves current changes and creates new configuration list instance.
-     */
-    fun save(): List<BackgroundConfiguration>? {
-        if (configs == null) {
-            return null
-        }
-
-        // replace current border config
-        val selected = editorsList.selectedIndex
-        if (selected != -1) {
-            saveBackgroundConfig(selected)
-            editorsList.selectedIndex = selected
-        }
-
-        // creates new list
-        val newConfigs: MutableList<BackgroundConfiguration> = ArrayList(editorsListModel.size)
-        for (i in 0 until editorsListModel.size) {
-            newConfigs.add(editorsListModel.getElementAt(i) as BackgroundConfiguration)
-        }
-        configs = newConfigs
-        return newConfigs
-    }
-
-    private fun saveBackgroundConfig(index: Int) {
-        val newConfiguration: BackgroundConfiguration = borderConfigPanel.save()
-        editorsListModel.remove(index)
-        editorsListModel.add(index, newConfiguration)
-    }
-
-    /**
-     * Returns `false` if all list elements are the same as in given config list
-     * and selected border config is modified.
-     */
-    fun isModified(): Boolean {
-        if (configs == null) {
-            return false
-        }
-        if (borderConfigPanel.isModified()) {
-            return true
-        }
-        if (configs!!.size != editorsListModel.size) {
-            return true
-        }
-        for (i in 0 until editorsListModel.size) {
-            if (configs!![i] != editorsListModel.getElementAt(i)) {
-                return true
-            }
-        }
-        return false
-    }
 
 }

@@ -1,14 +1,14 @@
 package com.github.igr.sexyeditor.config
 
 import com.github.igr.sexyeditor.COMPONENT_NAME
-import com.github.igr.sexyeditor.ui.SexyEditorConfigurationPanel
+import com.github.igr.sexyeditor.ui.SexyEditorConfigPanel
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 
 class SexyEditorSettingsConfigurable: Configurable {
 
-    private var configurationComponent: SexyEditorConfigurationPanel? = null
+    private var configurationComponent: SexyEditorConfigPanel? = null
 
     @Nls
     override fun getDisplayName(): String {
@@ -23,7 +23,7 @@ class SexyEditorSettingsConfigurable: Configurable {
         if (configurationComponent == null) {
             val state = SexyEditorState.get().state
 
-            configurationComponent = SexyEditorConfigurationPanel()
+            configurationComponent = SexyEditorConfigPanel()
             configurationComponent!!.load(state.configs)
         }
         return configurationComponent?.rootComponent!!
