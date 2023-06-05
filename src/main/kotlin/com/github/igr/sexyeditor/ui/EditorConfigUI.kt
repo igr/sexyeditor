@@ -1,6 +1,8 @@
 package com.github.igr.sexyeditor.ui
 
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.uiDesigner.core.GridConstraints
+import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
@@ -44,45 +46,11 @@ open class EditorConfigUI {
         )
 
         nameTextField = createNameTextField()
-
-        val label3 = JLabel()
-        label3.text = "Position:"
-        panel.add(
-            label3,
-            GridConstraints(
-                2, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
-            )
-        )
-        positionComboBox = JComboBox<Int>()
-        positionComboBox.isEditable = false
-        positionComboBox.maximumRowCount = 9
-        positionComboBox.toolTipText = "<html>\nImage position relative to editor window."
-        panel.add(
-            positionComboBox,
-            GridConstraints(
-                2, 1, 1, 2,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
-                null, Dimension(117, 22), null, 0, false
-            )
-        )
-
+        positionComboBox = createPositionComboBox()
         opacitySlider = createOpacitySlider()
 
-        shrinkCheckBox = JCheckBox()
-        shrinkCheckBox.text = "Resize"
-        shrinkCheckBox.toolTipText = "<html>\nShrink large images to fit the editor."
-        panel.add(
-            shrinkCheckBox,
-            GridConstraints(
-                6, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
-            )
-        )
+        shrinkCheckBox = createShrinkCheckBox()
+
         shrinkSlider = JSlider().apply {
             isEnabled = false
             majorTickSpacing = 10
@@ -92,12 +60,11 @@ open class EditorConfigUI {
             paintTicks = true
             toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>\n100% means image will be shrinked to <b>desktop</b> (and not IDEA) size."
         }
-
         panel.add(
             shrinkSlider,
             GridConstraints(
                 6, 1, 1, 4,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
@@ -109,8 +76,8 @@ open class EditorConfigUI {
             randomCheckBox,
             GridConstraints(
                 7, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, Dimension(61, 22), null, 0, false
             )
         )
@@ -121,9 +88,9 @@ open class EditorConfigUI {
             slideshowCheckBox,
             GridConstraints(
                 8, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null, Dimension(61, 22), null, 0, false
             )
         )
@@ -136,7 +103,7 @@ open class EditorConfigUI {
             slideShowPause,
             GridConstraints(
                 8, 1, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, Dimension(70, 20), null, 0, false
             )
         )
@@ -146,7 +113,7 @@ open class EditorConfigUI {
             label4,
             GridConstraints(
                 9, 0, 1, 1,
-                GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, Dimension(61, 14), null, 0, false
             )
         )
@@ -155,7 +122,7 @@ open class EditorConfigUI {
             spacer1,
             GridConstraints(
                 8, 2, 1, 2,
-                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
                 null, null, null, 0, false
             )
         )
@@ -166,7 +133,7 @@ open class EditorConfigUI {
             insertFilesButton,
             GridConstraints(
                 10, 1, 1, 1,
-                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, Dimension(70, 25), null, 0, false
             )
         )
@@ -179,10 +146,10 @@ open class EditorConfigUI {
                 0,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_FIXED,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_FIXED,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(61, 14),
                 null,
@@ -200,10 +167,10 @@ open class EditorConfigUI {
                 1,
                 1,
                 4,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_HORIZONTAL,
+                SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(120, 20),
                 null,
@@ -219,10 +186,10 @@ open class EditorConfigUI {
                 1,
                 1,
                 6,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_WANT_GROW,
+                ANCHOR_CENTER,
+                FILL_BOTH,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
                 null,
                 null,
                 null,
@@ -247,10 +214,10 @@ open class EditorConfigUI {
                 3,
                 1,
                 1,
-                GridConstraints.ANCHOR_EAST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_WANT_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_EAST,
+                FILL_NONE,
+                SIZEPOLICY_WANT_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 null,
                 null,
@@ -268,10 +235,10 @@ open class EditorConfigUI {
                 4,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_HORIZONTAL,
+                SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(78, 20),
                 null,
@@ -295,10 +262,10 @@ open class EditorConfigUI {
                 5,
                 3,
                 1,
-                GridConstraints.ANCHOR_NORTHWEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_FIXED,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_NORTHWEST,
+                FILL_NONE,
+                SIZEPOLICY_FIXED,
+                SIZEPOLICY_FIXED,
                 null,
                 null,
                 null,
@@ -314,9 +281,9 @@ open class EditorConfigUI {
                 6,
                 1,
                 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_WANT_GROW,
+                ANCHOR_CENTER,
+                FILL_HORIZONTAL,
+                SIZEPOLICY_WANT_GROW,
                 1,
                 null,
                 null,
@@ -334,10 +301,10 @@ open class EditorConfigUI {
                 3,
                 1,
                 1,
-                GridConstraints.ANCHOR_CENTER,
-                GridConstraints.FILL_HORIZONTAL,
-                GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_CENTER,
+                FILL_HORIZONTAL,
+                SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 null,
                 null,
@@ -354,10 +321,10 @@ open class EditorConfigUI {
                 0,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_FIXED,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_FIXED,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(61, 14),
                 null,
@@ -375,10 +342,10 @@ open class EditorConfigUI {
                 1,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 null,
                 null,
@@ -395,10 +362,10 @@ open class EditorConfigUI {
                 0,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_FIXED,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_FIXED,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(61, 14),
                 null,
@@ -415,10 +382,10 @@ open class EditorConfigUI {
                 1,
                 1,
                 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK or GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
                 null,
                 null,
                 null,
@@ -426,7 +393,6 @@ open class EditorConfigUI {
                 false
             )
         )
-        label3.labelFor = positionComboBox
         label5.labelFor = matchTextField
         label6.labelFor = positionOffsetTextField
         label7.labelFor = positionComboBox
@@ -457,7 +423,7 @@ open class EditorConfigUI {
             },
             GridConstraints(
                 0, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, Dimension(60, 14), null, 0, false
             )
         )
@@ -465,11 +431,39 @@ open class EditorConfigUI {
             nameTextField,
             GridConstraints(
                 0, 1, 1, 4,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, Dimension(150, -1), null, 0, false
             )
         )
         return nameTextField
+    }
+
+    private fun createPositionComboBox(): JComboBox<Int> {
+        val positionComboBox = ComboBox<Int>().apply {
+            isEditable = false
+            maximumRowCount = 9
+            toolTipText = "<html>\nImage position relative to editor window."
+        }
+        panel.add(
+            JLabel().apply {
+                text = "Position:"
+                labelFor = positionComboBox
+            },
+            GridConstraints(
+                2, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(61, 14), null, 0, false
+            )
+        )
+        panel.add(
+            positionComboBox,
+            GridConstraints(
+                2, 1, 1, 2,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(117, 22), null, 0, false
+            )
+        )
+        return positionComboBox
     }
 
     private fun createOpacitySlider(): JSlider {
@@ -487,10 +481,10 @@ open class EditorConfigUI {
             },
             GridConstraints(
                 5, 0, 1, 1,
-                GridConstraints.ANCHOR_WEST,
-                GridConstraints.FILL_NONE,
-                GridConstraints.SIZEPOLICY_FIXED,
-                GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST,
+                FILL_NONE,
+                SIZEPOLICY_FIXED,
+                SIZEPOLICY_FIXED,
                 null,
                 Dimension(61, 14),
                 null,
@@ -502,11 +496,29 @@ open class EditorConfigUI {
             opacitySlider,
             GridConstraints(
                 5, 1, 1, 4,
-                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
         return opacitySlider
+    }
+
+    private fun createShrinkCheckBox(): JCheckBox {
+        val shrinkCheckBox = JCheckBox().apply {
+            text = "Resize"
+            toolTipText = "<html>\nShrink large images to fit the editor."
+        }
+        panel.add(
+            shrinkCheckBox,
+            GridConstraints(
+                6, 0, 1, 1,
+                ANCHOR_WEST, FILL_NONE,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
+                null, Dimension(61, 22), null, 0, false
+            )
+        )
+        return shrinkCheckBox
     }
 
 }
