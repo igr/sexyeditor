@@ -10,7 +10,6 @@ import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
 import java.awt.Color
 import java.awt.Dimension
-import java.io.File
 import javax.swing.*
 import javax.swing.border.TitledBorder
 
@@ -305,9 +304,8 @@ open class EditorConfigUI {
                 }
                 val returnVal = chooser.showOpenDialog(panel)
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    val selectedFiles: Array<File> = chooser.selectedFiles
-                    for (file in selectedFiles) {
-                        fileListModel.addElement(file.getAbsolutePath())
+                    for (file in chooser.selectedFiles) {
+                        fileListModel.addElement(file.absolutePath)
                     }
                 }
             }

@@ -24,7 +24,7 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
 
     private val previewSize: Int
     private var maxFileSize = 512 * 1024
-    private var showOnlyOnImages = true
+    private var showOnlyOnImages = false
     private val imageExtensions = arrayOf("gif", "jpg", "jpeg", "bmp", "png")
 
     init {
@@ -59,7 +59,7 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
      * Attach this accessory to file chooser and, optionally, add file filter for image files.
      */
     fun attachToFileChooser(fileChooser: JFileChooser, imagesFilterName: String?) {
-        fileChooser.setAccessory(this)
+        fileChooser.accessory = this
         fileChooser.addPropertyChangeListener(this)
         if (imagesFilterName != null) {
             fileChooser.fileFilter = FileNameExtensionFilter(imagesFilterName, *imageExtensions)
@@ -72,10 +72,10 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
         var icon: Icon? = null
         if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY == evt.propertyName) {
             if (showOnlyOnImages) {
-                this.setVisible(false)
+                this.isVisible = false
             }
-            newFile = evt.newValue as File
-            if (newFile != null) {
+            if (evt.newValue != null) {
+                newFile = evt.newValue as File
                 val path: String = newFile!!.absolutePath
                 val i = path.lastIndexOf('.')
                 if (i != -1) {
@@ -83,7 +83,7 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
                     for (ext in imageExtensions) {
                         if (extension == ext) {
                             if (showOnlyOnImages) {
-                                this.setVisible(true)
+                                this.isVisible = true
                             }
                             sure!!.isVisible = maxFileSize != -1 && newFile!!.length() > maxFileSize
                             if (!sure!!.isVisible) {

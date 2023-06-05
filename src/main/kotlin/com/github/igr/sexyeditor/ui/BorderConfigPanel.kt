@@ -58,9 +58,7 @@ class BorderConfigPanel : EditorConfigUI() {
         config.shrinkToFit = shrinkToFitCheckBox.isSelected
         config.slideshow = slideshowCheckBox.isSelected
         config.slideshowPause = slideShowPause.text.toInt()
-        val files = arrayOf<String>()
-        fileListModel.copyInto(files)
-        config.fileNames = files
+        config.fileNames = fileListModel.elements().toList().toTypedArray<String>()
         return config
     }
 
