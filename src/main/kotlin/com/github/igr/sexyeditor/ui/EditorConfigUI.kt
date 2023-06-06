@@ -57,12 +57,12 @@ open class EditorConfigUI {
         slideshowCheckBox = createSlideShowCheckBox(slideShowPause)
         fileList = createFileList()
         createFileListLabel()
-        createSpacer1()
-        insertFilesButton = createInsertFilesButton()
         matchTextField = createMatchTextField()
         positionOffsetTextField = createPositionOffsetTextField()
-        createImageLabel()
+        createSpacer1()
         createSpacer2()
+        createSpacer3()
+        insertFilesButton = createInsertFilesButton()
         removeFilesButton = createRemoveFileButton()
         fixedPositionCheckBox = createFixedPositionCheckbox()
         shrinkToFitCheckBox = createShrinkToFitCheckBox()
@@ -81,23 +81,23 @@ open class EditorConfigUI {
         //imageLabel!!.icon = SexyEditor.getInstance().getIcon()
     }
 
-    private fun createSpacer2() {
-        panel.add(
-            Spacer(),
-            GridConstraints(
-                1, 6, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
-                null, null, null, 0, false
-            )
-        )
-    }
-
     private fun createSpacer1() {
         panel.add(
             Spacer(),
             GridConstraints(
                 8, 2, 1, 2,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
+                null, null, null, 0, false
+            )
+        )
+    }
+
+    private fun createSpacer2() {
+        panel.add(
+            Spacer(),
+            GridConstraints(
+                1, 6, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
                 null, null, null, 0, false
             )
         )
@@ -116,7 +116,7 @@ open class EditorConfigUI {
             GridConstraints(
                 0, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(60, 14), null, 0, false
+                null, Dimension(60, -1), null, 0, false
             )
         )
         panel.add(
@@ -144,7 +144,7 @@ open class EditorConfigUI {
             GridConstraints(
                 2, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
+                null, Dimension(60, 14), null, 0, false
             )
         )
         panel.add(
@@ -152,7 +152,7 @@ open class EditorConfigUI {
             GridConstraints(
                 2, 1, 1, 2,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(117, 22), null, 0, false
+                null, Dimension(120, 22), null, 0, false
             )
         )
         return positionComboBox
@@ -178,7 +178,7 @@ open class EditorConfigUI {
                 SIZEPOLICY_FIXED,
                 SIZEPOLICY_FIXED,
                 null,
-                Dimension(61, 14),
+                Dimension(60, 14),
                 null,
                 0,
                 false
@@ -209,7 +209,7 @@ open class EditorConfigUI {
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
+                null, Dimension(60, 22), null, 0, false
             )
         )
         return shrinkCheckBox
@@ -223,7 +223,8 @@ open class EditorConfigUI {
             minorTickSpacing = 5
             paintLabels = true
             paintTicks = true
-            toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>\n100% means image will be shrinked to <b>desktop</b> (and not IDEA) size."
+            toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>" +
+                    "100% means image will be set to <b>desktop</b> (and not IDEA) size."
         }
         panel.add(
             shrinkSlider,
@@ -239,7 +240,8 @@ open class EditorConfigUI {
     private fun createRandomCheckBox(): JCheckBox {
         val randomCheckBox = JCheckBox().apply {
             text = "Random"
-            toolTipText = "<html>\nIf set, next image from the list will be chosen randomly.<br>\nAffects file openings and slideshows."
+            toolTipText = "<html>If set, next image from the list will be chosen randomly.<br>" +
+                    "Affects file openings and slideshows."
         }
         panel.add(
             randomCheckBox,
@@ -247,7 +249,7 @@ open class EditorConfigUI {
                 7, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
+                null, Dimension(60, 22), null, 0, false
             )
         )
         return randomCheckBox
@@ -256,7 +258,7 @@ open class EditorConfigUI {
     private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
         val slideshowCheckBox = JCheckBox().apply {
             text = "Slideshow:"
-            toolTipText = "<html>\nIf set images in editor will change while you work:)"
+            toolTipText = "<html>If set images in editor will change while you work:)"
             addActionListener { slideShowPause.isEnabled = isSelected }
         }
         panel.add(
@@ -266,7 +268,7 @@ open class EditorConfigUI {
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_FIXED,
-                null, Dimension(61, 22), null, 0, false
+                null, Dimension(60, 22), null, 0, false
             )
         )
         return slideshowCheckBox
@@ -276,7 +278,7 @@ open class EditorConfigUI {
         val slideShowPause = JTextField().apply {
             columns = 10
             isEnabled = false
-            toolTipText = "<html>\nTime between changing the image<br>\nin slideshow mode (in milliseconds)."
+            toolTipText = "<html>Time between changing the image<br>in slideshow mode (in milliseconds)."
         }
         panel.add(
             slideShowPause,
@@ -297,7 +299,7 @@ open class EditorConfigUI {
                 val chooser = JFileChooser().apply {
                     isMultiSelectionEnabled = true
                     dialogTitle = "Select images to insert..."
-                    preferredSize = Dimension(700, 500)
+                    preferredSize = Dimension(500, 500)
                 }
                 ImagePreviewPanel().apply {
                     attachToFileChooser(chooser, "Only images")
@@ -323,7 +325,9 @@ open class EditorConfigUI {
 
     private fun createMatchTextField(): JTextField {
         val matchTextField = JTextField().apply {
-            toolTipText = "<html>\nList of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>\nFile belongs to the first group that it matches.<br>\n<i>Example</i>: *.java;*.jsp"
+            toolTipText = "<html>List of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>" +
+                    "File belongs to the first group that it matches.<br>" +
+                    "<i>Example</i>: *.java;*.jsp"
         }
         panel.add(
             JLabel().apply {
@@ -408,7 +412,7 @@ open class EditorConfigUI {
                 text =
                     "<html>HINTS:<ul>" +
                             "<li>Read <b>tooltips</b> for more help." +
-                            "<li> Reopen editors if changes are not visible." +
+                            "<li>Reopen editors if changes are not visible." +
                             "<li>Apply changes before changing the editor group. "
                 verticalAlignment = 0
                 verticalTextPosition = 0
@@ -429,7 +433,7 @@ open class EditorConfigUI {
             GridConstraints(
                 9, 0, 1, 1,
                 ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
+                null, Dimension(60, 14), null, 0, false
             )
         )
     }
@@ -453,12 +457,22 @@ open class EditorConfigUI {
             removeFilesButton,
             GridConstraints(
                 10, 3, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL,
-                SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(70, 25), null, 0, false
             )
         )
         return removeFilesButton
+    }
+
+    private fun createSpacer3() {
+        panel.add(
+            JLabel("Spacer3"),
+            GridConstraints(
+                10, 4, 1, 1,
+                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
+                null, null, null, 0, false
+            )
+        )
     }
 
     private fun createFixedPositionCheckbox(): JCheckBox {
