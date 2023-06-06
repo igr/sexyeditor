@@ -16,16 +16,18 @@ import javax.swing.*
 import javax.swing.filechooser.FileNameExtensionFilter
 import kotlin.math.max
 
-class ImagePreviewPanel : JPanel(), PropertyChangeListener {
+/**
+ * @param previewSize - size of preview in pixels
+ * @param maxFileSize - maximum file size in pixels to automatically show preview for. Set  `-1` to remove limitation
+ */
+class ImagePreviewPanel(
+    val previewSize: Int = 200,
+    val maxFileSize : Int = 512 * 1024,
+) : JPanel(), PropertyChangeListener {
 
     private val label: JLabel
     private val sure: JButton
     private var maxImgWidth = 0
-
-    private val previewSize = 200
-    // Sets maximal file size of image that will be previewed automatically.
-    // Setting this value to `-1` all images will be previewed.
-    private var maxFileSize = 512 * 1024
     private val showOnlyOnImages = false
     private val imageExtensions = arrayOf("gif", "jpg", "jpeg", "bmp", "png")
 
@@ -126,8 +128,7 @@ class ImagePreviewPanel : JPanel(), PropertyChangeListener {
                     true
                 )
             )
-        } catch (ioex: IOException) {
-            // ignore, couldn't read image
+        } catch (ignore: IOException) {
         } finally {
             newFile = null
         }

@@ -5,9 +5,9 @@ import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.util.ui.JBUI
-import java.awt.Dimension
 import javax.swing.*
 import javax.swing.border.TitledBorder
+
 
 open class SexyEditorConfigUI {
 
@@ -103,7 +103,7 @@ open class SexyEditorConfigUI {
                     ANCHOR_CENTER, FILL_BOTH,
                     SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
                     SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                    null, Dimension(256, 88), null, 0, false
+                    null, null, null, 0, false
                 )
             )
         }
@@ -114,7 +114,7 @@ open class SexyEditorConfigUI {
                 ANCHOR_CENTER, FILL_BOTH,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_CAN_GROW,
-                null, Dimension(300, 160), null, 0, false
+                null, null, null, 0, false
             )
         )
 
