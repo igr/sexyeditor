@@ -1,6 +1,7 @@
 package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
+import com.github.igr.sexyeditor.config.BackgroundPosition
 
 class EditorConfigPanel : EditorConfigUI() {
 
@@ -16,7 +17,7 @@ class EditorConfigPanel : EditorConfigUI() {
         matchTextField.text = config.editorGroup
         opacitySlider.value = (config.opacity * 100).toInt()
 
-        positionComboBox.selectedIndex = config.position
+        positionComboBox.selectedIndex = config.position.value
         positionOffsetTextField.text = config.positionOffset.toString()
         if (shrinkCheckBox.isSelected != config.shrink) {
             shrinkCheckBox.doClick()
@@ -48,7 +49,7 @@ class EditorConfigPanel : EditorConfigUI() {
         config.name = nameTextField.text
         config.editorGroup = matchTextField.text
         config.opacity = (opacitySlider.value / 100.0).toFloat()
-        config.position = positionComboBox.selectedIndex
+        config.position = BackgroundPosition.of(positionComboBox.selectedIndex)
         config.positionOffset = positionOffsetTextField.text.toInt()
         config.shrink = shrinkCheckBox.isSelected
         config.shrinkValue = shrinkSlider.value
@@ -69,7 +70,7 @@ class EditorConfigPanel : EditorConfigUI() {
                     matchTextField.text != config.editorGroup ||
                     opacitySlider.value != (config.opacity * 100).toInt()
                 ) ||
-                positionComboBox.selectedIndex != config.position ||
+                positionComboBox.selectedIndex != config.position.value ||
                 positionOffsetTextField.text != config.positionOffset.toString() ||
                 shrinkCheckBox.isSelected != config.shrink ||
                 shrinkSlider.value != config.shrinkValue ||

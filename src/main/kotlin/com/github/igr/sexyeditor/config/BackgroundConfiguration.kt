@@ -1,16 +1,35 @@
 package com.github.igr.sexyeditor.config
 
-class BackgroundConfiguration {
+enum class BackgroundPosition(val value: Int) {
+    POSITION_TOP_LEFT(0),
+    POSITION_TOP_MIDDLE(1),
+    POSITION_TOP_RIGHT(2),
+    POSITION_MIDDLE_LEFT(3),
+    POSITION_CENTER(4),
+    POSITION_MIDDLE_RIGHT(5),
+    POSITION_BOTTOM_LEFT(6),
+    POSITION_BOTTOM_MIDDLE(7),
+    POSITION_BOTTOM_RIGHT(8);
 
-    val POSITION_TOP_LEFT = 0
-    val POSITION_TOP_MIDDLE = 1
-    val POSITION_TOP_RIGHT = 2
-    val POSITION_MIDDLE_LEFT = 3
-    val POSITION_CENTER = 4
-    val POSITION_MIDDLE_RIGHT = 5
-    val POSITION_BOTTOM_LEFT = 6
-    val POSITION_BOTTOM_MIDDLE = 7
-    val POSITION_BOTTOM_RIGHT = 8
+    companion object {
+        fun of(value: Int): BackgroundPosition {
+            return when (value) {
+                0 -> POSITION_TOP_LEFT
+                1 -> POSITION_TOP_MIDDLE
+                2 -> POSITION_TOP_RIGHT
+                3 -> POSITION_MIDDLE_LEFT
+                4 -> POSITION_CENTER
+                5 -> POSITION_MIDDLE_RIGHT
+                6 -> POSITION_BOTTOM_LEFT
+                7 -> POSITION_BOTTOM_MIDDLE
+                8 -> POSITION_BOTTOM_RIGHT
+                else -> throw IllegalArgumentException("Unknown value: $value")
+            }
+        }
+    }
+}
+
+class BackgroundConfiguration {
 
     var name = "All editors"
 
@@ -25,9 +44,9 @@ class BackgroundConfiguration {
     var opacity = 0.10f
 
     /**
-     * Image position 0 - 8.
+     * Image position.
      */
-    var position = POSITION_TOP_RIGHT
+    var position = BackgroundPosition.POSITION_TOP_RIGHT
 
     /**
      * Position offset from the edges in pixels.

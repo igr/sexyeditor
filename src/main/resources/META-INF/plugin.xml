@@ -21,4 +21,9 @@ Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-co
         <applicationService serviceImplementation="com.github.igr.sexyeditor.services.BackgroundService" />
     </extensions>
 
+    <applicationListeners>
+        <listener class="com.github.igr.sexyeditor.listeners.SexyEditorListener"
+                  topic="com.intellij.openapi.editor.event.EditorFactoryListener"/>
+    </applicationListeners>
+
 </idea-plugin>
