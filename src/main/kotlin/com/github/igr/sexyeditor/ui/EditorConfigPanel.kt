@@ -2,8 +2,7 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 
-// todo rename to EditorConfigPanel
-class BorderConfigPanel : EditorConfigUI() {
+class EditorConfigPanel : EditorConfigUI() {
 
     private var config: BackgroundConfiguration = BackgroundConfiguration()
 
@@ -66,13 +65,20 @@ class BorderConfigPanel : EditorConfigUI() {
      * Returns `true` if configuration is modified.
      */
     fun isModified(): Boolean {
-        return ((nameTextField.text != config.name
-                || matchTextField.text != config.editorGroup || opacitySlider.value != (config.opacity * 100).toInt()) || positionComboBox.selectedIndex != config.position || positionOffsetTextField.text != java.lang.String.valueOf(
-            config.positionOffset
-        ) || shrinkCheckBox.isSelected != config.shrink || shrinkSlider.value != config.shrinkValue || randomCheckBox.isSelected != config.random || fixedPositionCheckBox.isSelected != config.fixedPosition || shrinkToFitCheckBox.isSelected != config.shrinkToFit || slideshowCheckBox.isSelected != config.slideshow || slideShowPause.text != java.lang.String.valueOf(
-            config.slideshowPause
-        )
-                || !equalFileListModel(config.fileNames))
+        return ((nameTextField.text != config.name ||
+                    matchTextField.text != config.editorGroup ||
+                    opacitySlider.value != (config.opacity * 100).toInt()
+                ) ||
+                positionComboBox.selectedIndex != config.position ||
+                positionOffsetTextField.text != config.positionOffset.toString() ||
+                shrinkCheckBox.isSelected != config.shrink ||
+                shrinkSlider.value != config.shrinkValue ||
+                randomCheckBox.isSelected != config.random ||
+                fixedPositionCheckBox.isSelected != config.fixedPosition ||
+                shrinkToFitCheckBox.isSelected != config.shrinkToFit ||
+                slideshowCheckBox.isSelected != config.slideshow ||
+                slideShowPause.text != config.slideshowPause.toString() ||
+                !equalFileListModel(config.fileNames))
     }
 
     private fun equalFileListModel(otherList: Array<String>?): Boolean {

@@ -18,7 +18,7 @@ open class SexyEditorConfigUI {
     protected val moveUpButton: JButton
     protected val moveDownButton: JButton
     protected val editorsListModel: DefaultListModel<BackgroundConfiguration>
-    protected val borderConfigPanel: BorderConfigPanel
+    protected val editorConfigPanel: EditorConfigPanel
 
     val rootComponent: JComponent
         get() = panel
@@ -29,9 +29,9 @@ open class SexyEditorConfigUI {
             isEnabled = true
         }
 
-        borderConfigPanel = BorderConfigPanel()
+        editorConfigPanel = EditorConfigPanel()
         panel.add(
-            borderConfigPanel.rootComponent,
+            editorConfigPanel.rootComponent,
             GridConstraints(
                 4, 0, 1, 2,
                 ANCHOR_CENTER, FILL_BOTH,
@@ -86,9 +86,7 @@ open class SexyEditorConfigUI {
         )
 
         val scrollPane = JScrollPane().apply {
-            border = null
-            verticalScrollBar.border = null
-            horizontalScrollBar.border = null
+            border = BorderFactory.createEmptyBorder()
         }
         val innerPanel = JPanel().apply {
             layout = GridLayoutManager(1, 1, JBUI.emptyInsets(), -1, -1)
@@ -128,7 +126,7 @@ open class SexyEditorConfigUI {
                 // select a config
                 val selected = selectedIndex
                 if (selected != -1) {
-                    borderConfigPanel.load(editorsListModel.getElementAt(selected) as BackgroundConfiguration)
+                    editorConfigPanel.load(editorsListModel.getElementAt(selected) as BackgroundConfiguration)
                 }
             }
         }

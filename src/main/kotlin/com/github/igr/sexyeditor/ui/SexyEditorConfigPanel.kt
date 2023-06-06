@@ -46,7 +46,7 @@ class SexyEditorConfigPanel : SexyEditorConfigUI() {
     }
 
     private fun saveBackgroundConfig(index: Int) {
-        val newConfiguration: BackgroundConfiguration = borderConfigPanel.save()
+        val newConfiguration: BackgroundConfiguration = editorConfigPanel.save()
         editorsListModel.remove(index)
         editorsListModel.add(index, newConfiguration)
     }
@@ -59,7 +59,7 @@ class SexyEditorConfigPanel : SexyEditorConfigUI() {
         if (configs == null) {
             return false
         }
-        if (borderConfigPanel.isModified()) {
+        if (editorConfigPanel.isModified()) {
             return true
         }
         if (configs!!.size != editorsListModel.size) {
