@@ -1,7 +1,6 @@
 package com.github.igr.sexyeditor.ui
 
 import com.intellij.openapi.ui.ComboBox
-import com.intellij.ui.JBColor
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.uiDesigner.core.GridConstraints
@@ -38,7 +37,7 @@ open class EditorConfigUI {
         get() = panel
 
     init {
-        panel.layout = GridLayoutManager(11, 7, JBUI.insets(10), -1, -1)
+        panel.layout = GridLayoutManager(11, 5, JBUI.insets(10), -1, -1)
         panel.border = BorderFactory.createTitledBorder(
             null,
             "Editor group configuration",
@@ -47,27 +46,42 @@ open class EditorConfigUI {
             null, null
         )
 
+        // row 0
         nameTextField = createNameTextField()
+        matchTextField = createMatchTextField()
+
+        // row 1
         positionComboBox = createPositionComboBox()
+        // row 2
+        positionOffsetTextField = createPositionOffsetTextField()
+
+        // row 4
+        fixedPositionCheckBox = createFixedPositionCheckbox()
+        // row 5
+        shrinkToFitCheckBox = createShrinkToFitCheckBox()
+        // row 6
         opacitySlider = createOpacitySlider()
+
+        // row 7
         shrinkSlider = createShrinkSlider()
         shrinkCheckBox = createShrinkCheckBox(shrinkSlider)
+
+        // row 8
         randomCheckBox = createRandomCheckBox()
+
+        // row 9
         slideShowPause = createSlideShowPause()
         slideshowCheckBox = createSlideShowCheckBox(slideShowPause)
-        fileList = createFileList()
-        createFileListLabel()
-        matchTextField = createMatchTextField()
-        positionOffsetTextField = createPositionOffsetTextField()
         createSpacer1()
-        createSpacer2()
-        createSpacer3()
+
+        // row 10
+        createFileListLabel()
+        fileList = createFileList()
+
+        // row 11
         insertFilesButton = createInsertFilesButton()
         removeFilesButton = createRemoveFileButton()
-        fixedPositionCheckBox = createFixedPositionCheckbox()
-        shrinkToFitCheckBox = createShrinkToFitCheckBox()
-
-
+        createSpacer3()
 
         // setup
 
@@ -85,19 +99,8 @@ open class EditorConfigUI {
         panel.add(
             Spacer(),
             GridConstraints(
-                8, 2, 1, 2,
+                8, 2, 1, 3,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
-                null, null, null, 0, false
-            )
-        )
-    }
-
-    private fun createSpacer2() {
-        panel.add(
-            Spacer(),
-            GridConstraints(
-                1, 6, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
                 null, null, null, 0, false
             )
         )
@@ -173,15 +176,8 @@ open class EditorConfigUI {
             },
             GridConstraints(
                 5, 0, 1, 1,
-                ANCHOR_WEST,
-                FILL_NONE,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_FIXED,
-                null,
-                Dimension(60, 14),
-                null,
-                0,
-                false
+                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
+                null, Dimension(60, 14), null, 0, false
             )
         )
         panel.add(
@@ -357,7 +353,7 @@ open class EditorConfigUI {
         panel.add(
             scrollPane,
             GridConstraints(
-                9, 1, 1, 6,
+                9, 1, 1, 4,
                 ANCHOR_CENTER, FILL_BOTH,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
@@ -402,29 +398,6 @@ open class EditorConfigUI {
         return positionOffsetTextField
     }
 
-    private fun createImageLabel() {
-        panel.add(
-            JLabel().apply {
-                background = JBColor(-10066330, -10066330)
-                foreground = JBColor(-6710887, -6710887)
-                horizontalAlignment = 10
-                iconTextGap = 8
-                text =
-                    "<html>HINTS:<ul>" +
-                            "<li>Read <b>tooltips</b> for more help." +
-                            "<li>Reopen editors if changes are not visible." +
-                            "<li>Apply changes before changing the editor group. "
-                verticalAlignment = 0
-                verticalTextPosition = 0
-            },
-            GridConstraints(
-                0, 5, 3, 1,
-                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, null, null, 1, false
-            )
-        )
-    }
-
     private fun createFileListLabel() {
         panel.add(
             JLabel().apply {
@@ -456,7 +429,7 @@ open class EditorConfigUI {
         panel.add(
             removeFilesButton,
             GridConstraints(
-                10, 3, 1, 1,
+                10, 2, 1, 1,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
                 null, Dimension(70, 25), null, 0, false
             )
@@ -466,9 +439,9 @@ open class EditorConfigUI {
 
     private fun createSpacer3() {
         panel.add(
-            JLabel("Spacer3"),
+            Spacer(),
             GridConstraints(
-                10, 4, 1, 1,
+                10, 3, 1, 1,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
                 null, null, null, 0, false
             )
