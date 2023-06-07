@@ -14,13 +14,15 @@ import javax.swing.JViewport
 import javax.swing.border.Border
 
 /**
- * Editors border that draws background image. Each editor has its own background border instance.
+ * Editors border that draws background image.
+ * Each editor has its own background border instance.
  */
 class BackgroundBorder(
     private val config: BackgroundConfiguration,
     private val component: Component
 ) : Border {
 
+    private var runtime: EditorRuntimeData = EditorRuntimeData(config)
     private var imageFileName: String? = null
     private var image: BufferedImage? = null
     private var imageWidth = 0
@@ -30,8 +32,7 @@ class BackgroundBorder(
 
     init {
         active = true
-        // TODO
-        //loadImage(config.getNextImage())
+        loadImage(runtime.getNextImage())
     }
 
     // ---------------------------------------------------------------- border
@@ -44,6 +45,7 @@ class BackgroundBorder(
         var y = y
         var width = width
         var height = height
+
         if (image == null) {
             return
         }
@@ -176,14 +178,17 @@ class BackgroundBorder(
      * Loads specified image in the background and shrink to fit if required so.
      * Repaints parent component of this border.
      */
-    fun loadImage(fileName: String) {
+    private fun loadImage(fileName: String?) {
+        if (fileName == null) {
+            return
+        }
         Thread { loadImageNow(fileName) }.start()
     }
 
     /**
      * Loads an image.
      */
-    private fun loadImageNow(fileName: String?) {
+    private fun loadImageNow(fileName: String) {
         if (isClosed()) {
             return
         }

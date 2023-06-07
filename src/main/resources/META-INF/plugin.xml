@@ -14,16 +14,10 @@ Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-co
         <applicationConfigurable
                 parentId="tools"
                 instance="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
-                id="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
                 displayName="Sexy Editor"/>
 
         <applicationService serviceImplementation="com.github.igr.sexyeditor.config.SexyEditorState" />
-        <applicationService serviceImplementation="com.github.igr.sexyeditor.services.BackgroundService" />
+        <editorFactoryListener implementation="com.github.igr.sexyeditor.listeners.SexyEditorListener"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.igr.sexyeditor.listeners.SexyEditorListener"
-                  topic="com.intellij.openapi.editor.event.EditorFactoryListener"/>
-    </applicationListeners>
 
 </idea-plugin>
