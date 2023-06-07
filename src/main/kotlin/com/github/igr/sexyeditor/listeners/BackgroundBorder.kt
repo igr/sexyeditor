@@ -4,6 +4,7 @@ import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.BackgroundPosition.*
 import com.github.igr.sexyeditor.ui.createScaledInstance
+import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.util.ui.JBUI
 import java.awt.*
 import java.awt.image.BufferedImage
@@ -22,17 +23,15 @@ class BackgroundBorder(
     private val component: Component
 ) : Border {
 
-    private var runtime: EditorRuntimeData = EditorRuntimeData(config)
-    private var imageFileName: String? = null
+    private var runtime: EditorRuntimeData = EditorRuntimeData(config, this)
     private var image: BufferedImage? = null
     private var imageWidth = 0
     private var imageHeight = 0
-
     private var active = false
 
     init {
         active = true
-        loadImage(runtime.getNextImage())
+        loadImage(runtime.selectNextImage())
     }
 
     // ---------------------------------------------------------------- border
@@ -40,22 +39,17 @@ class BackgroundBorder(
     /**
      * Paints the border and the background.
      */
-    override fun paintBorder(component: Component, graphics: Graphics, x: Int, y: Int, width: Int, height: Int) {
-        var x = x
-        var y = y
-        var width = width
-        var height = height
-
+    override fun paintBorder(component: Component, graphics: Graphics, naX: Int, naY: Int, naWidth: Int, naHeight: Int) {
         if (image == null) {
             return
         }
         val g2d = graphics as Graphics2D
         g2d.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, config.opacity)
         val jv = component.parent as JViewport
-        width = jv.width
-        height = jv.height
-        x = jv.viewRect.x
-        y = jv.viewRect.y
+        val width = jv.width
+        val height = jv.height
+        var x = jv.viewRect.x
+        var y = jv.viewRect.y
         val position = config.position
         val positionOffset: Int = config.positionOffset
         val fixedLocation: Boolean = config.fixedPosition
@@ -178,7 +172,7 @@ class BackgroundBorder(
      * Loads specified image in the background and shrink to fit if required so.
      * Repaints parent component of this border.
      */
-    private fun loadImage(fileName: String?) {
+    fun loadImage(fileName: String?) {
         if (fileName == null) {
             return
         }
@@ -192,7 +186,8 @@ class BackgroundBorder(
         if (isClosed()) {
             return
         }
-        imageFileName = fileName
+        thisLogger().debug("Load image: {}", fileName)
+
         var image = readImage(fileName)
         if (image == null) {
             this.image = null
@@ -262,7 +257,7 @@ class BackgroundBorder(
         image = null
         imageWidth = 0
         imageHeight = 0
-        imageFileName = null
+        runtime.end()
         component.repaint()
     }
 
@@ -279,11 +274,8 @@ class BackgroundBorder(
     /**
      * Returns `true` if this instance is closed.
      */
-    fun isClosed(): Boolean {
+    private fun isClosed(): Boolean {
         return !active
     }
 
-    override fun toString(): String {
-        return "BackgroundBorder (" + imageFileName + ": " + imageWidth + 'x' + imageHeight + ')'
-    }
 }

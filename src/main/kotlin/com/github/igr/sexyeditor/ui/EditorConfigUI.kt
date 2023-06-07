@@ -274,7 +274,7 @@ open class EditorConfigUI {
         val slideShowPause = JTextField().apply {
             columns = 10
             isEnabled = false
-            toolTipText = "<html>Time between changing the image<br>in slideshow mode (in milliseconds)."
+            toolTipText = "<html>Time between changing the image<br>in slideshow mode (in seconds)."
         }
         panel.add(
             slideShowPause,
@@ -289,7 +289,7 @@ open class EditorConfigUI {
 
     private fun createInsertFilesButton(): JButton {
         val insertFilesButton = JButton().apply {
-            icon = iconOf("images")
+            icon = PluginIcons.IMAGES
             text = "Add image(s)..."
             addActionListener {
                 val chooser = JFileChooser().apply {

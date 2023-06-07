@@ -1,6 +1,6 @@
 package com.github.igr.sexyeditor.config
 
-import com.github.igr.sexyeditor.COMPONENT_NAME
+import com.github.igr.sexyeditor.SexyEditorBundle
 import com.github.igr.sexyeditor.ui.SexyEditorConfigPanel
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
@@ -12,7 +12,7 @@ class SexyEditorSettingsConfigurable: Configurable {
 
     @Nls
     override fun getDisplayName(): String {
-        return COMPONENT_NAME
+        return SexyEditorBundle.getMessage("name")
     }
 
     override fun getHelpTopic(): String? {
@@ -36,7 +36,6 @@ class SexyEditorSettingsConfigurable: Configurable {
     override fun apply() {
         val state = SexyEditorState.get()
         state.configs = configurationComponent!!.save()!!
-        //state.configs.forEach(BackgroundConfiguration::repaintAllEditors)
     }
 
     override fun reset() {

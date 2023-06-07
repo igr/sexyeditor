@@ -23,17 +23,7 @@ class PositionComboBoxRenderer : JLabel(), ListCellRenderer<Int> {
         )
     }
 
-    private val positionIcons = arrayOf(
-        iconOf("top-left"),
-        iconOf("top-middle"),
-        iconOf("top-right"),
-        iconOf("middle-left"),
-        iconOf("center"),
-        iconOf("middle-right"),
-        iconOf("bottom-left"),
-        iconOf("bottom-middle"),
-        iconOf("bottom-right"),
-    )
+    private val positionIcons = PluginIcons.POSITIONS
 
     init {
         isOpaque = true

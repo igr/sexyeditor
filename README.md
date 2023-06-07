@@ -2,7 +2,7 @@
 
 <!-- Plugin description -->
 Editors are so booooring. White background. Black background.
-<Choose-your-color-here/> background. Meh.
+Choose-your-color background. Meh.
 
 Not anymore! With **Sexy Editor**, your IntelliJ IDE will becomes _awesome_! By choosing one or more background images, your everyday IntelliJ editor gets _super beautiful_.
 
@@ -73,8 +73,3 @@ Over time, we have received a large amount of beautiful feedback on how **Sexy E
 > "I stopped smoking thanx to you guys! I spent like hundreds of dollars for all kind of California terapists, and nothing helped. I was despaired. Then I just made a pic with simple sentence: I am not smoking. That was it. I guess my brain processed this message even I was not directly looking at it. Two months later, I was a new guy!" - Brian, San Francisco, USA
 
 > "Everyone in my office wants to figure the secret how I made my IDEA so beautiful. I am not telling them, ha ha... And I love this feeling!" - Anonymous.
-
-
-## See also
-
-Why not [Jodd](http://jodd.org)?

@@ -70,7 +70,7 @@ public class BackgroundConfiguration {
 	protected boolean slideshow;
 
 	/**
-	 * Pause in milliseconds between two slides.
+	 * Pause in seconds between two slides.
 	 */
 	protected int slideshowPause = 3000;
 

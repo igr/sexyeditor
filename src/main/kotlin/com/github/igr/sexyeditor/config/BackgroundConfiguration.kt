@@ -80,9 +80,9 @@ class BackgroundConfiguration {
     var slideshow = false
 
     /**
-     * Pause in milliseconds between two slides.
+     * Pause in seconds between two slides.
      */
-    var slideshowPause = 3000
+    var slideshowPause = 3
 
     /**
      * If background is located at fixed position and does not move with scrolling.

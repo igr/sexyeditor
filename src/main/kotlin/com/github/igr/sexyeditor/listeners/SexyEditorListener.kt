@@ -1,11 +1,13 @@
 package com.github.igr.sexyeditor.listeners
 
+import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.github.igr.sexyeditor.config.SexyEditorState
-import com.github.igr.sexyeditor.services.SexyEditorService
 import com.intellij.openapi.editor.event.EditorFactoryEvent
 import com.intellij.openapi.editor.event.EditorFactoryListener
 import com.intellij.openapi.fileEditor.FileDocumentManager
+import com.intellij.openapi.fileTypes.WildcardFileNameMatcher
 import java.awt.Component
+import java.util.*
 import javax.swing.JViewport
 import javax.swing.border.Border
 
@@ -50,13 +52,10 @@ internal class SexyEditorListener: EditorFactoryListener {
      */
     private fun createBorder(fileName: String, component: Component): BackgroundBorder? {
         val state = SexyEditorState.get()
-        val service = SexyEditorService.get()
 
         for (config in state.configs) {
-            if (service.matchFileName(config, fileName)) {
-                val backgroundBorder = BackgroundBorder(config, component)
-                service.registerBorder(backgroundBorder)
-                return backgroundBorder
+            if (matchFileName(config, fileName)) {
+                return BackgroundBorder(config, component)
             }
         }
         return null
@@ -66,8 +65,18 @@ internal class SexyEditorListener: EditorFactoryListener {
      * Unregisters border.
      */
     private fun removeBorder(border: BackgroundBorder) {
-        val service = SexyEditorService.get()
-        service.unregisterBorder(border)
+        border.removeImage()
+    }
+
+    private fun matchFileName(config: BackgroundConfiguration, fileName: String): Boolean {
+        val st = StringTokenizer(config.editorGroup, ";")
+        while (st.hasMoreTokens()) {
+            val token = st.nextToken().trim { it <= ' ' }
+            if (WildcardFileNameMatcher(token).acceptsCharSequence(fileName)) {
+                return true
+            }
+        }
+        return false
     }
 
 }

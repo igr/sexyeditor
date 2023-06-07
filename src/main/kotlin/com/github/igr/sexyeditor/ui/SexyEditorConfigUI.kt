@@ -137,7 +137,7 @@ open class SexyEditorConfigUI {
         JButton().apply {
             hideActionText = false
             horizontalAlignment = SwingConstants.LEFT
-            icon = generalIconOf("add")
+            icon = PluginIcons.ADD
             text = "Add Editor"
             addActionListener {
                 val selected = editorsList.selectedIndex
@@ -154,7 +154,7 @@ open class SexyEditorConfigUI {
     private fun createRemoveButton() =
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
-            icon = generalIconOf("remove")
+            icon = PluginIcons.REMOVE
             text = "Remove"
             addActionListener {
                 var selected = editorsList.selectedIndex
@@ -173,7 +173,7 @@ open class SexyEditorConfigUI {
     private fun createMoveUpButton() =
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
-            icon = actionIconOf("moveUp")
+            icon = PluginIcons.MOVE_UP
             text = "Move Up"
 
             addActionListener {
@@ -191,7 +191,7 @@ open class SexyEditorConfigUI {
     private fun createMoveDownButton() =
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
-            icon = actionIconOf("moveDown")
+            icon = PluginIcons.MOVE_DOWN
             text = "Move Down"
 
             addActionListener {

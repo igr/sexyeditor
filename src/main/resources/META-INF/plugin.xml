@@ -12,7 +12,7 @@ Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-co
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
-                parentId="tools"
+                parentId="appearance"
                 instance="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
                 displayName="Sexy Editor"/>
 
