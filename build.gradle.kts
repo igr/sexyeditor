@@ -23,6 +23,7 @@ repositories {
 // Dependencies are managed with Gradle version catalog
 dependencies {
 //    implementation(libs.annotations)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 // Use Java 11 for 2020.3+, and Java 17 for 2022.2+.

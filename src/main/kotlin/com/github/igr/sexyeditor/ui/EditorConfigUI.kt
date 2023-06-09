@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder
 
 
 open class EditorConfigUI {
-    protected val panel: JPanel = JPanel()
+    private val panel: JPanel = JPanel()
     protected val nameTextField: JTextField
     protected val positionComboBox: JComboBox<Int>
     protected val opacitySlider: JSlider
@@ -29,9 +29,9 @@ open class EditorConfigUI {
     private val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
     protected val shrinkToFitCheckBox: JCheckBox
-    protected val fileList: JBList<String>
+    private val fileList: JBList<String>
     protected val fileListModel: DefaultListModel<String>
-    protected val positionComboBoxModel: DefaultComboBoxModel<Int>
+    private val positionComboBoxModel: DefaultComboBoxModel<Int>
 
     val rootComponent: JComponent
         get() = panel

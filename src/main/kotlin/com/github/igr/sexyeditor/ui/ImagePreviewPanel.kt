@@ -21,8 +21,8 @@ import kotlin.math.max
  * @param maxFileSize - maximum file size in pixels to automatically show preview for. Set  `-1` to remove limitation
  */
 class ImagePreviewPanel(
-    val previewSize: Int = 200,
-    val maxFileSize : Int = 512 * 1024,
+    private val previewSize: Int = 200,
+    private val maxFileSize : Int = 512 * 1024,
 ) : JPanel(), PropertyChangeListener {
 
     private val label: JLabel

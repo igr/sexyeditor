@@ -58,7 +58,7 @@ class EditorConfigPanel : EditorConfigUI() {
         config.shrinkToFit = shrinkToFitCheckBox.isSelected
         config.slideshow = slideshowCheckBox.isSelected
         config.slideshowPause = slideShowPause.text.toInt()
-        config.fileNames = fileListModel.elements().toList().toTypedArray<String>()
+        config.fileNames = fileListModel.elements().toList().toTypedArray()
         return config
     }
 

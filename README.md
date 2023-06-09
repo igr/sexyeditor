@@ -1,7 +1,11 @@
-# IntelliJ Sexy Editor 💟💻
+# IntelliJ Sexy Editor ❤️💻
+
+[![Build](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml/badge.svg)](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml)
+![Version](https://img.shields.io/jetbrains/plugin/v/Sexy%20Editor)
+![Downloads](https://img.shields.io/jetbrains/plugin/d/Sexy%20Editor)
 
 <!-- Plugin description -->
-Make your editors beautiful with awesome backgrounds!
+**Make your editors beautiful with awesome backgrounds!**
 
 Editors are so booooring. White background. Black background.
 Choose-your-color background. Meh.
@@ -12,7 +16,15 @@ That's not all! It doesn't have to be just a pretty image. Put a motivational qu
 
 <!-- Plugin description end -->
 
-Don't forget to [vote for the plugin!](https://plugins.jetbrains.com/plugin/1833-sexy-editor)
+**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-sexy-editor) to update your karma 🔮!**
+
+## Features
+
++ Add any image to your editor (just editor (!), not the complete UI)
++ Multiple editor
+
+
+![](doc/sexyeditor.jpg)
 
 ## Examples
 
@@ -33,8 +45,6 @@ Or, what you can use to make IntelliJ sexy:
 
 Wait! You can set multiple backgrounds! They can change like
 a slideshow, or they can change randomly.
-
-![](sexyeditor.jpg)
 
 ## Feeling Sexy?
 

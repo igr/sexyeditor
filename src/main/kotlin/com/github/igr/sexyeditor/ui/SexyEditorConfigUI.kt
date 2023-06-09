@@ -12,12 +12,12 @@ import javax.swing.border.TitledBorder
 
 open class SexyEditorConfigUI {
 
-    protected val panel: JPanel = JPanel()
+    private val panel: JPanel = JPanel()
     protected val editorsList: JList<BackgroundConfiguration>
-    protected val addNewButton: JButton
-    protected val removeButton: JButton
-    protected val moveUpButton: JButton
-    protected val moveDownButton: JButton
+    private val addNewButton: JButton
+    private val removeButton: JButton
+    private val moveUpButton: JButton
+    private val moveDownButton: JButton
     protected val editorsListModel: DefaultListModel<BackgroundConfiguration>
     protected val editorConfigPanel: EditorConfigPanel
     private val emptyLabel: JLabel
