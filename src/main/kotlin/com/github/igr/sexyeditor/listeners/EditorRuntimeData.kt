@@ -1,6 +1,7 @@
 package com.github.igr.sexyeditor.listeners
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
+import com.intellij.openapi.diagnostic.thisLogger
 import kotlin.random.Random
 
 class EditorRuntimeData(
@@ -42,6 +43,7 @@ class EditorRuntimeData(
     }
 
     private fun createThread(slideshowPause: Int): Thread {
+        thisLogger().info("Creating slideshow thread")
         return Thread {
             while (slideshowThreadRunning) {
                 try {
@@ -65,6 +67,7 @@ class EditorRuntimeData(
             Thread.sleep(100)
         }
         slideshowThread = null
+        thisLogger().info("Slideshow thread stopped")
     }
 
     fun end() {
