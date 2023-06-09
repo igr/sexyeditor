@@ -54,51 +54,12 @@ class BackgroundBorder(
         val positionOffset: Int = config.positionOffset
         val fixedLocation: Boolean = config.fixedPosition
         val shrinkToFit: Boolean = config.shrinkToFit
-        // x axis
-        if (fixedLocation) {
-            // image is not moved on scroll
-            if (position.isOnLeftSide()) {
-                x += positionOffset
-            } else if (position.isVerticallyCentered()) {
-                x += (width - imageWidth) / 2
-            } else if (position.isOnRightSide()) {
-                x += width - imageWidth - positionOffset
-            }
 
-            // y axis
-            if (position.isOnTop()) {
-                y += positionOffset
-            } else if (position.isHorizontallyCentered()) {
-                y += (height - imageHeight) / 2
-            } else if (position.isOnBottom()) {
-                y += height - imageHeight - positionOffset
-            }
-        } else {
-            // image is move with scroll
-            if (position.isOnLeftSide()) {
-                x = positionOffset
-            } else if (position.isVerticallyCentered()) {
-                x = (width - imageWidth) / 2
-            } else if (position.isOnRightSide()) {
-                x = width - imageWidth - positionOffset
-            }
-
-            // y axis
-            if (position.isOnTop()) {
-                y = positionOffset
-            } else if (position.isHorizontallyCentered()) {
-                y = (height - imageHeight) / 2
-            } else if (position.isOnBottom()) {
-                y = height - imageHeight - positionOffset
-            }
-        }
+        var newImageWidth = imageWidth
+        var newImageHeight = imageHeight
 
         // draw
-        if (!shrinkToFit) {
-            g2d.drawImage(image, x, y, jv)
-        } else {
-            var newImageWidth = imageWidth
-            var newImageHeight = imageHeight
+        if (shrinkToFit) {
             val visibleWidth = width - 2 * positionOffset
             val visibleHeight = height - 2 * positionOffset
             if (newImageWidth > visibleWidth) {
@@ -113,6 +74,51 @@ class BackgroundBorder(
                 newImageHeight = visibleHeight
                 newImageWidth = (newImageWidth * scale).toInt()
             }
+        }
+
+        // x axis
+        if (fixedLocation) {
+            // image is not moved on scroll
+            if (position.isOnLeftSide()) {
+                x += positionOffset
+            } else if (position.isVerticallyCentered()) {
+                x += (width - newImageWidth) / 2
+            } else if (position.isOnRightSide()) {
+                x += width - newImageWidth - positionOffset
+            }
+
+            // y axis
+            if (position.isOnTop()) {
+                y += positionOffset
+            } else if (position.isHorizontallyCentered()) {
+                y += (height - newImageHeight) / 2
+            } else if (position.isOnBottom()) {
+                y += height - newImageHeight - positionOffset
+            }
+        } else {
+            // image is move with scroll
+            if (position.isOnLeftSide()) {
+                x = positionOffset
+            } else if (position.isVerticallyCentered()) {
+                x = (width - newImageWidth) / 2
+            } else if (position.isOnRightSide()) {
+                x = width - newImageWidth - positionOffset
+            }
+
+            // y axis
+            if (position.isOnTop()) {
+                y = positionOffset
+            } else if (position.isHorizontallyCentered()) {
+                y = (height - newImageHeight) / 2
+            } else if (position.isOnBottom()) {
+                y = height - newImageHeight - positionOffset
+            }
+        }
+
+        // draw
+        if (!shrinkToFit) {
+            g2d.drawImage(image, x, y, jv)
+        } else {
             g2d.drawImage(image, x, y, newImageWidth, newImageHeight, jv)
         }
     }
