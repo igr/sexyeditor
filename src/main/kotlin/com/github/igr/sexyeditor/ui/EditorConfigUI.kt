@@ -197,7 +197,7 @@ open class EditorConfigUI {
 
     private fun createResizeCheckBox(shrinkSlider: JSlider): JCheckBox {
         val resizeCheckBox = JCheckBox().apply {
-            text = PluginBundle.message("label.resize")
+            text = PluginBundle.message("label.resize-on-load")
             toolTipText = PluginBundle.message("tooltip.resize")
             addActionListener {  shrinkSlider.isEnabled = isSelected }
         }
@@ -223,7 +223,7 @@ open class EditorConfigUI {
             minorTickSpacing = 5
             paintLabels = true
             paintTicks = true
-            toolTipText =  PluginBundle.message("tooltip.shrink-slider")
+            toolTipText =  PluginBundle.message("tooltip.resize-slider")
         }
         panel.add(
             resizeSlider,
