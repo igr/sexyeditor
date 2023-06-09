@@ -5,3 +5,4 @@ out
 .qodana
 build
 libs
+.env
