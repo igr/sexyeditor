@@ -24,8 +24,8 @@ open class EditorConfigUI {
     protected val nameTextField: JTextField
     protected val positionComboBox: JComboBox<Int>
     protected val opacitySlider: JSlider
-    protected val shrinkCheckBox: JCheckBox
-    protected val shrinkSlider: JSlider
+    protected val resizeCheckBox: JCheckBox
+    protected val resizeSlider: JSlider
     protected val randomCheckBox: JCheckBox
     protected val slideshowCheckBox: JCheckBox
     protected val slideShowPause: JTextField
@@ -69,8 +69,8 @@ open class EditorConfigUI {
         opacitySlider = createOpacitySlider()
 
         // row 7
-        shrinkSlider = createShrinkSlider()
-        shrinkCheckBox = createShrinkCheckBox(shrinkSlider)
+        resizeSlider = createResizeSlider()
+        resizeCheckBox = createResizeCheckBox(resizeSlider)
 
         // row 8
         randomCheckBox = createRandomCheckBox()
@@ -195,15 +195,15 @@ open class EditorConfigUI {
         return opacitySlider
     }
 
-    private fun createShrinkCheckBox(shrinkSlider: JSlider): JCheckBox {
-        val shrinkCheckBox = JCheckBox().apply {
+    private fun createResizeCheckBox(shrinkSlider: JSlider): JCheckBox {
+        val resizeCheckBox = JCheckBox().apply {
             text = PluginBundle.message("label.resize")
-            toolTipText = PluginBundle.message("tooltip.shrink")
+            toolTipText = PluginBundle.message("tooltip.resize")
             addActionListener {  shrinkSlider.isEnabled = isSelected }
         }
 
         panel.add(
-            shrinkCheckBox,
+            resizeCheckBox,
             GridConstraints(
                 6, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
@@ -212,11 +212,11 @@ open class EditorConfigUI {
                 null, Dimension(60, 22), null, 0, false
             )
         )
-        return shrinkCheckBox
+        return resizeCheckBox
     }
 
-    private fun createShrinkSlider(): JSlider {
-        val shrinkSlider = JSlider().apply {
+    private fun createResizeSlider(): JSlider {
+        val resizeSlider = JSlider().apply {
             isEnabled = false
             majorTickSpacing = 10
             minimum = 0
@@ -226,14 +226,14 @@ open class EditorConfigUI {
             toolTipText =  PluginBundle.message("tooltip.shrink-slider")
         }
         panel.add(
-            shrinkSlider,
+            resizeSlider,
             GridConstraints(
                 6, 1, 1, 4,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
-        return shrinkSlider
+        return resizeSlider
     }
 
     private fun createRandomCheckBox(): JCheckBox {

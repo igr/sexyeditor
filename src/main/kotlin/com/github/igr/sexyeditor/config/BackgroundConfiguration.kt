@@ -54,15 +54,15 @@ class BackgroundConfiguration {
     var positionOffset = 10
 
     /**
-     * Is image shrunk.
+     * Is image resized.
      */
-    var shrink = false
+    var resize = false
 
     /**
      * Amount of image shrinking in percents. 100% percent means shrink to fit
      * the screen dimensions.
      */
-    var shrinkValue = 90
+    var resizeValue = 90
 
     /**
      * List of images.

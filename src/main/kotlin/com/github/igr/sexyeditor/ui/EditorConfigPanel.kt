@@ -19,10 +19,10 @@ class EditorConfigPanel : EditorConfigUI() {
 
         positionComboBox.selectedIndex = config.position.value
         positionOffsetTextField.text = config.positionOffset.toString()
-        if (shrinkCheckBox.isSelected != config.shrink) {
-            shrinkCheckBox.doClick()
+        if (resizeCheckBox.isSelected != config.resize) {
+            resizeCheckBox.doClick()
         }
-        shrinkSlider.value = config.shrinkValue
+        resizeSlider.value = config.resizeValue
         if (fixedPositionCheckBox.isSelected != config.fixedPosition) {
             fixedPositionCheckBox.doClick()
         }
@@ -51,8 +51,8 @@ class EditorConfigPanel : EditorConfigUI() {
         config.opacity = (opacitySlider.value / 100.0).toFloat()
         config.position = BackgroundPosition.of(positionComboBox.selectedIndex)
         config.positionOffset = positionOffsetTextField.text.toInt()
-        config.shrink = shrinkCheckBox.isSelected
-        config.shrinkValue = shrinkSlider.value
+        config.resize = resizeCheckBox.isSelected
+        config.resizeValue = resizeSlider.value
         config.random = randomCheckBox.isSelected
         config.fixedPosition = fixedPositionCheckBox.isSelected
         config.shrinkToFit = shrinkToFitCheckBox.isSelected
@@ -72,8 +72,8 @@ class EditorConfigPanel : EditorConfigUI() {
                 ) ||
                 positionComboBox.selectedIndex != config.position.value ||
                 positionOffsetTextField.text != config.positionOffset.toString() ||
-                shrinkCheckBox.isSelected != config.shrink ||
-                shrinkSlider.value != config.shrinkValue ||
+                resizeCheckBox.isSelected != config.resize ||
+                resizeSlider.value != config.resizeValue ||
                 randomCheckBox.isSelected != config.random ||
                 fixedPositionCheckBox.isSelected != config.fixedPosition ||
                 shrinkToFitCheckBox.isSelected != config.shrinkToFit ||

@@ -194,12 +194,12 @@ class BackgroundBorder(
             component.repaint()
             return
         }
-        if (config.shrink) {
+        if (config.resize) {
             val imageWidth = image.width
             val imageHeight = image.height
             val screen = Toolkit.getDefaultToolkit().screenSize
-            val screenWidth = (screen.getWidth() * config.shrinkValue / 100.0).toInt()
-            val screenHeight = (screen.getHeight() * config.shrinkValue / 100.0).toInt()
+            val screenWidth = (screen.getWidth() * config.resizeValue / 100.0).toInt()
+            val screenHeight = (screen.getHeight() * config.resizeValue / 100.0).toInt()
             var ratioW = 1.0f
             var ratioH = 1.0f
             var scale = false
