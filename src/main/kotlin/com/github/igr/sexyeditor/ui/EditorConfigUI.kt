@@ -1,6 +1,7 @@
 package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.PluginBundle
+import com.intellij.ide.plugins.PluginSetBuilder
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -10,6 +11,11 @@ import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
 import java.awt.Dimension
+import java.awt.datatransfer.DataFlavor
+import java.awt.dnd.DnDConstants
+import java.awt.dnd.DropTarget
+import java.awt.dnd.DropTargetDropEvent
+import java.io.File
 import javax.swing.*
 import javax.swing.border.TitledBorder
 
@@ -108,7 +114,7 @@ open class EditorConfigUI {
     private fun createNameTextField(): JTextField {
         val nameTextField = JTextField().apply {
             text = ""
-            toolTipText = "User-friendly editor group name."
+            toolTipText = PluginBundle.message("tooltip.name")
         }
         panel.add(
             JLabel().apply {
@@ -136,7 +142,7 @@ open class EditorConfigUI {
         val positionComboBox = ComboBox<Int>().apply {
             isEditable = false
             maximumRowCount = 9
-            toolTipText = "<html>\nImage position relative to editor window."
+            toolTipText = PluginBundle.message("tooltip.position")
         }
         panel.add(
             JLabel().apply {
@@ -166,7 +172,7 @@ open class EditorConfigUI {
             minorTickSpacing = 5
             paintLabels = true
             paintTicks = true
-            toolTipText = "<html>\nImage opacity percentage value."
+            toolTipText = PluginBundle.message("tooltip.opacity")
         }
         panel.add(
             JLabel().apply {
@@ -193,7 +199,7 @@ open class EditorConfigUI {
     private fun createShrinkCheckBox(shrinkSlider: JSlider): JCheckBox {
         val shrinkCheckBox = JCheckBox().apply {
             text = PluginBundle.message("label.resize")
-            toolTipText = "<html>\nShrink large images to fit the editor."
+            toolTipText = PluginBundle.message("tooltip.shrink")
             addActionListener {  shrinkSlider.isEnabled = isSelected }
         }
 
@@ -218,8 +224,7 @@ open class EditorConfigUI {
             minorTickSpacing = 5
             paintLabels = true
             paintTicks = true
-            toolTipText =  "<html>\nShrink percentage amount relative to OS desktop size.<br>" +
-                    "100% means image will be set to <b>desktop</b> (and not IDEA) size."
+            toolTipText =  PluginBundle.message("tooltip.shrink-slider")
         }
         panel.add(
             shrinkSlider,
@@ -235,8 +240,7 @@ open class EditorConfigUI {
     private fun createRandomCheckBox(): JCheckBox {
         val randomCheckBox = JCheckBox().apply {
             text = PluginBundle.message("label.random")
-            toolTipText = "<html>If set, next image from the list will be chosen randomly.<br>" +
-                    "Affects file openings and slideshows."
+            toolTipText = PluginBundle.message("tooltip.random")
         }
         panel.add(
             randomCheckBox,
@@ -253,7 +257,7 @@ open class EditorConfigUI {
     private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
         val slideshowCheckBox = JCheckBox().apply {
             text = PluginBundle.message("label.slideshow")
-            toolTipText = "<html>If set images in editor will change while you work:)"
+            toolTipText = PluginBundle.message("tooltip.slideshow")
             addActionListener { slideShowPause.isEnabled = isSelected }
         }
         panel.add(
@@ -273,7 +277,7 @@ open class EditorConfigUI {
         val slideShowPause = JTextField().apply {
             columns = 10
             isEnabled = false
-            toolTipText = "<html>Time between changing the image<br>in slideshow mode (in seconds)."
+            toolTipText = PluginBundle.message("tooltip.slideshow-pause")
         }
         panel.add(
             slideShowPause,
@@ -320,10 +324,7 @@ open class EditorConfigUI {
 
     private fun createMatchTextField(): JTextField {
         val matchTextField = JTextField().apply {
-            toolTipText =
-                "<html>List of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>" +
-                    "File belongs to the first group that it matches.<br>" +
-                    "<i>Example</i>: *.java;*.jsp"
+            toolTipText = PluginBundle.message("tooltip.match")
         }
         panel.add(
             JLabel().apply {
@@ -355,26 +356,41 @@ open class EditorConfigUI {
             GridConstraints(
                 9, 1, 1, 4,
                 ANCHOR_CENTER, FILL_BOTH,
+                SIZEPOLICY_FIXED,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                null, null, null, 0, false
+                Dimension(-1, 120), null, null, 0, false
             )
         )
 
         val fileList = JBList<String>().apply {
             model = DefaultListModel()
             selectionMode = 1
-            toolTipText = "File list"
+            toolTipText = PluginBundle.message("tooltip.filelist")
             putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
         }
         scrollPane.setViewportView(fileList)
+
+        fileList.dropTarget = object : DropTarget() {
+            @Synchronized
+            override fun drop(evt: DropTargetDropEvent) {
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY)
+                    val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
+                    for (file in droppedFiles) {
+                        fileListModel.addElement(file.absolutePath)
+                    }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+            }
+        }
         return fileList
     }
 
     private fun createPositionOffsetTextField(): JTextField {
         val positionOffsetTextField = JTextField().apply {
             columns = 4
-            toolTipText = "<html>Image offset from nearest editor edges (in pixels)."
+            toolTipText = PluginBundle.message("tooltip.position-offset")
         }
         panel.add(
             JLabel().apply {

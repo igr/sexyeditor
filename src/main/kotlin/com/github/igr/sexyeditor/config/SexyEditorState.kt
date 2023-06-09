@@ -9,7 +9,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 
 @State(
     name = COMPONENT_NAME,
-    storages = [Storage("sexy-editor.xml")]
+    storages = [Storage("sexy-editor-3.xml")]
 )
 class SexyEditorState : PersistentStateComponent<SexyEditorState> {
 

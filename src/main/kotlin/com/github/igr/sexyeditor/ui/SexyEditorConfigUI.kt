@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.util.ui.JBUI
+import java.awt.event.MouseAdapter
 import javax.swing.*
 import javax.swing.border.TitledBorder
 
@@ -20,7 +21,7 @@ open class SexyEditorConfigUI {
     private val moveDownButton: JButton
     protected val editorsListModel: DefaultListModel<BackgroundConfiguration>
     protected val editorConfigPanel: EditorConfigPanel
-    private val emptyLabel: JLabel
+    private val hintLabel: JLabel
 
     val rootComponent: JComponent
         get() = panel
@@ -37,16 +38,24 @@ open class SexyEditorConfigUI {
             GridConstraints(
                 4, 0, 1, 2,
                 ANCHOR_CENTER, FILL_BOTH,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
-        emptyLabel = JLabel().apply {
+        hintLabel = JLabel().apply {
             horizontalAlignment = SwingConstants.CENTER
+            text = randomTip()
+            icon = PluginIcons.TIP
+            verticalAlignment = SwingConstants.BOTTOM
+            addMouseListener(object : MouseAdapter() {
+                override fun mouseClicked(e: java.awt.event.MouseEvent) {
+                    text = randomTip()
+                }
+            })
         }
         panel.add(
-            emptyLabel,
+            hintLabel,
             GridConstraints(
                 5, 0, 1, 2,
                 ANCHOR_CENTER, FILL_BOTH,
@@ -116,8 +125,8 @@ open class SexyEditorConfigUI {
                 GridConstraints(
                     0, 0, 1, 1,
                     ANCHOR_CENTER, FILL_BOTH,
-                    SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                    SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                    SIZEPOLICY_CAN_SHRINK,
+                    SIZEPOLICY_CAN_SHRINK,
                     null, null, null, 0, false
                 )
             )
@@ -149,6 +158,8 @@ open class SexyEditorConfigUI {
             }
         }
         scrollPane.setViewportView(editorsList)
+
+        showEditorConfigPanel()
     }
 
     private fun createAddNewButton() =
@@ -236,9 +247,10 @@ open class SexyEditorConfigUI {
             return
         }
         editorConfigPanel.rootComponent.isVisible = false
-        emptyLabel.apply {
+        hintLabel.apply {
             text = PluginBundle.message("no-editors")
             icon = PluginIcons.LOGO
+            verticalAlignment = SwingConstants.CENTER
         }
     }
 
@@ -247,10 +259,17 @@ open class SexyEditorConfigUI {
             return
         }
         editorConfigPanel.rootComponent.isVisible = true
-        emptyLabel.apply {
-            text = ""
-            icon = null
+        hintLabel.apply {
+            text = randomTip()
+            icon = PluginIcons.TIP
+            verticalAlignment = SwingConstants.BOTTOM
         }
     }
+
+    private fun randomTip(): String = arrayOf(
+        PluginBundle.message("tip.1"),
+        PluginBundle.message("tip.2"),
+        PluginBundle.message("tip.3"),
+    ).random()
 
 }
