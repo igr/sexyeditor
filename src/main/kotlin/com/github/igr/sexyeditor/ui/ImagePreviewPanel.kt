@@ -50,7 +50,7 @@ class ImagePreviewPanel(
             isVisible = false
         }
         add(sure, BorderLayout.SOUTH)
-        sure.addActionListener { e: ActionEvent? ->
+        sure.addActionListener {
             sure.isVisible = false
             val icon: Icon? = loadImage()
             label.icon = icon
