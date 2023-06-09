@@ -19,11 +19,12 @@ But wait, there's more! It's not just about a visually stunning image. Instead, 
 
 ## Features
 
-+ Assign backgrounds to various editors (just editor (!), not the complete UI)
-+ Use random mode to shuffle images on open
-+ Slideshow to display all the images
++ Assign backgrounds to various editors (just editor (!), not the complete UI).
++ Use random mode to shuffle images on open.
++ Slideshow to display all the images.
 + Control opacity of the background image.
-+ Set background image position and size
++ Set background image position and size.
++ Scroll image together with the code.
 
 ![](doc/sexyeditor.jpg)
 

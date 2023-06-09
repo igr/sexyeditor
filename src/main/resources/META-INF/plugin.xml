@@ -12,7 +12,7 @@ https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
-                parentId="appearance"
+                parentId="editor"
                 instance="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
                 displayName="Sexy Editor"/>
 

@@ -12,9 +12,9 @@ Editors is a list of editor groups. Each group is defined by its *name* and file
 
 Name is just user-friendly group label. Match is semi-column (;) separated list of *wildcard* file patterns that defines which files will be associated with currently selected group.
 
-## Position and Offest
+## Position and Offset
 
-Image relative position in editor window. Offset is a gap in pixels between image and nearest editor edges.
+Image relative position in editor window. Offset is a gap in pixels between image and nearest editors' edge.
 
 ## Fixed position
 
@@ -22,7 +22,7 @@ If checked, image will not follow scrolling the view area of your editor.
 
 ## Shrink to fit
 
-Big images will be scaled to fit the visible area.
+Large images will be scaled down to fit the visible area.
 
 ## Opacity
 
@@ -30,7 +30,7 @@ Makes images transparent.
 
 ## Resize
 
-If this option is set, large images will be resized to fit the *desktop* size. Note it is a desktop size, not IDEA size, therefore, images will be still a bit larger then editor. Therefore it is possible to set amount of resizing: 100% means images will fit to desktop, 50% means images will fit the one quarter of the screen.
+If this option is set, large images will be resized to fit the *desktop* size. Note it is a desktop size, not IDEA size, therefore, images will be still a bit larger than editor. Therefore, it is possible to set amount of resizing: 100% means images will fit to desktop, 50% means images will fit the one quarter of the screen.
 
 ## Random
 

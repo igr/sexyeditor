@@ -1,7 +1,6 @@
 package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.PluginBundle
-import com.intellij.ide.plugins.PluginSetBuilder
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -114,12 +113,12 @@ open class EditorConfigUI {
     private fun createNameTextField(): JTextField {
         val nameTextField = JTextField().apply {
             text = ""
-            toolTipText = PluginBundle.message("tooltip.name")
         }
         panel.add(
             JLabel().apply {
                 text = PluginBundle.message("label.name")
                 labelFor = nameTextField
+                toolTipText = PluginBundle.message("tooltip.name")
             },
             GridConstraints(
                 0, 0, 1, 1,
@@ -142,12 +141,12 @@ open class EditorConfigUI {
         val positionComboBox = ComboBox<Int>().apply {
             isEditable = false
             maximumRowCount = 9
-            toolTipText = PluginBundle.message("tooltip.position")
         }
         panel.add(
             JLabel().apply {
                 text = PluginBundle.message("label.position")
                 labelFor = positionComboBox
+                toolTipText = PluginBundle.message("tooltip.position")
             },
             GridConstraints(
                 2, 0, 1, 1,
@@ -172,12 +171,12 @@ open class EditorConfigUI {
             minorTickSpacing = 5
             paintLabels = true
             paintTicks = true
-            toolTipText = PluginBundle.message("tooltip.opacity")
         }
         panel.add(
             JLabel().apply {
                 text = PluginBundle.message("label.opacity")
                 labelFor = opacitySlider
+                toolTipText = PluginBundle.message("tooltip.opacity")
             },
             GridConstraints(
                 5, 0, 1, 1,
@@ -323,13 +322,12 @@ open class EditorConfigUI {
     }
 
     private fun createMatchTextField(): JTextField {
-        val matchTextField = JTextField().apply {
-            toolTipText = PluginBundle.message("tooltip.match")
-        }
+        val matchTextField = JTextField()
         panel.add(
             JLabel().apply {
                 text = PluginBundle.message("label.match")
                 labelFor = matchTextField
+                toolTipText = PluginBundle.message("tooltip.match")
             },
             GridConstraints(
                 1, 0, 1, 1,
@@ -390,12 +388,12 @@ open class EditorConfigUI {
     private fun createPositionOffsetTextField(): JTextField {
         val positionOffsetTextField = JTextField().apply {
             columns = 4
-            toolTipText = PluginBundle.message("tooltip.position-offset")
         }
         panel.add(
             JLabel().apply {
                 text = PluginBundle.message("label.offset")
                 labelFor = positionOffsetTextField
+                toolTipText = PluginBundle.message("tooltip.position-offset")
             },
             GridConstraints(
                 2, 3, 1, 1,
@@ -473,6 +471,7 @@ open class EditorConfigUI {
             JLabel().apply {
                 text = PluginBundle.message("label.fixed-position")
                 labelFor = fixedPositionCheckBox
+                toolTipText = PluginBundle.message("tooltip.fixed-position")
             },
             GridConstraints(
                 3, 0, 1, 1,
