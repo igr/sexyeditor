@@ -1,5 +1,6 @@
 package com.github.igr.sexyeditor.ui
 
+import com.github.igr.sexyeditor.PluginBundle
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -40,7 +41,7 @@ open class EditorConfigUI {
         panel.layout = GridLayoutManager(11, 5, JBUI.insets(10), -1, -1)
         panel.border = BorderFactory.createTitledBorder(
             null,
-            "Editor group configuration",
+            PluginBundle.message("label.editor-group"),
             TitledBorder.DEFAULT_JUSTIFICATION,
             TitledBorder.DEFAULT_POSITION,
             null, null
@@ -111,7 +112,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Name:"
+                text = PluginBundle.message("label.name")
                 labelFor = nameTextField
             },
             GridConstraints(
@@ -139,7 +140,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Position:"
+                text = PluginBundle.message("label.position")
                 labelFor = positionComboBox
             },
             GridConstraints(
@@ -169,7 +170,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Opacity:"
+                text = PluginBundle.message("label.opacity")
                 labelFor = opacitySlider
             },
             GridConstraints(
@@ -191,7 +192,7 @@ open class EditorConfigUI {
 
     private fun createShrinkCheckBox(shrinkSlider: JSlider): JCheckBox {
         val shrinkCheckBox = JCheckBox().apply {
-            text = "Resize"
+            text = PluginBundle.message("label.resize")
             toolTipText = "<html>\nShrink large images to fit the editor."
             addActionListener {  shrinkSlider.isEnabled = isSelected }
         }
@@ -233,7 +234,7 @@ open class EditorConfigUI {
 
     private fun createRandomCheckBox(): JCheckBox {
         val randomCheckBox = JCheckBox().apply {
-            text = "Random"
+            text = PluginBundle.message("label.random")
             toolTipText = "<html>If set, next image from the list will be chosen randomly.<br>" +
                     "Affects file openings and slideshows."
         }
@@ -251,7 +252,7 @@ open class EditorConfigUI {
 
     private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
         val slideshowCheckBox = JCheckBox().apply {
-            text = "Slideshow:"
+            text = PluginBundle.message("label.slideshow")
             toolTipText = "<html>If set images in editor will change while you work:)"
             addActionListener { slideShowPause.isEnabled = isSelected }
         }
@@ -288,7 +289,7 @@ open class EditorConfigUI {
     private fun createInsertFilesButton(): JButton {
         val insertFilesButton = JButton().apply {
             icon = PluginIcons.IMAGES
-            text = "Add image(s)..."
+            text = PluginBundle.message("label.add-images")
             addActionListener {
                 val chooser = JFileChooser().apply {
                     isMultiSelectionEnabled = true
@@ -326,7 +327,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Match:"
+                text = PluginBundle.message("label.match")
                 labelFor = matchTextField
             },
             GridConstraints(
@@ -377,7 +378,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Offset:"
+                text = PluginBundle.message("label.offset")
                 labelFor = positionOffsetTextField
             },
             GridConstraints(
@@ -400,7 +401,7 @@ open class EditorConfigUI {
     private fun createFileListLabel() {
         panel.add(
             JLabel().apply {
-                text = "File list:"
+                text = PluginBundle.message("label.file-list")
             },
             GridConstraints(
                 9, 0, 1, 1,
@@ -412,7 +413,7 @@ open class EditorConfigUI {
 
     private fun createRemoveFileButton(): JButton {
         val removeFilesButton = JButton().apply {
-            text = "Remove"
+            text = PluginBundle.message("button.remove")
             addActionListener {
                 val min = fileList.minSelectionIndex
                 if (min == -1) {
@@ -454,7 +455,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Fixed Position:"
+                text = PluginBundle.message("label.fixed-position")
                 labelFor = fixedPositionCheckBox
             },
             GridConstraints(
@@ -483,7 +484,7 @@ open class EditorConfigUI {
         }
         panel.add(
             JLabel().apply {
-                text = "Shrink To Fit:"
+                text = PluginBundle.message("label.shrink-to-fit")
                 labelFor = shrinkToFitCheckBox
             },
             GridConstraints(

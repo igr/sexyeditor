@@ -106,7 +106,7 @@ open class SexyEditorConfigUI {
         val innerPanel = JPanel().apply {
             layout = GridLayoutManager(1, 1, JBUI.emptyInsets(), -1, -1)
             border = BorderFactory.createTitledBorder(
-                null, "Editors",
+                null, PluginBundle.message("label.editors"),
                 TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
                 null, null
@@ -156,7 +156,7 @@ open class SexyEditorConfigUI {
             hideActionText = false
             horizontalAlignment = SwingConstants.LEFT
             icon = PluginIcons.ADD
-            text = "Add Editor"
+            text = PluginBundle.message("button.add-editor")
             addActionListener {
                 if (editorsListModel.size() == 0) {
                     showEditorConfigPanel()
@@ -176,7 +176,7 @@ open class SexyEditorConfigUI {
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
             icon = PluginIcons.REMOVE
-            text = "Remove"
+            text = PluginBundle.message("button.remove")
             addActionListener {
                 var selected = editorsList.selectedIndex
                 if (selected != -1) {
@@ -198,7 +198,7 @@ open class SexyEditorConfigUI {
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
             icon = PluginIcons.MOVE_UP
-            text = "Move Up"
+            text = PluginBundle.message("button.move-up")
 
             addActionListener {
                 var selected = editorsList.selectedIndex
@@ -216,7 +216,7 @@ open class SexyEditorConfigUI {
         JButton().apply {
             horizontalAlignment = SwingConstants.LEFT
             icon = PluginIcons.MOVE_DOWN
-            text = "Move Down"
+            text = PluginBundle.message("button.move-down")
 
             addActionListener {
                 var selected = editorsList.selectedIndex

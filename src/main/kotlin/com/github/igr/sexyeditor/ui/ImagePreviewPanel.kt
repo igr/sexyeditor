@@ -46,7 +46,7 @@ class ImagePreviewPanel(
 
         maxImgWidth = previewSize - 5
         add(label, BorderLayout.CENTER)
-        sure = JButton("big image - click to preview").apply {
+        sure = JButton("Big image: click to preview").apply {
             isVisible = false
         }
         add(sure, BorderLayout.SOUTH)
