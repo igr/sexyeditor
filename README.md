@@ -1,18 +1,30 @@
-# IntelliJ Sexy Editor 💟💻
+# IntelliJ Sexy Editor ❤️💻
+
+[![Build](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml/badge.svg)](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml)
+![Version](https://img.shields.io/jetbrains/plugin/v/Sexy%20Editor)
+![Downloads](https://img.shields.io/jetbrains/plugin/d/Sexy%20Editor)
+
+<!-- Plugin description -->
+**Make your editors beautiful with awesome backgrounds!**
 
 Editors are so booooring. White background. Black background.
-<Choose-your-color-here/> background. Meh.
+Choose-your-color background. Meh.
 
-Not anymore! With **Sexy Editor**, your IntelliJ IDE will become...
-err... sexy! By choosing one or more background images, your
-everyday IntelliJ editor gets _super beautiful_.
+Not anymore! With **Sexy Editor**, your IntelliJ IDE will becomes _awesome_! By choosing one or more background images, your everyday IntelliJ editor gets _super beautiful_.
 
-But that's not all! It doesn't have to be just a pretty image.
-Put a motivational quote of your choice, instead! By simply looking
-at it, _every hour_ of every working day, you will soon become
-whatever you are striving for!
+That's not all! It doesn't have to be just a pretty image. Put a motivational quote of your choice, instead! By simply looking at it, _every hour_ of every working day, you will soon become whatever you are striving for!
 
-Don't forget to [vote for the plugin!](https://plugins.jetbrains.com/plugin/1833-sexy-editor)
+<!-- Plugin description end -->
+
+**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-sexy-editor) to update your karma 🔮!**
+
+## Features
+
++ Add any image to your editor (just editor (!), not the complete UI)
++ Multiple editor
+
+
+![](doc/sexyeditor.jpg)
 
 ## Examples
 
@@ -33,8 +45,6 @@ Or, what you can use to make IntelliJ sexy:
 
 Wait! You can set multiple backgrounds! They can change like
 a slideshow, or they can change randomly.
-
-![](sexyeditor.jpg)
 
 ## Feeling Sexy?
 
@@ -75,8 +85,3 @@ Over time, we have received a large amount of beautiful feedback on how **Sexy E
 > "I stopped smoking thanx to you guys! I spent like hundreds of dollars for all kind of California terapists, and nothing helped. I was despaired. Then I just made a pic with simple sentence: I am not smoking. That was it. I guess my brain processed this message even I was not directly looking at it. Two months later, I was a new guy!" - Brian, San Francisco, USA
 
 > "Everyone in my office wants to figure the secret how I made my IDEA so beautiful. I am not telling them, ha ha... And I love this feeling!" - Anonymous.
-
-
-## See also
-
-Why not [Jodd](http://jodd.org)?
