@@ -27,6 +27,42 @@ enum class BackgroundPosition(val value: Int) {
             }
         }
     }
+
+    fun isOnBottom(): Boolean {
+        return this == POSITION_BOTTOM_LEFT ||
+                this == POSITION_BOTTOM_MIDDLE ||
+                this == POSITION_BOTTOM_RIGHT
+    }
+
+    fun isHorizontallyCentered(): Boolean {
+        return this == POSITION_MIDDLE_LEFT ||
+                this == POSITION_CENTER ||
+                this == POSITION_MIDDLE_RIGHT
+    }
+
+    fun isOnTop(): Boolean {
+        return this == POSITION_TOP_LEFT ||
+                this == POSITION_TOP_MIDDLE ||
+                this == POSITION_TOP_RIGHT
+    }
+
+    fun isOnRightSide(): Boolean {
+        return this == POSITION_TOP_RIGHT ||
+                this == POSITION_MIDDLE_RIGHT ||
+                this == POSITION_BOTTOM_RIGHT
+    }
+
+    fun isVerticallyCentered(): Boolean {
+        return this == POSITION_TOP_MIDDLE ||
+                this == POSITION_CENTER ||
+                this == POSITION_BOTTOM_MIDDLE
+    }
+
+    fun isOnLeftSide(): Boolean {
+        return this == POSITION_TOP_LEFT ||
+                this == POSITION_MIDDLE_LEFT ||
+                this == POSITION_BOTTOM_LEFT
+    }
 }
 
 class BackgroundConfiguration {

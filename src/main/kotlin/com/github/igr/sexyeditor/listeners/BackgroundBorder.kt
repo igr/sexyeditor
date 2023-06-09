@@ -57,38 +57,38 @@ class BackgroundBorder(
         // x axis
         if (fixedLocation) {
             // image is not moved on scroll
-            if (isOnLeftSide(position)) {
+            if (position.isOnLeftSide()) {
                 x += positionOffset
-            } else if (isVerticallyCentered(position)) {
+            } else if (position.isVerticallyCentered()) {
                 x += width - imageWidth shr 1
-            } else if (isOnRightSide(position)) {
+            } else if (position.isOnRightSide()) {
                 x += width - imageWidth - positionOffset
             }
 
             // y axis
-            if (isOnTop(position)) {
+            if (position.isOnTop()) {
                 y += positionOffset
-            } else if (isHorizontallyCentered(position)) {
+            } else if (position.isHorizontallyCentered()) {
                 y += height - imageHeight shr 1
-            } else if (isOnBottom(position)) {
+            } else if (position.isOnBottom()) {
                 y += height - imageHeight - positionOffset
             }
         } else {
             // image is move with scroll
-            if (isOnLeftSide(position)) {
+            if (position.isOnLeftSide()) {
                 x = positionOffset
-            } else if (isVerticallyCentered(position)) {
+            } else if (position.isVerticallyCentered()) {
                 x = width - imageWidth shr 1
-            } else if (isOnRightSide(position)) {
+            } else if (position.isOnRightSide()) {
                 x = width - imageWidth - positionOffset
             }
 
             // y axis
-            if (isOnTop(position)) {
+            if (position.isOnTop()) {
                 y = positionOffset
-            } else if (isHorizontallyCentered(position)) {
+            } else if (position.isHorizontallyCentered()) {
                 y = height - imageHeight shr 1
-            } else if (isOnBottom(position)) {
+            } else if (position.isOnBottom()) {
                 y = height - imageHeight - positionOffset
             }
         }
@@ -115,42 +115,6 @@ class BackgroundBorder(
             }
             g2d.drawImage(image, x, y, newImageWidth, newImageHeight, jv)
         }
-    }
-
-    private fun isOnBottom(position: BackgroundPosition): Boolean {
-        return position == POSITION_BOTTOM_LEFT ||
-                position == POSITION_BOTTOM_MIDDLE ||
-                position == POSITION_BOTTOM_RIGHT
-    }
-
-    private fun isHorizontallyCentered(position: BackgroundPosition): Boolean {
-        return position == POSITION_MIDDLE_LEFT ||
-                position == POSITION_CENTER ||
-                position == POSITION_MIDDLE_RIGHT
-    }
-
-    private fun isOnTop(position: BackgroundPosition): Boolean {
-        return position == POSITION_TOP_LEFT ||
-                position == POSITION_TOP_MIDDLE ||
-                position == POSITION_TOP_RIGHT
-    }
-
-    private fun isOnRightSide(position: BackgroundPosition): Boolean {
-        return position == POSITION_TOP_RIGHT ||
-                position == POSITION_MIDDLE_RIGHT ||
-                position == POSITION_BOTTOM_RIGHT
-    }
-
-    private fun isVerticallyCentered(position: BackgroundPosition): Boolean {
-        return position == POSITION_TOP_MIDDLE ||
-                position == POSITION_CENTER ||
-                position == POSITION_BOTTOM_MIDDLE
-    }
-
-    private fun isOnLeftSide(position: BackgroundPosition): Boolean {
-        return position == POSITION_TOP_LEFT ||
-                position == POSITION_MIDDLE_LEFT ||
-                position == POSITION_BOTTOM_LEFT
     }
 
     /**
