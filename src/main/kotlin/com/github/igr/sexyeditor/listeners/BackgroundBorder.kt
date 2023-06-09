@@ -60,7 +60,7 @@ class BackgroundBorder(
             if (position.isOnLeftSide()) {
                 x += positionOffset
             } else if (position.isVerticallyCentered()) {
-                x += width - imageWidth shr 1
+                x += (width - imageWidth) / 2
             } else if (position.isOnRightSide()) {
                 x += width - imageWidth - positionOffset
             }
@@ -69,7 +69,7 @@ class BackgroundBorder(
             if (position.isOnTop()) {
                 y += positionOffset
             } else if (position.isHorizontallyCentered()) {
-                y += height - imageHeight shr 1
+                y += (height - imageHeight) / 2
             } else if (position.isOnBottom()) {
                 y += height - imageHeight - positionOffset
             }
@@ -78,7 +78,7 @@ class BackgroundBorder(
             if (position.isOnLeftSide()) {
                 x = positionOffset
             } else if (position.isVerticallyCentered()) {
-                x = width - imageWidth shr 1
+                x = (width - imageWidth) / 2
             } else if (position.isOnRightSide()) {
                 x = width - imageWidth - positionOffset
             }
@@ -87,7 +87,7 @@ class BackgroundBorder(
             if (position.isOnTop()) {
                 y = positionOffset
             } else if (position.isHorizontallyCentered()) {
-                y = height - imageHeight shr 1
+                y = (height - imageHeight) / 2
             } else if (position.isOnBottom()) {
                 y = height - imageHeight - positionOffset
             }
