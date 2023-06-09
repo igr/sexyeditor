@@ -20,6 +20,7 @@ class PluginIcons {
             iconOf("bottom-middle"),
             iconOf("bottom-right"),
         )
+        val LOGO = iconOf("sexyeditor")
     }
 }
 

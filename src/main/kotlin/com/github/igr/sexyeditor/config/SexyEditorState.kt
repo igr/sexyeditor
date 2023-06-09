@@ -13,7 +13,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 )
 class SexyEditorState : PersistentStateComponent<SexyEditorState> {
 
-    var configs: List<BackgroundConfiguration> = mutableListOf()
+    var configs: MutableList<BackgroundConfiguration> = mutableListOf()
 
     companion object {
         fun get(): SexyEditorState {

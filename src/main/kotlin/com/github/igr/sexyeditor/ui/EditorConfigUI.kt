@@ -91,8 +91,6 @@ open class EditorConfigUI {
         for (i in 0 until PositionComboBoxRenderer.POSITIONS.size) {
             positionComboBoxModel.addElement(Integer.valueOf(i))
         }
-        // todo
-        //imageLabel!!.icon = SexyEditor.getInstance().getIcon()
     }
 
     private fun createSpacer1() {
@@ -321,7 +319,8 @@ open class EditorConfigUI {
 
     private fun createMatchTextField(): JTextField {
         val matchTextField = JTextField().apply {
-            toolTipText = "<html>List of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>" +
+            toolTipText =
+                "<html>List of <b>wildcard</b> expressions separated by semicolon (<b>;</b>) for matching editor file names.<br>" +
                     "File belongs to the first group that it matches.<br>" +
                     "<i>Example</i>: *.java;*.jsp"
         }

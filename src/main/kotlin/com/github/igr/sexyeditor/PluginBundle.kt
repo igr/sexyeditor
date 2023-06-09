@@ -7,7 +7,7 @@ import org.jetbrains.annotations.PropertyKey
 @NonNls
 private const val BUNDLE = "messages.SexyEditorBundle"
 
-object SexyEditorBundle : DynamicBundle(BUNDLE) {
+object PluginBundle : DynamicBundle(BUNDLE) {
 
     @Suppress("SpreadOperator")
     @JvmStatic

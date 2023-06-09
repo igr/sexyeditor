@@ -1,5 +1,6 @@
 package com.github.igr.sexyeditor.ui
 
+import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
@@ -19,13 +20,14 @@ open class SexyEditorConfigUI {
     protected val moveDownButton: JButton
     protected val editorsListModel: DefaultListModel<BackgroundConfiguration>
     protected val editorConfigPanel: EditorConfigPanel
+    private val emptyLabel: JLabel
 
     val rootComponent: JComponent
         get() = panel
 
     init {
         panel.apply {
-            layout = GridLayoutManager(5, 2, JBUI.insets(0, 10), -1, -1)
+            layout = GridLayoutManager(6, 2, JBUI.insets(0, 10), -1, -1)
             isEnabled = true
         }
 
@@ -34,6 +36,19 @@ open class SexyEditorConfigUI {
             editorConfigPanel.rootComponent,
             GridConstraints(
                 4, 0, 1, 2,
+                ANCHOR_CENTER, FILL_BOTH,
+                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
+                SIZEPOLICY_FIXED,
+                null, null, null, 0, false
+            )
+        )
+        emptyLabel = JLabel().apply {
+            horizontalAlignment = SwingConstants.CENTER
+        }
+        panel.add(
+            emptyLabel,
+            GridConstraints(
+                5, 0, 1, 2,
                 ANCHOR_CENTER, FILL_BOTH,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
@@ -127,6 +142,9 @@ open class SexyEditorConfigUI {
                 val selected = selectedIndex
                 if (selected != -1) {
                     editorConfigPanel.load(editorsListModel.getElementAt(selected) as BackgroundConfiguration)
+                } else {
+                    // when no config is selected, load a default one
+                    editorConfigPanel.load(BackgroundConfiguration())
                 }
             }
         }
@@ -140,10 +158,13 @@ open class SexyEditorConfigUI {
             icon = PluginIcons.ADD
             text = "Add Editor"
             addActionListener {
+                if (editorsListModel.size() == 0) {
+                    showEditorConfigPanel()
+                }
                 val selected = editorsList.selectedIndex
                 if (selected != -1) {
                     editorsListModel.add(selected, BackgroundConfiguration())
-                    editorsList.setSelectedIndex(selected)
+                    editorsList.selectedIndex = selected
                 } else {
                     editorsListModel.add(editorsListModel.size(), BackgroundConfiguration())
                     editorsList.setSelectedIndex(editorsListModel.size() - 1)
@@ -166,6 +187,9 @@ open class SexyEditorConfigUI {
                     if (selected >= 0) {
                         editorsList.selectedIndex = selected
                     }
+                }
+                if (editorsListModel.isEmpty) {
+                    hideEditorConfigPanel()
                 }
             }
         }
@@ -205,5 +229,28 @@ open class SexyEditorConfigUI {
                 editorsList.setSelectedIndex(selected)
             }
         }
+
+
+    private fun hideEditorConfigPanel() {
+        if (!editorConfigPanel.rootComponent.isVisible) {
+            return
+        }
+        editorConfigPanel.rootComponent.isVisible = false
+        emptyLabel.apply {
+            text = PluginBundle.message("no-editors")
+            icon = PluginIcons.LOGO
+        }
+    }
+
+    private fun showEditorConfigPanel() {
+        if (editorConfigPanel.rootComponent.isVisible) {
+            return
+        }
+        editorConfigPanel.rootComponent.isVisible = true
+        emptyLabel.apply {
+            text = ""
+            icon = null
+        }
+    }
 
 }
