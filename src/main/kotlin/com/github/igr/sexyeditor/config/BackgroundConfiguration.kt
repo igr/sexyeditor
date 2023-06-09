@@ -1,15 +1,15 @@
 package com.github.igr.sexyeditor.config
 
-enum class BackgroundPosition(val value: Int) {
-    POSITION_TOP_LEFT(0),
-    POSITION_TOP_MIDDLE(1),
-    POSITION_TOP_RIGHT(2),
-    POSITION_MIDDLE_LEFT(3),
-    POSITION_CENTER(4),
-    POSITION_MIDDLE_RIGHT(5),
-    POSITION_BOTTOM_LEFT(6),
-    POSITION_BOTTOM_MIDDLE(7),
-    POSITION_BOTTOM_RIGHT(8);
+enum class BackgroundPosition(val value: Int, val label: String) {
+    POSITION_TOP_LEFT(0, "Top-Left"),
+    POSITION_TOP_MIDDLE(1, "Top-Middle"),
+    POSITION_TOP_RIGHT(2, "Top-Right"),
+    POSITION_MIDDLE_LEFT(3, "Middle-Left"),
+    POSITION_CENTER(4, "Center"),
+    POSITION_MIDDLE_RIGHT(5, "Middle-Right"),
+    POSITION_BOTTOM_LEFT(6, "Bottom-Left"),
+    POSITION_BOTTOM_MIDDLE(7, "Bottom-Middle"),
+    POSITION_BOTTOM_RIGHT(8, "Bottom-Right");
 
     companion object {
         fun of(value: Int): BackgroundPosition {

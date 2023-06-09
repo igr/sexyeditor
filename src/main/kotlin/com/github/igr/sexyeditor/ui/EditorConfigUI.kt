@@ -1,6 +1,7 @@
 package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.PluginBundle
+import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -22,7 +23,7 @@ import javax.swing.border.TitledBorder
 open class EditorConfigUI {
     private val panel: JPanel = JPanel()
     protected val nameTextField: JTextField
-    protected val positionComboBox: JComboBox<Int>
+    protected val positionComboBox: JComboBox<BackgroundPosition>
     protected val opacitySlider: JSlider
     protected val resizeCheckBox: JCheckBox
     protected val resizeSlider: JSlider
@@ -37,7 +38,7 @@ open class EditorConfigUI {
     protected val shrinkToFitCheckBox: JCheckBox
     private val fileList: JBList<String>
     protected val fileListModel: DefaultListModel<String>
-    private val positionComboBoxModel: DefaultComboBoxModel<Int>
+    private val positionComboBoxModel: DefaultComboBoxModel<BackgroundPosition>
 
     val rootComponent: JComponent
         get() = panel
@@ -92,10 +93,10 @@ open class EditorConfigUI {
         // setup
 
         fileListModel = fileList.model as DefaultListModel<String>
-        positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<Int>
+        positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<BackgroundPosition>
         positionComboBox.renderer = PositionComboBoxRenderer()
         for (i in 0 until PositionComboBoxRenderer.POSITIONS.size) {
-            positionComboBoxModel.addElement(Integer.valueOf(i))
+            positionComboBoxModel.addElement(BackgroundPosition.of(i))
         }
     }
 
@@ -137,8 +138,8 @@ open class EditorConfigUI {
         return nameTextField
     }
 
-    private fun createPositionComboBox(): JComboBox<Int> {
-        val positionComboBox = ComboBox<Int>().apply {
+    private fun createPositionComboBox(): JComboBox<BackgroundPosition> {
+        val positionComboBox = ComboBox<BackgroundPosition>().apply {
             isEditable = false
             maximumRowCount = 9
         }
@@ -519,6 +520,16 @@ open class EditorConfigUI {
                 null, null, null, 0, false
             )
         )
+
+        panel.add(
+            Spacer(),
+            GridConstraints(
+                4, 2, 1, 1,
+                ANCHOR_CENTER, FILL_VERTICAL, SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
+                null, null, null, 0, false
+            )
+        )
+
         return shrinkToFitCheckBox
     }
 

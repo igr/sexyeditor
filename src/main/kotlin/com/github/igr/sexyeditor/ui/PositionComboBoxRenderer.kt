@@ -1,5 +1,6 @@
 package com.github.igr.sexyeditor.ui
 
+import com.github.igr.sexyeditor.config.BackgroundPosition
 import java.awt.Component
 import java.awt.Dimension
 import javax.swing.JLabel
@@ -7,7 +8,7 @@ import javax.swing.JList
 import javax.swing.ListCellRenderer
 import javax.swing.SwingConstants
 
-class PositionComboBoxRenderer : JLabel(), ListCellRenderer<Int> {
+class PositionComboBoxRenderer : JLabel(), ListCellRenderer<BackgroundPosition> {
 
     companion object {
         val POSITIONS = arrayOf(
@@ -33,8 +34,8 @@ class PositionComboBoxRenderer : JLabel(), ListCellRenderer<Int> {
     }
 
     override fun getListCellRendererComponent(
-        list: JList<out Int>,
-        value: Int,
+        list: JList<out BackgroundPosition>,
+        value: BackgroundPosition,
         index: Int,
         isSelected: Boolean,
         cellHasFocus: Boolean
@@ -46,9 +47,9 @@ class PositionComboBoxRenderer : JLabel(), ListCellRenderer<Int> {
             background = list.background
             foreground = list.foreground
         }
-        icon = positionIcons[value]
+        icon = positionIcons[value.value]
         iconTextGap = 6
-        text = POSITIONS[value]
+        text = value.label
         return this
     }
 
