@@ -1,6 +1,8 @@
 # IntelliJ Sexy Editor 💟💻
 
 <!-- Plugin description -->
+Make your editors beautiful with awesome backgrounds!
+
 Editors are so booooring. White background. Black background.
 Choose-your-color background. Meh.
 

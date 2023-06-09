@@ -1,7 +1,7 @@
-<!-- Keep a Changelog guide -> https://keepachangelog.com -->
+<!-- https://keepachangelog.com -->
 
 # SexyEditor Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+### Changed
+- The plugin has been rewritten in Kotlin.

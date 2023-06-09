@@ -1,10 +1,10 @@
 <!--
-Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
+https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
 -->
 <idea-plugin>
-    <id>com.github.igr.sexyeditor</id>
+    <id>Sexy Editor</id>
     <name>Sexy Editor</name>
-    <vendor>igr</vendor>
+    <vendor email="sexyeditor@igo.rs" url="https://oblac.studio">Oblac</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
