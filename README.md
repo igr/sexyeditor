@@ -5,28 +5,27 @@
 ![Downloads](https://img.shields.io/jetbrains/plugin/d/Sexy%20Editor)
 
 <!-- Plugin description -->
-**Level up your editors beautiful with awesome backgrounds!**
-
-Level up your editors with these awesome backgrounds! Make them look beautiful and stand out from the crowd! #levelup #editors #backgrounds
+**Level up your editors with awesome backgrounds!**
 
 Editors are so boring. White background. Black background. Choose-your-color background. Meh.
 
-Not anymore! With **Sexy Editor**, your JetBrains IDE becomes _awesome_! Choose one or more background image, and your everyday editor gets transformed into _visual masterpiece_.
+Not anymore! With **Sexy Editor**, your JetBrains IDE becomes _awesome_! Choose one or more background images and your everyday editor gets transformed into _visual masterpiece_.
 
-But wait, there's more! It's not just about a visually stunning image. Instead, infuse it with a motivational quote of your choosing! By glancing at it every hour, throughout your workday, you'll gradually transform into the very embodiment of your aspirations!
+But wait, there's more! It's not just about a visually stunning image. Infuse it with a motivational quote of your choosing! By glancing at it every hour, throughout your workday, you'll gradually transform into the very embodiment of your aspirations!
 
 <!-- Plugin description end -->
 
-**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-sexy-editor) to update your karma 🔮!**
+**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-sexy-editor) to increase your karma 🔮!**
 
 ## Features
 
 + Assign backgrounds to various editors (just editor (!), not the complete UI).
 + Use random mode to shuffle images on open.
-+ Slideshow to display all the images.
++ Slideshow mode changes background image while you work.
 + Control opacity of the background image.
 + Set background image position and size.
 + Scroll image together with the code.
++ Various fitting options.
 
 ![](doc/sexyeditor.jpg)
 

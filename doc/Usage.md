@@ -2,7 +2,7 @@
 
 ## Configuration screen
 
-![](config2.png)
+![](SexyEditorSettings.png)
 
 ## Editor
 
@@ -20,15 +20,15 @@ Images' relative position in the editor window. `Offset` is a gap in pixels betw
 
 If checked, background image will not follow scrolling of the editor.
 
-## Shrink to fit
+## Fit to editor
 
-Large background images will be scaled down to fit the visible area of the editor.
+Various fitting strategies, on how background image is resized for the editor size.
 
 ## Opacity
 
 Controls the image transparency.
 
-## Resize
+## Resize on load (adv.)
 
 If this option is set, large images will be resized to fit the _desktop_ size. Note it is a desktop size, not IDEA size, therefore, images will be still a bit larger than editor. 100% means images will fit to desktop, 50% means images will fit the one quarter of the screen.
 
@@ -44,4 +44,4 @@ Slideshow enables image changes in runtime, during user work. Value defines numb
 
 ## Backgrounds
 
-List of all images. Each file has to be in one row. Invalid files are simply ignored.
+List of all images. Each file has to be in one row. Invalid files are simply ignored. Supports drag-and-drop.
