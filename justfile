@@ -8,8 +8,7 @@ default:
 build:
     ./gradlew buildPlugin
 
-# sign the plugin
-## requires enviroment variabels and certificates to be set
+# sign the plugin (requires environment variables and certificates to be set)
 sign: build
     ./gradlew signPlugin
 
