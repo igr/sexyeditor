@@ -4,11 +4,18 @@
 
 ## [Unreleased]
 
+### Fixed
+- Removed non-bundled icons.
+
+## [3.0.0] - 2023-06-12
+
 ### Added
 - "Fit to editor" strategies.
 
 ### Changed
 - New plugin icon.
+- Some fine-tuning.
+- Rewritten in Kotlin.
 
 ### Removed
 - "Shrink to fit" feature, has issues
@@ -49,9 +56,12 @@
 ### Added
 - Long, long time ago, this cool plugin was created.
 
-[Unreleased]: https://github.com/igr/sexyeditor/compare/v3.0.0-beta.1...HEAD
-[3.0.0-alpha.1]: https://github.com/igr/sexyeditor/compare/v2.1.0...v3.0.0-alpha.1
+[Unreleased]: https://github.com/igr/sexyeditor/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/igr/sexyeditor/compare/v3.0.0-beta.1...v3.0.0
 [3.0.0-beta.1]: https://github.com/igr/sexyeditor/compare/v3.0.0-alpha.1...v3.0.0-beta.1
+[3.0.0-alpha.1]: https://github.com/igr/sexyeditor/compare/v2.1.0...v3.0.0-alpha.1
 [2.1.0]: https://github.com/igr/sexyeditor/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/igr/sexyeditor/compare/v1.0.0...v2.0.0
+[1.2.0]: https://github.com/igr/sexyeditor/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/igr/sexyeditor/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/igr/sexyeditor/commits/v1.0.0

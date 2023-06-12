@@ -165,8 +165,7 @@ open class SexyEditorConfigUI {
     private fun createAddNewButton() =
         JButton().apply {
             hideActionText = false
-            horizontalAlignment = SwingConstants.LEFT
-            icon = PluginIcons.ADD
+            horizontalAlignment = SwingConstants.CENTER
             text = PluginBundle.message("button.add-editor")
             addActionListener {
                 if (editorsListModel.size() == 0) {
@@ -185,8 +184,7 @@ open class SexyEditorConfigUI {
 
     private fun createRemoveButton() =
         JButton().apply {
-            horizontalAlignment = SwingConstants.LEFT
-            icon = PluginIcons.REMOVE
+            horizontalAlignment = SwingConstants.CENTER
             text = PluginBundle.message("button.remove")
             addActionListener {
                 var selected = editorsList.selectedIndex
@@ -207,8 +205,7 @@ open class SexyEditorConfigUI {
 
     private fun createMoveUpButton() =
         JButton().apply {
-            horizontalAlignment = SwingConstants.LEFT
-            icon = PluginIcons.MOVE_UP
+            horizontalAlignment = SwingConstants.CENTER
             text = PluginBundle.message("button.move-up")
 
             addActionListener {
@@ -225,8 +222,7 @@ open class SexyEditorConfigUI {
 
     private fun createMoveDownButton() =
         JButton().apply {
-            horizontalAlignment = SwingConstants.LEFT
-            icon = PluginIcons.MOVE_DOWN
+            horizontalAlignment = SwingConstants.CENTER
             text = PluginBundle.message("button.move-down")
 
             addActionListener {
