@@ -42,6 +42,16 @@ open class EditorConfigUI {
     protected val fitTypeComboBox: JComboBox<FitType>
     private val fitTypeComboBoxModel: DefaultComboBoxModel<FitType>
 
+    private val dimensions = object {
+        val label = Dimension(60, -1)
+        val textField = Dimension(150, -1)
+        val smallTextField = Dimension(70, 20)
+        val combobox = Dimension(120, 22)
+        val checkbox = Dimension(60, 22)
+        val button = Dimension(70, 25)
+    }
+
+
     val rootComponent: JComponent
         get() = panel
 
@@ -128,7 +138,7 @@ open class EditorConfigUI {
             GridConstraints(
                 0, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(60, -1), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
         panel.add(
@@ -136,7 +146,7 @@ open class EditorConfigUI {
             GridConstraints(
                 0, 1, 1, 4,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(150, -1), null, 0, false
+                null, dimensions.textField, null, 0, false
             )
         )
         return nameTextField
@@ -157,7 +167,7 @@ open class EditorConfigUI {
             GridConstraints(
                 2, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(60, 14), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
         panel.add(
@@ -165,7 +175,7 @@ open class EditorConfigUI {
             GridConstraints(
                 2, 1, 1, 2,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(120, 22), null, 0, false
+                null, dimensions.combobox, null, 0, false
             )
         )
         return positionComboBox
@@ -187,7 +197,7 @@ open class EditorConfigUI {
             GridConstraints(
                 5, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(60, 14), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
         panel.add(
@@ -215,7 +225,7 @@ open class EditorConfigUI {
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_FIXED,
-                null, Dimension(60, 22), null, 0, false
+                null, dimensions.checkbox, null, 0, false
             )
         )
         return resizeCheckBox
@@ -253,7 +263,7 @@ open class EditorConfigUI {
                 7, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(60, 22), null, 0, false
+                null, dimensions.checkbox, null, 0, false
             )
         )
         return randomCheckBox
@@ -272,7 +282,7 @@ open class EditorConfigUI {
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_FIXED,
-                null, Dimension(60, 22), null, 0, false
+                null, dimensions.checkbox, null, 0, false
             )
         )
         return slideshowCheckBox
@@ -289,7 +299,7 @@ open class EditorConfigUI {
             GridConstraints(
                 8, 1, 1, 1,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(70, 20), null, 0, false
+                null, dimensions.smallTextField, null, 0, false
             )
         )
         return slideShowPause
@@ -321,7 +331,7 @@ open class EditorConfigUI {
             GridConstraints(
                 10, 1, 1, 1,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(70, 25), null, 0, false
+                null, dimensions.button, null, 0, false
             )
         )
         return insertFilesButton
@@ -339,7 +349,7 @@ open class EditorConfigUI {
                 1, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
         panel.add(
@@ -347,7 +357,7 @@ open class EditorConfigUI {
             GridConstraints(
                 1, 1, 1, 4,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(120, 20), null, 0, false
+                null, dimensions.textField, null, 0, false
             )
         )
         return matchTextField
@@ -412,7 +422,7 @@ open class EditorConfigUI {
             GridConstraints(
                 2, 4, 1, 1,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(78, 20), null, 0, false
+                null, dimensions.smallTextField, null, 0, false
             )
         )
         return positionOffsetTextField
@@ -426,7 +436,7 @@ open class EditorConfigUI {
             GridConstraints(
                 9, 0, 1, 1,
                 ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(60, 14), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
     }
@@ -451,7 +461,7 @@ open class EditorConfigUI {
             GridConstraints(
                 10, 2, 1, 1,
                 ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(70, 25), null, 0, false
+                null, dimensions.button, null, 0, false
             )
         )
         return removeFilesButton
@@ -483,7 +493,7 @@ open class EditorConfigUI {
                 3, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
+                null, dimensions.label, null, 0, false
             )
         )
         panel.add(
@@ -522,7 +532,7 @@ open class EditorConfigUI {
             GridConstraints(
                 4, 1, 1, 2,
                 ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, Dimension(120, 22), null, 0, false
+                null, dimensions.combobox, null, 0, false
             )
         )
         return combo
