@@ -21,7 +21,7 @@
 ## [3.0.0-alpha.1] - 2023-06-09
 
 ### Changed
-- The plugin has been rewritten to Kotlin.
+- Rewritten in Kotlin.
 
 ## [2.1.0] - 2017-09-24
 
