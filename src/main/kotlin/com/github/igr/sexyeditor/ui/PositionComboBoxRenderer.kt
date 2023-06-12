@@ -10,20 +10,6 @@ import javax.swing.SwingConstants
 
 class PositionComboBoxRenderer : JLabel(), ListCellRenderer<BackgroundPosition> {
 
-    companion object {
-        val POSITIONS = arrayOf(
-            "Top-Left",
-            "Top-Middle",
-            "Top-Right",
-            "Middle-Left",
-            "Center",
-            "Middle-Right",
-            "Bottom-Left",
-            "Bottom-Middle",
-            "Bottom-Right"
-        )
-    }
-
     private val positionIcons = PluginIcons.POSITIONS
 
     init {

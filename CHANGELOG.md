@@ -4,10 +4,18 @@
 
 ## [Unreleased]
 
+### Added
+- "Fit to editor" strategies.
+
+### Changed
+- New plugin icon.
+
+### Removed
+- "Shrink to fit" feature, has issues
+
 ## [3.0.0-beta.1] - 2023-06-09
 
 ### Changed
-- New plugin icon!
 - Some fine-tuning.
 
 ## [3.0.0-alpha.1] - 2023-06-09

@@ -1,8 +1,7 @@
 package com.github.igr.sexyeditor.listeners
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
-import com.github.igr.sexyeditor.config.BackgroundPosition
-import com.github.igr.sexyeditor.config.BackgroundPosition.*
+import com.github.igr.sexyeditor.config.FitType
 import com.github.igr.sexyeditor.ui.createScaledInstance
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.util.ui.JBUI
@@ -13,6 +12,7 @@ import java.io.IOException
 import javax.imageio.ImageIO
 import javax.swing.JViewport
 import javax.swing.border.Border
+import kotlin.math.max
 
 /**
  * Editors border that draws background image.
@@ -53,27 +53,54 @@ class BackgroundBorder(
         val position = config.position
         val positionOffset: Int = config.positionOffset
         val fixedLocation: Boolean = config.fixedPosition
-        val shrinkToFit: Boolean = config.shrinkToFit
 
         var newImageWidth = imageWidth
         var newImageHeight = imageHeight
 
         // draw
-        if (shrinkToFit) {
-            val visibleWidth = width - 2 * positionOffset
-            val visibleHeight = height - 2 * positionOffset
-            if (newImageWidth > visibleWidth) {
-                // reduce image height
-                val scale = visibleWidth / newImageWidth.toDouble()
-                newImageWidth = visibleWidth
+        when (config.fitType) {
+            FitType.SHRINK_TO_FIT -> {
+                val visibleWidth = width - 2 * positionOffset
+                val visibleHeight = height - 2 * positionOffset
+                if (newImageWidth > visibleWidth) {
+                    // reduce image height
+                    val scale = visibleWidth / newImageWidth.toDouble()
+                    newImageWidth = visibleWidth
+                    newImageHeight = (newImageHeight * scale).toInt()
+                }
+                if (newImageHeight > visibleHeight) {
+                    // reduce image width
+                    val scale = visibleHeight / newImageHeight.toDouble()
+                    newImageHeight = visibleHeight
+                    newImageWidth = (newImageWidth * scale).toInt()
+                }
+            }
+            FitType.RESIZE_TO_FIT -> {
+                val visibleWidth = width - 2 * positionOffset
+                val visibleHeight = height - 2 * positionOffset
+                if (newImageWidth != visibleWidth) {
+                    // reduce image height
+                    val scale = visibleWidth / newImageWidth.toDouble()
+                    newImageWidth = visibleWidth
+                    newImageHeight = (newImageHeight * scale).toInt()
+                }
+                if (newImageHeight != visibleHeight) {
+                    // reduce image width
+                    val scale = visibleHeight / newImageHeight.toDouble()
+                    newImageHeight = visibleHeight
+                    newImageWidth = (newImageWidth * scale).toInt()
+                }
+            }
+            FitType.FILL -> {
+                val visibleWidth = width - 2 * positionOffset
+                val visibleHeight = height - 2 * positionOffset
+                val scale1 = visibleWidth / newImageWidth.toDouble()
+                val scale2 = visibleHeight / newImageHeight.toDouble()
+                val scale = max(scale1, scale2)
+                newImageWidth = (newImageWidth * scale).toInt()
                 newImageHeight = (newImageHeight * scale).toInt()
             }
-            if (newImageHeight > visibleHeight) {
-                // reduce image width
-                val scale = visibleHeight / newImageHeight.toDouble()
-                newImageHeight = visibleHeight
-                newImageWidth = (newImageWidth * scale).toInt()
-            }
+            FitType.NONE -> {}
         }
 
         // x axis
@@ -116,7 +143,7 @@ class BackgroundBorder(
         }
 
         // draw
-        if (!shrinkToFit) {
+        if (config.fitType == FitType.NONE) {
             g2d.drawImage(image, x, y, jv)
         } else {
             g2d.drawImage(image, x, y, newImageWidth, newImageHeight, jv)

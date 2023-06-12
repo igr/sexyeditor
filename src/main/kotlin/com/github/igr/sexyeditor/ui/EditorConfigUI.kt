@@ -2,6 +2,7 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundPosition
+import com.github.igr.sexyeditor.config.FitType
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -23,7 +24,6 @@ import javax.swing.border.TitledBorder
 open class EditorConfigUI {
     private val panel: JPanel = JPanel()
     protected val nameTextField: JTextField
-    protected val positionComboBox: JComboBox<BackgroundPosition>
     protected val opacitySlider: JSlider
     protected val resizeCheckBox: JCheckBox
     protected val resizeSlider: JSlider
@@ -35,10 +35,12 @@ open class EditorConfigUI {
     private val insertFilesButton: JButton
     private val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
-    protected val shrinkToFitCheckBox: JCheckBox
     private val fileList: JBList<String>
     protected val fileListModel: DefaultListModel<String>
+    protected val positionComboBox: JComboBox<BackgroundPosition>
     private val positionComboBoxModel: DefaultComboBoxModel<BackgroundPosition>
+    protected val fitTypeComboBox: JComboBox<FitType>
+    private val fitTypeComboBoxModel: DefaultComboBoxModel<FitType>
 
     val rootComponent: JComponent
         get() = panel
@@ -65,7 +67,8 @@ open class EditorConfigUI {
         // row 4
         fixedPositionCheckBox = createFixedPositionCheckbox()
         // row 5
-        shrinkToFitCheckBox = createShrinkToFitCheckBox()
+        fitTypeComboBox = createFitTypeComboBox()
+
         // row 6
         opacitySlider = createOpacitySlider()
 
@@ -93,11 +96,12 @@ open class EditorConfigUI {
         // setup
 
         fileListModel = fileList.model as DefaultListModel<String>
+
         positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<BackgroundPosition>
-        positionComboBox.renderer = PositionComboBoxRenderer()
-        for (i in 0 until PositionComboBoxRenderer.POSITIONS.size) {
-            positionComboBoxModel.addElement(BackgroundPosition.of(i))
-        }
+        BackgroundPosition.values().forEach { positionComboBoxModel.addElement(it) }
+
+        fitTypeComboBoxModel = fitTypeComboBox.model as DefaultComboBoxModel<FitType>
+        FitType.values().forEach { fitTypeComboBoxModel.addElement(it) }
     }
 
     private fun createSpacer1() {
@@ -142,6 +146,7 @@ open class EditorConfigUI {
         val positionComboBox = ComboBox<BackgroundPosition>().apply {
             isEditable = false
             maximumRowCount = 9
+            renderer = PositionComboBoxRenderer()
         }
         panel.add(
             JLabel().apply {
@@ -494,43 +499,33 @@ open class EditorConfigUI {
         return fixedPositionCheckBox
     }
 
-    private fun createShrinkToFitCheckBox(): JCheckBox {
-        val shrinkToFitCheckBox = JCheckBox().apply {
-            text = ""
+    private fun createFitTypeComboBox(): ComboBox<FitType> {
+        val combo = ComboBox<FitType>().apply {
+            isEditable = false
+            maximumRowCount = 4
         }
         panel.add(
             JLabel().apply {
-                text = PluginBundle.message("label.shrink-to-fit")
-                labelFor = shrinkToFitCheckBox
+                text = PluginBundle.message("label.fit-to-editor")
+                labelFor = combo
+                toolTipText = PluginBundle.message("tooltip.fit-to-editor")
             },
             GridConstraints(
                 4, 0, 1, 1,
                 ANCHOR_WEST, FILL_NONE,
                 SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, Dimension(61, 14), null, 0, false
-            )
-        )
-        panel.add(
-            shrinkToFitCheckBox,
-            GridConstraints(
-                4, 1, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
                 null, null, null, 0, false
             )
         )
-
         panel.add(
-            Spacer(),
+            combo,
             GridConstraints(
-                4, 2, 1, 1,
-                ANCHOR_CENTER, FILL_VERTICAL, SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                null, null, null, 0, false
+                4, 1, 1, 2,
+                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
+                null, Dimension(120, 22), null, 0, false
             )
         )
-
-        return shrinkToFitCheckBox
+        return combo
     }
 
 }

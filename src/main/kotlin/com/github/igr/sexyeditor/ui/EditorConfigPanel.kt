@@ -2,6 +2,7 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.github.igr.sexyeditor.config.BackgroundPosition
+import com.github.igr.sexyeditor.config.FitType
 
 class EditorConfigPanel : EditorConfigUI() {
 
@@ -18,6 +19,8 @@ class EditorConfigPanel : EditorConfigUI() {
         opacitySlider.value = (config.opacity * 100).toInt()
 
         positionComboBox.selectedIndex = config.position.value
+        fitTypeComboBox.selectedIndex = config.fitType.value
+
         positionOffsetTextField.text = config.positionOffset.toString()
         if (resizeCheckBox.isSelected != config.resize) {
             resizeCheckBox.doClick()
@@ -26,9 +29,7 @@ class EditorConfigPanel : EditorConfigUI() {
         if (fixedPositionCheckBox.isSelected != config.fixedPosition) {
             fixedPositionCheckBox.doClick()
         }
-        if (shrinkToFitCheckBox.isSelected != config.shrinkToFit) {
-            shrinkToFitCheckBox.doClick()
-        }
+
         if (randomCheckBox.isSelected != config.random) {
             randomCheckBox.doClick()
         }
@@ -50,12 +51,12 @@ class EditorConfigPanel : EditorConfigUI() {
         config.editorGroup = matchTextField.text
         config.opacity = (opacitySlider.value / 100.0).toFloat()
         config.position = BackgroundPosition.of(positionComboBox.selectedIndex)
+        config.fitType = FitType.of(fitTypeComboBox.selectedIndex)
         config.positionOffset = positionOffsetTextField.text.toInt()
         config.resize = resizeCheckBox.isSelected
         config.resizeValue = resizeSlider.value
         config.random = randomCheckBox.isSelected
         config.fixedPosition = fixedPositionCheckBox.isSelected
-        config.shrinkToFit = shrinkToFitCheckBox.isSelected
         config.slideshow = slideshowCheckBox.isSelected
         config.slideshowPause = slideShowPause.text.toInt()
         config.fileNames = fileListModel.elements().toList().toTypedArray()
@@ -71,12 +72,12 @@ class EditorConfigPanel : EditorConfigUI() {
                     opacitySlider.value != (config.opacity * 100).toInt()
                 ) ||
                 positionComboBox.selectedIndex != config.position.value ||
+                fitTypeComboBox.selectedIndex != config.fitType.value ||
                 positionOffsetTextField.text != config.positionOffset.toString() ||
                 resizeCheckBox.isSelected != config.resize ||
                 resizeSlider.value != config.resizeValue ||
                 randomCheckBox.isSelected != config.random ||
                 fixedPositionCheckBox.isSelected != config.fixedPosition ||
-                shrinkToFitCheckBox.isSelected != config.shrinkToFit ||
                 slideshowCheckBox.isSelected != config.slideshow ||
                 slideShowPause.text != config.slideshowPause.toString() ||
                 !equalFileListModel(config.fileNames))

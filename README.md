@@ -1,4 +1,4 @@
-# IntelliJ Sexy Editor v3 ❤️💻
+# IntelliJ Sexy Editor ❤️💻
 
 [![Build](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml/badge.svg)](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml)
 ![Version](https://img.shields.io/jetbrains/plugin/v/Sexy%20Editor)
@@ -6,6 +6,8 @@
 
 <!-- Plugin description -->
 **Level up your editors beautiful with awesome backgrounds!**
+
+Level up your editors with these awesome backgrounds! Make them look beautiful and stand out from the crowd! #levelup #editors #backgrounds
 
 Editors are so boring. White background. Black background. Choose-your-color background. Meh.
 
