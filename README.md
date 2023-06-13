@@ -1,6 +1,6 @@
 # IntelliJ Awesome Editor ❤️💻
 
-[![Build](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml/badge.svg)](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml)
+[![Build](https://github.com/igr/idea-sexyeditor/actions/workflows/build.yml/badge.svg)](https://github.com/igr/sexyeditor/actions/workflows/build.yml)
 ![Version](https://img.shields.io/jetbrains/plugin/v/Sexy%20Editor)
 ![Downloads](https://img.shields.io/jetbrains/plugin/d/Sexy%20Editor)
 
@@ -15,7 +15,7 @@ But wait, there's more! It's not just about a visually stunning image. Infuse it
 
 <!-- Plugin description end -->
 
-**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-sexy-editor) to increase your karma 🔮!**
+**Be a unicorn 🦄 and [vote for the plugin](https://plugins.jetbrains.com/plugin/1833-awesome-editor) to increase your karma 🔮!**
 
 ## Features
 
