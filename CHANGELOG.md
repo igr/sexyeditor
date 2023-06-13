@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+- Plugin renamed :)
+
+
 ## [3.0.1] - 2023-06-12
 
 ### Fixed

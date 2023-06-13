@@ -1,14 +1,14 @@
 package com.github.igr.sexyeditor.config
 
 import com.github.igr.sexyeditor.PluginBundle
-import com.github.igr.sexyeditor.ui.SexyEditorConfigPanel
+import com.github.igr.sexyeditor.ui.MainConfigPanel
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 
-class SexyEditorSettingsConfigurable: Configurable {
+class SettingsConfigurable: Configurable {
 
-    private var configurationComponent: SexyEditorConfigPanel? = null
+    private var configurationComponent: MainConfigPanel? = null
 
     @Nls
     override fun getDisplayName(): String {
@@ -21,9 +21,9 @@ class SexyEditorSettingsConfigurable: Configurable {
 
     override fun createComponent(): JComponent {
         if (configurationComponent == null) {
-            val state = SexyEditorState.get().state
+            val state = PluginState.get().state
 
-            configurationComponent = SexyEditorConfigPanel().apply {
+            configurationComponent = MainConfigPanel().apply {
                 load(state.configs)
             }
 
@@ -35,7 +35,7 @@ class SexyEditorSettingsConfigurable: Configurable {
     }
 
     override fun isModified(): Boolean {
-        val state = SexyEditorState.get()
+        val state = PluginState.get()
         return configurationComponent?.isModified(state.configs) ?: false
     }
 
@@ -43,12 +43,12 @@ class SexyEditorSettingsConfigurable: Configurable {
         if (configurationComponent == null) {
             return
         }
-        val state = SexyEditorState.get()
+        val state = PluginState.get()
         state.configs = configurationComponent!!.save()
     }
 
     override fun reset() {
-        val state = SexyEditorState.get()
+        val state = PluginState.get()
         configurationComponent?.load(state.configs)
     }
 

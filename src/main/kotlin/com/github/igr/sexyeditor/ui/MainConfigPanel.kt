@@ -2,7 +2,7 @@ package com.github.igr.sexyeditor.ui
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 
-class SexyEditorConfigPanel : SexyEditorConfigUI() {
+class MainConfigPanel : MainConfigUI() {
 
     /**
      * Loads configuration list into the GUI and selects the very first element.

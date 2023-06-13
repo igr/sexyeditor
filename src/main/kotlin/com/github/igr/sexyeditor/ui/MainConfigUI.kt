@@ -11,7 +11,7 @@ import javax.swing.*
 import javax.swing.border.TitledBorder
 
 
-open class SexyEditorConfigUI {
+open class MainConfigUI {
 
     private val panel: JPanel = JPanel()
     protected val editorsList: JList<BackgroundConfiguration>

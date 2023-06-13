@@ -1,7 +1,7 @@
 package com.github.igr.sexyeditor.listeners
 
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
-import com.github.igr.sexyeditor.config.SexyEditorState
+import com.github.igr.sexyeditor.config.PluginState
 import com.intellij.openapi.editor.event.EditorFactoryEvent
 import com.intellij.openapi.editor.event.EditorFactoryListener
 import com.intellij.openapi.fileEditor.FileDocumentManager
@@ -11,7 +11,7 @@ import java.util.*
 import javax.swing.JViewport
 import javax.swing.border.Border
 
-internal class SexyEditorListener: EditorFactoryListener {
+internal class EditorListener: EditorFactoryListener {
 
     /**
      * Editor is created, finds appropriate background border and apply it to the editor.
@@ -51,7 +51,7 @@ internal class SexyEditorListener: EditorFactoryListener {
      * Image is loaded during border creation.
      */
     private fun createBorder(fileName: String, component: Component): BackgroundBorder? {
-        val state = SexyEditorState.get()
+        val state = PluginState.get()
 
         for (config in state.configs) {
             if (matchFileName(config, fileName)) {

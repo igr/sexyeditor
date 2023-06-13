@@ -3,21 +3,21 @@ https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
 -->
 <idea-plugin>
     <id>Sexy Editor</id>
-    <name>Sexy Editor</name>
-    <vendor email="sexyeditor@igo.rs" url="https://oblac.studio">Oblac</vendor>
+    <name>Awesome Editor</name>
+    <vendor email="awesomeeditor@igo.rs" url="https://oblac.studio">Oblac</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.SexyEditorBundle</resource-bundle>
+    <resource-bundle>messages.AwesomeEditorBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
                 parentId="editor"
-                instance="com.github.igr.sexyeditor.config.SexyEditorSettingsConfigurable"
-                displayName="Sexy Editor"/>
+                instance="com.github.igr.sexyeditor.config.SettingsConfigurable"
+                displayName="Awesome Editor"/>
 
-        <applicationService serviceImplementation="com.github.igr.sexyeditor.config.SexyEditorState" />
-        <editorFactoryListener implementation="com.github.igr.sexyeditor.listeners.SexyEditorListener"/>
+        <applicationService serviceImplementation="com.github.igr.sexyeditor.config.PluginState" />
+        <editorFactoryListener implementation="com.github.igr.sexyeditor.listeners.EditorListener"/>
     </extensions>
 
 </idea-plugin>
