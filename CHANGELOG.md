@@ -1,6 +1,6 @@
 <!-- https://keepachangelog.com -->
 
-# SexyEditor Changelog
+# Awesome Editor Changelog
 
 ## [Unreleased]
 

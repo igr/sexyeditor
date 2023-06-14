@@ -32,9 +32,9 @@ But wait, there's more! It's not just about a visually stunning image. Infuse it
 ## Links
 
 + [Usage](doc/Usage.md)
-+ [Example: Gallery](doc/ExampleGallery.md)
-+ [Example: Keymap](doc/ExampleKeymap.md)
-+ [Example: Types](doc/ExampleTypes.md)
++ [Examples](doc/Examples.md)
+
+**Share your Awesome Editors 🙌 !!!**
 
 # Success Stories
 
