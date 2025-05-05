@@ -39,7 +39,11 @@ class EditorConfigPanel : EditorConfigUI() {
         slideShowPause.text = config.slideshowPause.toString()
         fileListModel.clear()
         for (fileName in config.fileNames) {
-            fileListModel.addElement(fileName)
+            fileListModel.addElement(
+                ImageFile(
+                    fileName
+                )
+            )
         }
     }
 
@@ -59,7 +63,7 @@ class EditorConfigPanel : EditorConfigUI() {
         config.fixedPosition = fixedPositionCheckBox.isSelected
         config.slideshow = slideshowCheckBox.isSelected
         config.slideshowPause = slideShowPause.text.toInt()
-        config.fileNames = fileListModel.elements().toList().toTypedArray()
+        config.fileNames = fileListModel.elements().toList().map { it.path }.toTypedArray()
         return config
     }
 
@@ -92,7 +96,7 @@ class EditorConfigPanel : EditorConfigUI() {
             return false
         }
         for (i in 0 until size) {
-            if (fileListModel[i] != otherList[i]) {
+            if (fileListModel[i].path != otherList[i]) {
                 return false
             }
         }

@@ -8,3 +8,4 @@ libs
 .env
 certificate
 .intellijPlatform/*
+.kotlin/*

@@ -35,8 +35,8 @@ open class EditorConfigUI {
     private val insertFilesButton: JButton
     private val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
-    private val fileList: JBList<String>
-    protected val fileListModel: DefaultListModel<String>
+    private val fileList: JBList<ImageFile>
+    protected val fileListModel: DefaultListModel<ImageFile>
     protected val positionComboBox: JComboBox<BackgroundPosition>
     private val positionComboBoxModel: DefaultComboBoxModel<BackgroundPosition>
     protected val fitTypeComboBox: JComboBox<FitType>
@@ -105,7 +105,7 @@ open class EditorConfigUI {
 
         // setup
 
-        fileListModel = fileList.model as DefaultListModel<String>
+        fileListModel = fileList.model as DefaultListModel<ImageFile>
 
         positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<BackgroundPosition>
         BackgroundPosition.values().forEach { positionComboBoxModel.addElement(it) }
@@ -313,7 +313,7 @@ open class EditorConfigUI {
                 val chooser = JFileChooser().apply {
                     isMultiSelectionEnabled = true
                     dialogTitle = "Select images to insert..."
-                    preferredSize = Dimension(500, 500)
+                    preferredSize = Dimension(800, 500)
                 }
                 ImagePreviewPanel().apply {
                     attachToFileChooser(chooser, "Only images")
@@ -321,7 +321,11 @@ open class EditorConfigUI {
                 val returnVal = chooser.showOpenDialog(panel)
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     for (file in chooser.selectedFiles) {
-                        fileListModel.addElement(file.absolutePath)
+                        fileListModel.addElement(
+                            ImageFile(
+                                file.absolutePath
+                            )
+                        )
                     }
                 }
             }
@@ -363,7 +367,7 @@ open class EditorConfigUI {
         return matchTextField
     }
 
-    private fun createFileList(): JBList<String> {
+    private fun createFileList(): JBList<ImageFile> {
         val scrollPane = JBScrollPane()
         panel.add(
             scrollPane,
@@ -372,15 +376,16 @@ open class EditorConfigUI {
                 ANCHOR_CENTER, FILL_BOTH,
                 SIZEPOLICY_FIXED,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                Dimension(-1, 120), null, null, 0, false
+                Dimension(-1, 160), null, null, 0, false
             )
         )
 
-        val fileList = JBList<String>().apply {
+        val fileList = JBList<ImageFile>().apply {
             model = DefaultListModel()
             selectionMode = 1
             toolTipText = PluginBundle.message("tooltip.filelist")
             putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
+            cellRenderer = ImageListCellRenderer()
         }
         scrollPane.setViewportView(fileList)
 
@@ -391,7 +396,11 @@ open class EditorConfigUI {
                     evt.acceptDrop(DnDConstants.ACTION_COPY)
                     val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
                     for (file in droppedFiles) {
-                        fileListModel.addElement(file.absolutePath)
+                        fileListModel.addElement(
+                            ImageFile(
+                                file.absolutePath
+                            )
+                        )
                     }
                 } catch (ex: Exception) {
                     ex.printStackTrace()
