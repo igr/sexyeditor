@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## [5.0.0] - 2025-04-05
+
+### Added
+- Preview of the image in the settings.
+
 ## [4.0.0] - 2023-06-13
 
 ### Changed
