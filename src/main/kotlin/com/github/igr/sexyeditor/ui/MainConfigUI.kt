@@ -5,6 +5,7 @@ import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
+import com.intellij.util.ui.JBDimension
 import com.intellij.util.ui.JBUI
 import java.awt.event.MouseAdapter
 import javax.swing.*
@@ -138,7 +139,7 @@ open class MainConfigUI {
                 ANCHOR_CENTER, FILL_BOTH,
                 SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
                 SIZEPOLICY_CAN_GROW,
-                null, null, null, 0, false
+                null, JBDimension(-1, 100), null, 0, false
             )
         )
 

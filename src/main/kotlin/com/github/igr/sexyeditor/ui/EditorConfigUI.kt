@@ -312,7 +312,7 @@ open class EditorConfigUI {
             addActionListener {
                 val chooser = JFileChooser().apply {
                     isMultiSelectionEnabled = true
-                    dialogTitle = "Select images to insert..."
+                    dialogTitle = "Select images"
                     preferredSize = Dimension(800, 500)
                 }
                 ImagePreviewPanel().apply {
