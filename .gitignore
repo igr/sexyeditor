@@ -7,3 +7,4 @@ build
 libs
 .env
 certificate
+.intellijPlatform/*
