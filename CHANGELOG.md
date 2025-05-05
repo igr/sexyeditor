@@ -4,68 +4,93 @@
 
 ## [Unreleased]
 
-## [5.0.0] - 2025-04-05
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## 5.0.0 - 2025-04-05
 
 ### Added
+
 - Preview of the image in the settings.
 
 ## [4.0.0] - 2023-06-13
 
 ### Changed
+
 - Plugin renamed :)
 
 ## [3.0.1] - 2023-06-12
 
 ### Fixed
+
 - Removed non-bundled icons.
 
 ## [3.0.0] - 2023-06-12
 
 ### Added
+
 - "Fit to editor" strategies.
 
 ### Changed
+
 - New plugin icon.
 - Some fine-tuning.
 - Rewritten in Kotlin.
 
 ### Removed
+
 - "Shrink to fit" feature, has issues
 
 ## [3.0.0-beta.1] - 2023-06-09
 
 ### Changed
+
 - Some fine-tuning.
 
 ## [3.0.0-alpha.1] - 2023-06-09
 
 ### Changed
+
 - Rewritten in Kotlin.
 
 ## [2.1.0] - 2017-09-24
 
 ### Added
+
 - Added Shrink to fit feature.
 - Added fixed position feature.
 
 ## [2.0.0] - 2016-05-16
 
 ### Changed
+
 - Plugin rewritten
 
 ## [1.2.0] - 2008-02-17
 
 ### Changed
+
 - Background image loading, for better performances.
 
 ## [1.1.0] - 2007-12-10
 
 ### Fixed
+
 - Fixed stupid bug
 
 ## [1.0.0] - 2007-12-18
 
 ### Added
+
 - Long, long time ago, this cool plugin was created.
 
 [Unreleased]: https://github.com/igr/sexyeditor/compare/v4.0.0...HEAD
