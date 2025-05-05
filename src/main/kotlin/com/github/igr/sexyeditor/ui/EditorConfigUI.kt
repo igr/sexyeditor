@@ -389,23 +389,28 @@ open class EditorConfigUI {
         }
         scrollPane.setViewportView(fileList)
 
-        fileList.dropTarget = object : DropTarget() {
-            @Synchronized
-            override fun drop(evt: DropTargetDropEvent) {
-                try {
-                    evt.acceptDrop(DnDConstants.ACTION_COPY)
-                    val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
-                    for (file in droppedFiles) {
-                        fileListModel.addElement(
-                            ImageFile(
-                                file.absolutePath
+        try {
+            fileList.dropTarget = object : DropTarget() {
+                @Synchronized
+                override fun drop(evt: DropTargetDropEvent) {
+                    try {
+                        evt.acceptDrop(DnDConstants.ACTION_COPY)
+                        val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
+                        for (file in droppedFiles) {
+                            fileListModel.addElement(
+                                ImageFile(
+                                    file.absolutePath
+                                )
                             )
-                        )
+                        }
+                    } catch (ex: Exception) {
+                        // this is a workaround to make Intellij build work
+                        ex.printStackTrace()
                     }
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
                 }
             }
+        } catch (ignore: java.awt.HeadlessException) {
+            // Ignore, this is a headless exception
         }
         return fileList
     }
