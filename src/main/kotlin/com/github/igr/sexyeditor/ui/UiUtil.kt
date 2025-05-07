@@ -1,10 +1,19 @@
 package com.github.igr.sexyeditor.ui
 
 
+import com.intellij.openapi.diagnostic.logger
 import com.intellij.util.ui.ImageUtil
+import com.intellij.util.ui.UIUtil
 import java.awt.RenderingHints
 import java.awt.Transparency
 import java.awt.image.BufferedImage
+import java.io.File
+import java.io.IOException
+import javax.imageio.ImageIO
+import javax.swing.ImageIcon
+import java.awt.Color
+
+private val LOG = logger<UIUtil>()
 
 /**
  * Convenience method that returns a scaled instance of the provided `BufferedImage`.
@@ -71,4 +80,57 @@ fun createScaledInstance(
     } while (w != targetWidth || h != targetHeight)
 
     return ret
+}
+
+fun ImageFile.loadImageAsIcon(): ImageIcon? {
+    val image = try {
+        ImageIO.read(File(path))
+    } catch (e: IOException) {
+        LOG.warn("Could not open image '$path'", e)
+        null
+    }
+    if (image == null) {
+        return null
+    }
+
+    val maxWidth = 32f
+    val maxHeight = 32f
+
+    val priorHeight = image.height.toFloat()
+    val priorWidth = image.width.toFloat()
+
+    // Calculate the correct new height and width
+    var newHeight: Float
+    var newWidth: Float
+    if (priorHeight / priorWidth > maxHeight / maxWidth) {
+        newHeight = maxHeight
+        newWidth = (priorWidth / priorHeight) * newHeight
+    } else {
+        newWidth = maxWidth
+        newHeight = (priorHeight / priorWidth) * newWidth
+    }
+
+    // Resize the image
+
+    // 1. Create a new Buffered Image and Graphic2D object
+    val resizedImg = ImageUtil.createImage(maxWidth.toInt(), maxHeight.toInt(), BufferedImage.TYPE_INT_ARGB)
+    val g2 = resizedImg.createGraphics()
+
+    // 1.5 clear
+    g2.color = Color(0, 0, 0, 0)
+    g2.fillRect(0, 0, maxWidth.toInt(), maxHeight.toInt())
+
+    // 2. Use the Graphic object to draw a new image to the image in the buffer
+    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
+    g2.drawImage(
+        image,
+        ((maxWidth - newWidth) / 2).toInt(),
+        ((maxHeight - newHeight) / 2).toInt(),
+        newWidth.toInt(),
+        newHeight.toInt(),
+        null
+    )
+    g2.dispose()
+
+    return ImageIcon(resizedImg)
 }

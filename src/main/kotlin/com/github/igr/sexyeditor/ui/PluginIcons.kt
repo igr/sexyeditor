@@ -18,6 +18,7 @@ class PluginIcons {
         )
         val LOGO = iconOf("sexyeditor")
         val TIP = iconOf("hint")
+        val WARNING = iconOf("warning")
     }
 }
 
