@@ -267,6 +267,7 @@ open class MainConfigUI {
         PluginBundle.message("tip.1"),
         PluginBundle.message("tip.2"),
         PluginBundle.message("tip.3"),
+        PluginBundle.message("tip.4"),
     ).random()
 
 }
