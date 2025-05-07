@@ -6,11 +6,11 @@
 
 ## Editor
 
-`Editors` is a list of Editor groups. Each Editor group is defined by its _name_ and files matching _wildcard patterns_. The order is important: it goes from top to bottom. Editors' file name is matched upon each group starting from the top of the list.
+`Editors` is a list of Editor groups. Each Editor group is defined by its _name_ and files matching _wildcard patterns_. The order is important: it proceeds from top to bottom. An editors' file name is matched against each group starting from the top of the list.
 
 ## Name and Match
 
-`Name` is just user-friendly label. `Match` is semi-column (`;`) separated list of _wildcard_ (no regex) file patterns that defines which files will be associated with a currently selected group.
+`Name` is simply a user-friendly label. `Match` is semi-column (`;`) separated list of _wildcard_ (no regex) file patterns that define which files will be associated with a currently selected group.
 
 ## Position and Offset
 
@@ -44,4 +44,6 @@ Slideshow enables image changes in runtime, during user work. Value defines the 
 
 ## Backgrounds
 
-List of all images. Each file has to be in one row. Invalid files are simply ignored. Supports drag-and-drop.
+List of all images. Each file is on a separate row. Invalid files (not images) are simply ignored. Drag-and-drop is supported.
+
+There is a context menu that displays a preview of the image.
