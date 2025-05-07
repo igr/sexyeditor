@@ -14,6 +14,8 @@ import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.DnDConstants
 import java.awt.dnd.DropTarget
 import java.awt.dnd.DropTargetDropEvent
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
 import java.io.File
 import javax.swing.*
 import javax.swing.border.TitledBorder
@@ -133,6 +135,7 @@ open class EditorConfigUI {
     private fun createFileList(): JBList<ImageFile> {
         val fileList = uiCreateFileList(panel)
 
+        // DRAG n DROP
         try {
             fileList.dropTarget = object : DropTarget() {
                 @Synchronized
@@ -149,6 +152,42 @@ open class EditorConfigUI {
         } catch (headless: java.awt.HeadlessException) {
             LOG.warn("Drag and drop not supported in Headless mode", headless)
         }
+
+        // CONTEXT
+        val contextMenu = JPopupMenu()
+        val deleteItem = JMenuItem("Remove")
+        deleteItem.addActionListener {
+            val selectedValue = fileList.selectedIndex
+            if (selectedValue != -1) {
+                removeFromFileListModel(selectedValue)
+            }
+        }
+        contextMenu.add(deleteItem)
+        contextMenu.add(JMenuItem(PluginIcons.WARNING))
+
+        fileList.addMouseListener(object : MouseAdapter() {
+            override fun mousePressed(e: MouseEvent) {
+                handleRightClick(e)
+            }
+
+            override fun mouseReleased(e: MouseEvent) {
+                handleRightClick(e)
+            }
+
+            private fun handleRightClick(e: MouseEvent) {
+                if (e.isPopupTrigger && fileList.locationToIndex(e.getPoint()) != -1) {
+                    val index = fileList.locationToIndex(e.getPoint())
+                    fileList.setSelectedIndex(index) // Highlight selected item
+                    val elem = fileListModel[index]
+
+                    val icon = loadImageAsIcon(elem.path, 50f) ?: PluginIcons.WARNING
+                    contextMenu.remove(1)
+                    contextMenu.add(JMenuItem(icon))
+                    contextMenu.show(fileList, e.getX(), e.getY())
+                }
+            }
+        })
+
         return fileList
     }
 
@@ -162,9 +201,18 @@ open class EditorConfigUI {
             if (max == -1) {
                 return@uiCreateRemoveFileButton
             }
-            fileListModel.removeRange(min, max)
-            uiSetFileListLabelText(fileListLabel, fileListModel.size)
+            removeFromFileListModel(min, max)
         }
+    }
+
+    private fun removeFromFileListModel(min: Int, max: Int) {
+        fileListModel.removeRange(min, max)
+        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+    }
+
+    private fun removeFromFileListModel(ndx: Int) {
+        fileListModel.removeElementAt(ndx)
+        uiSetFileListLabelText(fileListLabel, fileListModel.size)
     }
 
     internal fun addToFileListModel(files: List<File>) {

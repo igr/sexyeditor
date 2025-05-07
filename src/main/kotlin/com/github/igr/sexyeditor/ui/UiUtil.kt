@@ -82,7 +82,7 @@ fun createScaledInstance(
     return ret
 }
 
-fun loadImageAsIcon(path: String): ImageIcon? {
+fun loadImageAsIcon(path: String, max: Float): ImageIcon? {
     val image = try {
         ImageIO.read(File(path))
     } catch (e: IOException) {
@@ -93,8 +93,8 @@ fun loadImageAsIcon(path: String): ImageIcon? {
         return null
     }
 
-    val maxWidth = 32f
-    val maxHeight = 32f
+    val maxWidth = max
+    val maxHeight = max
 
     val priorHeight = image.height.toFloat()
     val priorWidth = image.width.toFloat()

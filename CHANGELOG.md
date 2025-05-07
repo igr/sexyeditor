@@ -6,7 +6,8 @@
 
 ### Added
 
-- Show number of files.
+- Show the number of files.
+- Add the right-click on the file with a simple preview.
 
 ### Changed
 
