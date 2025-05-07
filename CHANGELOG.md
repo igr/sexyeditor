@@ -8,6 +8,8 @@
 
 ### Changed
 
+- Add a transparent background for previews.
+
 ### Deprecated
 
 ### Removed
