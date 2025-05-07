@@ -4,7 +4,6 @@ import com.intellij.ui.JBColor
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.RenderingHints
-import java.awt.event.ActionEvent
 import java.awt.image.BufferedImage
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener

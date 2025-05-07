@@ -110,10 +110,10 @@ open class EditorConfigUI {
         fileListModel = fileList.model as DefaultListModel<ImageFile>
 
         positionComboBoxModel = positionComboBox.model as DefaultComboBoxModel<BackgroundPosition>
-        BackgroundPosition.values().forEach { positionComboBoxModel.addElement(it) }
+        BackgroundPosition.entries.forEach { positionComboBoxModel.addElement(it) }
 
         fitTypeComboBoxModel = fitTypeComboBox.model as DefaultComboBoxModel<FitType>
-        FitType.values().forEach { fitTypeComboBoxModel.addElement(it) }
+        FitType.entries.forEach { fitTypeComboBoxModel.addElement(it) }
     }
 
     private fun createSpacer1() {
