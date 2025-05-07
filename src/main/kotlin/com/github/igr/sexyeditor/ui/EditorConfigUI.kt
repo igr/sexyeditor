@@ -4,6 +4,7 @@ import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.FitType
 import com.github.igr.sexyeditor.ui.editor.*
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.ui.components.JBList
 import com.intellij.uiDesigner.core.GridLayoutManager
@@ -33,6 +34,7 @@ open class EditorConfigUI {
     private val insertFilesButton: JButton
     private val removeFilesButton: JButton
     protected val fixedPositionCheckBox: JCheckBox
+    private val fileListLabel: JLabel
     private val fileList: JBList<ImageFile>
     protected val fileListModel: DefaultListModel<ImageFile>
     protected val positionComboBox: JComboBox<BackgroundPosition>
@@ -48,7 +50,6 @@ open class EditorConfigUI {
         val checkbox = Dimension(60, 22)
         val button = Dimension(70, 25)
     }
-
 
     val rootComponent: JComponent
         get() = panel
@@ -93,7 +94,7 @@ open class EditorConfigUI {
         uiCreateSpacer1(panel)
 
         // row 10
-        uiCreateFileListLabel(panel, dimensions.label)
+        fileListLabel = uiCreateFileListLabel(panel, dimensions.label)
         fileList = createFileList()
 
         // row 11
@@ -124,13 +125,7 @@ open class EditorConfigUI {
             }
             val returnVal = chooser.showOpenDialog(panel)
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                for (file in chooser.selectedFiles) {
-                    fileListModel.addElement(
-                        ImageFile(
-                            file.absolutePath
-                        )
-                    )
-                }
+                addToFileListModelInBackground(chooser.selectedFiles.asList())
             }
         }
     }
@@ -145,13 +140,7 @@ open class EditorConfigUI {
                     try {
                         evt.acceptDrop(DnDConstants.ACTION_COPY)
                         val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
-                        for (file in droppedFiles) {
-                            fileListModel.addElement(
-                                ImageFile(
-                                    file.absolutePath
-                                )
-                            )
-                        }
+                        addToFileListModelInBackground(droppedFiles)
                     } catch (ex: Exception) {
                         LOG.warn("Drag and drop failed", ex)
                     }
@@ -174,6 +163,34 @@ open class EditorConfigUI {
                 return@uiCreateRemoveFileButton
             }
             fileListModel.removeRange(min, max)
+            uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        }
+    }
+
+    internal fun addToFileListModel(files: List<File>) {
+        fileList.setPaintBusy(true)
+
+        LOG.info("Adding files to list in the background")
+        for (file in files) {
+            if (!file.exists()) {
+                continue
+            }
+            if (!file.isFile) {
+                continue
+            }
+            fileListModel.addElement(
+                ImageFile(
+                    file.absolutePath
+                )
+            )
+        }
+        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        fileList.setPaintBusy(false)
+    }
+
+    private fun addToFileListModelInBackground(files: List<File>) {
+        ApplicationManager.getApplication().executeOnPooledThread {
+            addToFileListModel(files)
         }
     }
 

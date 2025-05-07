@@ -4,6 +4,7 @@ package com.github.igr.sexyeditor.ui
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.util.ui.ImageUtil
 import com.intellij.util.ui.UIUtil
+import java.awt.Color
 import java.awt.RenderingHints
 import java.awt.Transparency
 import java.awt.image.BufferedImage
@@ -11,7 +12,6 @@ import java.io.File
 import java.io.IOException
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
-import java.awt.Color
 
 private val LOG = logger<UIUtil>()
 
@@ -82,7 +82,7 @@ fun createScaledInstance(
     return ret
 }
 
-fun ImageFile.loadImageAsIcon(): ImageIcon? {
+fun loadImageAsIcon(path: String): ImageIcon? {
     val image = try {
         ImageIO.read(File(path))
     } catch (e: IOException) {

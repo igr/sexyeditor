@@ -21,7 +21,7 @@ class ImageListCellRenderer : DefaultListCellRenderer {
         val component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus)
         val jLabel = component as JLabel
 
-        jLabel.setIcon(imageFile.icon)
+        //jLabel.setIcon(imageFile.icon)
         jLabel.setHorizontalTextPosition(RIGHT)
 
         jLabel.text = if (imageFile.path.startsWith(home)) {

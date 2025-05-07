@@ -1,11 +1,10 @@
 package com.github.igr.sexyeditor.ui
 
-import javax.swing.ImageIcon
-
+/**
+ * The image file.
+ */
 data class ImageFile(
     val path: String
 ) {
-    val icon: ImageIcon by lazy {
-        return@lazy loadImageAsIcon() ?: PluginIcons.WARNING
-    }
+    //val icon: ImageIcon = loadImageAsIcon(path) ?: PluginIcons.WARNING
 }

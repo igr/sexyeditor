@@ -6,13 +6,18 @@
 
 ### Added
 
+- Show number of files.
+
 ### Changed
 
 - Add a transparent background for previews.
+- Minor UI tweaks.
 
 ### Deprecated
 
 ### Removed
+
+- Thumbnails in the file list.
 
 ### Fixed
 

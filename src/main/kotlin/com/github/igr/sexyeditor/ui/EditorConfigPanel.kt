@@ -3,6 +3,7 @@ package com.github.igr.sexyeditor.ui
 import com.github.igr.sexyeditor.config.BackgroundConfiguration
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.FitType
+import java.io.File
 
 class EditorConfigPanel : EditorConfigUI() {
 
@@ -38,13 +39,7 @@ class EditorConfigPanel : EditorConfigUI() {
         }
         slideShowPause.text = config.slideshowPause.toString()
         fileListModel.clear()
-        for (fileName in config.fileNames) {
-            fileListModel.addElement(
-                ImageFile(
-                    fileName
-                )
-            )
-        }
+        addToFileListModel(config.fileNames.map { File(it) }.toList())
     }
 
     /**
