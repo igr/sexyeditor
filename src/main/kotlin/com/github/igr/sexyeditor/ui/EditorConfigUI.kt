@@ -3,29 +3,13 @@ package com.github.igr.sexyeditor.ui
 import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.FitType
-import com.github.igr.sexyeditor.ui.editor.uiCreateFileListLabel
-import com.github.igr.sexyeditor.ui.editor.uiCreateFitTypeComboBox
-import com.github.igr.sexyeditor.ui.editor.uiCreateFixedPositionCheckbox
-import com.github.igr.sexyeditor.ui.editor.uiCreateMatchTextField
-import com.github.igr.sexyeditor.ui.editor.uiCreateNameTextField
-import com.github.igr.sexyeditor.ui.editor.uiCreateOpacitySlider
-import com.github.igr.sexyeditor.ui.editor.uiCreatePositionComboBox
-import com.github.igr.sexyeditor.ui.editor.uiCreatePositionOffsetTextField
-import com.github.igr.sexyeditor.ui.editor.uiCreateRandomCheckBox
-import com.github.igr.sexyeditor.ui.editor.uiCreateResizeCheckBox
-import com.github.igr.sexyeditor.ui.editor.uiCreateResizeSlider
-import com.github.igr.sexyeditor.ui.editor.uiCreateSlideShowCheckBox
-import com.github.igr.sexyeditor.ui.editor.uiCreateSlideShowPause
-import com.github.igr.sexyeditor.ui.editor.uiCreateSpacer1
-import com.github.igr.sexyeditor.ui.editor.uiCreateSpacer3
+import com.github.igr.sexyeditor.ui.editor.*
 import com.intellij.openapi.diagnostic.logger
-import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.uiDesigner.core.GridConstraints
 import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
-import com.intellij.uiDesigner.core.Spacer
 import com.intellij.util.ui.JBUI
 import java.awt.Dimension
 import java.awt.datatransfer.DataFlavor
@@ -83,42 +67,42 @@ open class EditorConfigUI {
         )
 
         // row 0
-        nameTextField = createNameTextField()
-        matchTextField = createMatchTextField()
+        nameTextField = uiCreateNameTextField(panel, dimensions.label, dimensions.textField)
+        matchTextField = uiCreateMatchTextField(panel, dimensions.label, dimensions.textField)
 
         // row 1
-        positionComboBox = createPositionComboBox()
+        positionComboBox = uiCreatePositionComboBox(panel, dimensions.label, dimensions.combobox)
         // row 2
-        positionOffsetTextField = createPositionOffsetTextField()
+        positionOffsetTextField = uiCreatePositionOffsetTextField(panel, dimensions.smallTextField)
 
         // row 4
-        fixedPositionCheckBox = createFixedPositionCheckbox()
+        fixedPositionCheckBox = uiCreateFixedPositionCheckbox(panel, dimensions.label)
         // row 5
-        fitTypeComboBox = createFitTypeComboBox()
+        fitTypeComboBox = uiCreateFitTypeComboBox(panel, dimensions.combobox)
 
         // row 6
-        opacitySlider = createOpacitySlider()
+        opacitySlider = uiCreateOpacitySlider(panel, dimensions.label)
 
         // row 7
-        resizeSlider = createResizeSlider()
-        resizeCheckBox = createResizeCheckBox(resizeSlider)
+        resizeSlider = uiCreateResizeSlider(panel)
+        resizeCheckBox = uiCreateResizeCheckBox(panel, dimensions.checkbox, resizeSlider)
 
         // row 8
-        randomCheckBox = createRandomCheckBox()
+        randomCheckBox = uiCreateRandomCheckBox(panel, dimensions.checkbox)
 
         // row 9
-        slideShowPause = createSlideShowPause()
-        slideshowCheckBox = createSlideShowCheckBox(slideShowPause)
-        createSpacer1()
+        slideShowPause = uiCreateSlideShowPause(panel, dimensions.smallTextField)
+        slideshowCheckBox = uiCreateSlideShowCheckBox(panel, dimensions.checkbox, slideShowPause)
+        uiCreateSpacer1(panel)
 
         // row 10
-        createFileListLabel()
+        uiCreateFileListLabel(panel, dimensions.label)
         fileList = createFileList()
 
         // row 11
         insertFilesButton = createInsertFilesButton()
         removeFilesButton = createRemoveFileButton()
-        createSpacer3()
+        uiCreateSpacer3(panel)
 
         // setup
 
@@ -131,80 +115,27 @@ open class EditorConfigUI {
         FitType.entries.forEach { fitTypeComboBoxModel.addElement(it) }
     }
 
-    private fun createSpacer1() {
-        uiCreateSpacer1(panel)
-    }
-
-    private fun createNameTextField(): JTextField {
-        return uiCreateNameTextField(panel, dimensions.label, dimensions.textField)
-    }
-
-    private fun createPositionComboBox(): JComboBox<BackgroundPosition> {
-        return uiCreatePositionComboBox(panel,dimensions.label, dimensions.combobox)
-    }
-
-    private fun createOpacitySlider(): JSlider {
-        return uiCreateOpacitySlider(panel, dimensions.label)
-    }
-
-    private fun createResizeCheckBox(shrinkSlider: JSlider): JCheckBox {
-        return uiCreateResizeCheckBox(panel, dimensions.checkbox, shrinkSlider)
-    }
-
-    private fun createResizeSlider(): JSlider {
-        return uiCreateResizeSlider(panel)
-    }
-
-    private fun createRandomCheckBox(): JCheckBox {
-        return uiCreateRandomCheckBox(panel, dimensions.checkbox)
-    }
-
-    private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
-        return uiCreateSlideShowCheckBox(panel, dimensions.checkbox, slideShowPause)
-    }
-
-    private fun createSlideShowPause(): JTextField {
-        return uiCreateSlideShowPause(panel, dimensions.smallTextField)
-    }
-
     private fun createInsertFilesButton(): JButton {
-        val insertFilesButton = JButton().apply {
-            icon = PluginIcons.IMAGES
-            text = PluginBundle.message("label.add-images")
-            addActionListener {
-                val chooser = JFileChooser().apply {
-                    isMultiSelectionEnabled = true
-                    dialogTitle = "Select images"
-                    preferredSize = Dimension(800, 500)
-                }
-                ImagePreviewPanel().apply {
-                    attachToFileChooser(chooser, "Only images")
-                }
-                val returnVal = chooser.showOpenDialog(panel)
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    for (file in chooser.selectedFiles) {
-                        fileListModel.addElement(
-                            ImageFile(
-                                file.absolutePath
-                            )
+        return uiCreateInsertFilesButton(panel, dimensions.button) {
+            val chooser = JFileChooser().apply {
+                isMultiSelectionEnabled = true
+                dialogTitle = "Select images"
+                preferredSize = Dimension(800, 500)
+            }
+            ImagePreviewPanel().apply {
+                attachToFileChooser(chooser, "Only images")
+            }
+            val returnVal = chooser.showOpenDialog(panel)
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                for (file in chooser.selectedFiles) {
+                    fileListModel.addElement(
+                        ImageFile(
+                            file.absolutePath
                         )
-                    }
+                    )
                 }
             }
         }
-        panel.add(
-            insertFilesButton,
-            GridConstraints(
-                10, 1, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.button, null, 0, false
-            )
-        )
-        return insertFilesButton
-    }
-
-    private fun createMatchTextField(): JTextField {
-        return uiCreateMatchTextField(panel, dimensions.label, dimensions.textField)
     }
 
     private fun createFileList(): JBList<ImageFile> {
@@ -254,50 +185,18 @@ open class EditorConfigUI {
         return fileList
     }
 
-    private fun createPositionOffsetTextField(): JTextField {
-        return uiCreatePositionOffsetTextField(panel, dimensions.smallTextField)
-    }
-
-    private fun createFileListLabel() {
-        uiCreateFileListLabel(panel, dimensions.label)
-    }
-
     private fun createRemoveFileButton(): JButton {
-        val removeFilesButton = JButton().apply {
-            text = PluginBundle.message("button.remove")
-            addActionListener {
-                val min = fileList.minSelectionIndex
-                if (min == -1) {
-                    return@addActionListener
-                }
-                val max = fileList.maxSelectionIndex
-                if (max == -1) {
-                    return@addActionListener
-                }
-                fileListModel.removeRange(min, max)
+        return uiCreateRemoveFileButton(panel, dimensions.button) {
+            val min = fileList.minSelectionIndex
+            if (min == -1) {
+                return@uiCreateRemoveFileButton
             }
+            val max = fileList.maxSelectionIndex
+            if (max == -1) {
+                return@uiCreateRemoveFileButton
+            }
+            fileListModel.removeRange(min, max)
         }
-        panel.add(
-            removeFilesButton,
-            GridConstraints(
-                10, 2, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.button, null, 0, false
-            )
-        )
-        return removeFilesButton
-    }
-
-    private fun createSpacer3() {
-        uiCreateSpacer3(panel)
-    }
-
-    private fun createFixedPositionCheckbox(): JCheckBox {
-        return uiCreateFixedPositionCheckbox(panel, dimensions.label)
-    }
-
-    private fun createFitTypeComboBox(): ComboBox<FitType> {
-        return uiCreateFitTypeComboBox(panel, dimensions.combobox)
     }
 
 }
