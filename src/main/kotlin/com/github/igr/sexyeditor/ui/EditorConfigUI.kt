@@ -6,9 +6,6 @@ import com.github.igr.sexyeditor.config.FitType
 import com.github.igr.sexyeditor.ui.editor.*
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.ui.components.JBList
-import com.intellij.ui.components.JBScrollPane
-import com.intellij.uiDesigner.core.GridConstraints
-import com.intellij.uiDesigner.core.GridConstraints.*
 import com.intellij.uiDesigner.core.GridLayoutManager
 import com.intellij.util.ui.JBUI
 import java.awt.Dimension
@@ -139,26 +136,7 @@ open class EditorConfigUI {
     }
 
     private fun createFileList(): JBList<ImageFile> {
-        val scrollPane = JBScrollPane()
-        panel.add(
-            scrollPane,
-            GridConstraints(
-                9, 1, 1, 4,
-                ANCHOR_CENTER, FILL_BOTH,
-                SIZEPOLICY_FIXED,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_WANT_GROW,
-                Dimension(-1, 160), null, null, 0, false
-            )
-        )
-
-        val fileList = JBList<ImageFile>().apply {
-            model = DefaultListModel()
-            selectionMode = 1
-            toolTipText = PluginBundle.message("tooltip.filelist")
-            putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
-            cellRenderer = ImageListCellRenderer()
-        }
-        scrollPane.setViewportView(fileList)
+        val fileList = uiCreateFileList(panel)
 
         try {
             fileList.dropTarget = object : DropTarget() {
