@@ -3,6 +3,21 @@ package com.github.igr.sexyeditor.ui
 import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.FitType
+import com.github.igr.sexyeditor.ui.editor.uiCreateFileListLabel
+import com.github.igr.sexyeditor.ui.editor.uiCreateFitTypeComboBox
+import com.github.igr.sexyeditor.ui.editor.uiCreateFixedPositionCheckbox
+import com.github.igr.sexyeditor.ui.editor.uiCreateMatchTextField
+import com.github.igr.sexyeditor.ui.editor.uiCreateNameTextField
+import com.github.igr.sexyeditor.ui.editor.uiCreateOpacitySlider
+import com.github.igr.sexyeditor.ui.editor.uiCreatePositionComboBox
+import com.github.igr.sexyeditor.ui.editor.uiCreatePositionOffsetTextField
+import com.github.igr.sexyeditor.ui.editor.uiCreateRandomCheckBox
+import com.github.igr.sexyeditor.ui.editor.uiCreateResizeCheckBox
+import com.github.igr.sexyeditor.ui.editor.uiCreateResizeSlider
+import com.github.igr.sexyeditor.ui.editor.uiCreateSlideShowCheckBox
+import com.github.igr.sexyeditor.ui.editor.uiCreateSlideShowPause
+import com.github.igr.sexyeditor.ui.editor.uiCreateSpacer1
+import com.github.igr.sexyeditor.ui.editor.uiCreateSpacer3
 import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
@@ -117,194 +132,39 @@ open class EditorConfigUI {
     }
 
     private fun createSpacer1() {
-        panel.add(
-            Spacer(),
-            GridConstraints(
-                8, 2, 1, 3,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, SIZEPOLICY_CAN_SHRINK,
-                null, null, null, 0, false
-            )
-        )
+        uiCreateSpacer1(panel)
     }
 
     private fun createNameTextField(): JTextField {
-        val nameTextField = JTextField().apply {
-            text = ""
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.name")
-                labelFor = nameTextField
-                toolTipText = PluginBundle.message("tooltip.name")
-            },
-            GridConstraints(
-                0, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
-        panel.add(
-            nameTextField,
-            GridConstraints(
-                0, 1, 1, 4,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.textField, null, 0, false
-            )
-        )
-        return nameTextField
+        return uiCreateNameTextField(panel, dimensions.label, dimensions.textField)
     }
 
     private fun createPositionComboBox(): JComboBox<BackgroundPosition> {
-        val positionComboBox = ComboBox<BackgroundPosition>().apply {
-            isEditable = false
-            maximumRowCount = 9
-            renderer = PositionComboBoxRenderer()
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.position")
-                labelFor = positionComboBox
-                toolTipText = PluginBundle.message("tooltip.position")
-            },
-            GridConstraints(
-                2, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
-        panel.add(
-            positionComboBox,
-            GridConstraints(
-                2, 1, 1, 2,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.combobox, null, 0, false
-            )
-        )
-        return positionComboBox
+        return uiCreatePositionComboBox(panel,dimensions.label, dimensions.combobox)
     }
 
     private fun createOpacitySlider(): JSlider {
-        val opacitySlider = JSlider().apply {
-            majorTickSpacing = 10
-            minorTickSpacing = 5
-            paintLabels = true
-            paintTicks = true
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.opacity")
-                labelFor = opacitySlider
-                toolTipText = PluginBundle.message("tooltip.opacity")
-            },
-            GridConstraints(
-                5, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
-        panel.add(
-            opacitySlider,
-            GridConstraints(
-                5, 1, 1, 4,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        return opacitySlider
+        return uiCreateOpacitySlider(panel, dimensions.label)
     }
 
     private fun createResizeCheckBox(shrinkSlider: JSlider): JCheckBox {
-        val resizeCheckBox = JCheckBox().apply {
-            text = PluginBundle.message("label.resize-on-load")
-            toolTipText = PluginBundle.message("tooltip.resize")
-            addActionListener {  shrinkSlider.isEnabled = isSelected }
-        }
-
-        panel.add(
-            resizeCheckBox,
-            GridConstraints(
-                6, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null, dimensions.checkbox, null, 0, false
-            )
-        )
-        return resizeCheckBox
+        return uiCreateResizeCheckBox(panel, dimensions.checkbox, shrinkSlider)
     }
 
     private fun createResizeSlider(): JSlider {
-        val resizeSlider = JSlider().apply {
-            isEnabled = false
-            majorTickSpacing = 10
-            minimum = 0
-            minorTickSpacing = 5
-            paintLabels = true
-            paintTicks = true
-            toolTipText =  PluginBundle.message("tooltip.resize-slider")
-        }
-        panel.add(
-            resizeSlider,
-            GridConstraints(
-                6, 1, 1, 4,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        return resizeSlider
+        return uiCreateResizeSlider(panel)
     }
 
     private fun createRandomCheckBox(): JCheckBox {
-        val randomCheckBox = JCheckBox().apply {
-            text = PluginBundle.message("label.random")
-            toolTipText = PluginBundle.message("tooltip.random")
-        }
-        panel.add(
-            randomCheckBox,
-            GridConstraints(
-                7, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.checkbox, null, 0, false
-            )
-        )
-        return randomCheckBox
+        return uiCreateRandomCheckBox(panel, dimensions.checkbox)
     }
 
     private fun createSlideShowCheckBox(slideShowPause: JTextField): JCheckBox {
-        val slideshowCheckBox = JCheckBox().apply {
-            text = PluginBundle.message("label.slideshow")
-            toolTipText = PluginBundle.message("tooltip.slideshow")
-            addActionListener { slideShowPause.isEnabled = isSelected }
-        }
-        panel.add(
-            slideshowCheckBox,
-            GridConstraints(
-                8, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null, dimensions.checkbox, null, 0, false
-            )
-        )
-        return slideshowCheckBox
+        return uiCreateSlideShowCheckBox(panel, dimensions.checkbox, slideShowPause)
     }
 
     private fun createSlideShowPause(): JTextField {
-        val slideShowPause = JTextField().apply {
-            columns = 10
-            isEnabled = false
-            toolTipText = PluginBundle.message("tooltip.slideshow-pause")
-        }
-        panel.add(
-            slideShowPause,
-            GridConstraints(
-                8, 1, 1, 1,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.smallTextField, null, 0, false
-            )
-        )
-        return slideShowPause
+        return uiCreateSlideShowPause(panel, dimensions.smallTextField)
     }
 
     private fun createInsertFilesButton(): JButton {
@@ -344,29 +204,7 @@ open class EditorConfigUI {
     }
 
     private fun createMatchTextField(): JTextField {
-        val matchTextField = JTextField()
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.match")
-                labelFor = matchTextField
-                toolTipText = PluginBundle.message("tooltip.match")
-            },
-            GridConstraints(
-                1, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
-        panel.add(
-            matchTextField,
-            GridConstraints(
-                1, 1, 1, 4,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.textField, null, 0, false
-            )
-        )
-        return matchTextField
+        return uiCreateMatchTextField(panel, dimensions.label, dimensions.textField)
     }
 
     private fun createFileList(): JBList<ImageFile> {
@@ -417,43 +255,11 @@ open class EditorConfigUI {
     }
 
     private fun createPositionOffsetTextField(): JTextField {
-        val positionOffsetTextField = JTextField().apply {
-            columns = 4
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.offset")
-                labelFor = positionOffsetTextField
-                toolTipText = PluginBundle.message("tooltip.position-offset")
-            },
-            GridConstraints(
-                2, 3, 1, 1,
-                ANCHOR_EAST, FILL_NONE, SIZEPOLICY_WANT_GROW, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        panel.add(
-            positionOffsetTextField,
-            GridConstraints(
-                2, 4, 1, 1,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.smallTextField, null, 0, false
-            )
-        )
-        return positionOffsetTextField
+        return uiCreatePositionOffsetTextField(panel, dimensions.smallTextField)
     }
 
     private fun createFileListLabel() {
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.file-list")
-            },
-            GridConstraints(
-                9, 0, 1, 1,
-                ANCHOR_NORTHWEST, FILL_NONE, SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
+        uiCreateFileListLabel(panel, dimensions.label)
     }
 
     private fun createRemoveFileButton(): JButton {
@@ -483,74 +289,15 @@ open class EditorConfigUI {
     }
 
     private fun createSpacer3() {
-        panel.add(
-            Spacer(),
-            GridConstraints(
-                10, 3, 1, 1,
-                ANCHOR_CENTER, FILL_HORIZONTAL, SIZEPOLICY_WANT_GROW, 1,
-                null, null, null, 0, false
-            )
-        )
+        uiCreateSpacer3(panel)
     }
 
     private fun createFixedPositionCheckbox(): JCheckBox {
-        val fixedPositionCheckBox = JCheckBox().apply {
-            isSelected = true
-            text = ""
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.fixed-position")
-                labelFor = fixedPositionCheckBox
-                toolTipText = PluginBundle.message("tooltip.fixed-position")
-            },
-            GridConstraints(
-                3, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, dimensions.label, null, 0, false
-            )
-        )
-        panel.add(
-            fixedPositionCheckBox,
-            GridConstraints(
-                3, 1, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_CAN_SHRINK or SIZEPOLICY_CAN_GROW,
-                SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        return fixedPositionCheckBox
+        return uiCreateFixedPositionCheckbox(panel, dimensions.label)
     }
 
     private fun createFitTypeComboBox(): ComboBox<FitType> {
-        val combo = ComboBox<FitType>().apply {
-            isEditable = false
-            maximumRowCount = 4
-        }
-        panel.add(
-            JLabel().apply {
-                text = PluginBundle.message("label.fit-to-editor")
-                labelFor = combo
-                toolTipText = PluginBundle.message("tooltip.fit-to-editor")
-            },
-            GridConstraints(
-                4, 0, 1, 1,
-                ANCHOR_WEST, FILL_NONE,
-                SIZEPOLICY_FIXED, SIZEPOLICY_FIXED,
-                null, null, null, 0, false
-            )
-        )
-        panel.add(
-            combo,
-            GridConstraints(
-                4, 1, 1, 2,
-                ANCHOR_WEST, FILL_HORIZONTAL, SIZEPOLICY_CAN_GROW, SIZEPOLICY_FIXED,
-                null, dimensions.combobox, null, 0, false
-            )
-        )
-        return combo
+        return uiCreateFitTypeComboBox(panel, dimensions.combobox)
     }
 
 }
