@@ -3,6 +3,7 @@ package com.github.igr.sexyeditor.ui
 import com.github.igr.sexyeditor.PluginBundle
 import com.github.igr.sexyeditor.config.BackgroundPosition
 import com.github.igr.sexyeditor.config.FitType
+import com.intellij.openapi.diagnostic.logger
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBList
 import com.intellij.ui.components.JBScrollPane
@@ -20,6 +21,7 @@ import java.io.File
 import javax.swing.*
 import javax.swing.border.TitledBorder
 
+private val LOG = logger<EditorConfigUI>()
 
 open class EditorConfigUI {
     private val panel: JPanel = JPanel()
@@ -404,13 +406,12 @@ open class EditorConfigUI {
                             )
                         }
                     } catch (ex: Exception) {
-                        // this is a workaround to make Intellij build work
-                        ex.printStackTrace()
+                        LOG.warn("Drag and drop failed", ex)
                     }
                 }
             }
-        } catch (ignore: java.awt.HeadlessException) {
-            // Ignore, this is a headless exception
+        } catch (headless: java.awt.HeadlessException) {
+            LOG.warn("Drag and drop not supported in Headless mode", headless)
         }
         return fileList
     }
