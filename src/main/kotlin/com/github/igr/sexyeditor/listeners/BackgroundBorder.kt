@@ -44,6 +44,7 @@ class BackgroundBorder(
             return
         }
         val g2d = graphics as Graphics2D
+        val currentComposite = g2d.composite
         g2d.composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, config.opacity)
         val jv = component.parent as JViewport
         val width = jv.width
@@ -148,6 +149,9 @@ class BackgroundBorder(
         } else {
             g2d.drawImage(image, x, y, newImageWidth, newImageHeight, jv)
         }
+
+        // set composite back
+        g2d.composite = currentComposite
     }
 
     /**

@@ -14,7 +14,7 @@ import javax.swing.border.Border
 internal class EditorListener: EditorFactoryListener {
 
     /**
-     * Editor is created, finds appropriate background border and apply it to the editor.
+     * Editor is created, finds the appropriate background border and apply it to the editor.
      */
     override fun editorCreated(event: EditorFactoryEvent) {
         val editor = event.editor

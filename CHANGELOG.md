@@ -6,7 +6,7 @@
 
 ### Added
 
-- Duplicated files removed.
+- Duplicated files are removed.
 
 ### Changed
 
@@ -19,6 +19,8 @@
 ### Removed
 
 ### Fixed
+
+- Issue with Github comments.
 
 ### Security
 
