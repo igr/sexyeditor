@@ -146,15 +146,15 @@ open class MainConfigUI {
         editorsListModel = DefaultListModel()
         editorsList = JList<BackgroundConfiguration>().apply {
             model = editorsListModel
-            selectionMode = 0
+            selectionMode = ListSelectionModel.SINGLE_SELECTION
             addListSelectionListener {
                 // select a config
                 val selected = selectedIndex
                 if (selected != -1) {
-                    editorConfigPanel.load(editorsListModel.getElementAt(selected) as BackgroundConfiguration)
+                    editorConfigPanel.load(selected, editorsListModel.getElementAt(selected))
                 } else {
                     // when no config is selected, load a default one
-                    editorConfigPanel.load(BackgroundConfiguration())
+                    editorConfigPanel.load(-1, BackgroundConfiguration())
                 }
             }
         }
@@ -256,6 +256,11 @@ open class MainConfigUI {
             return
         }
         editorConfigPanel.rootComponent.isVisible = true
+        hintLabel.apply {
+            text = defaultTip()
+            icon = PluginIcons.TIP
+            verticalAlignment = SwingConstants.BOTTOM
+        }
     }
 
     private fun defaultTip() = PluginBundle.message("tip.3")

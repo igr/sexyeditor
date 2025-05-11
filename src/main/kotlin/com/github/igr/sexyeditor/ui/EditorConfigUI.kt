@@ -146,7 +146,7 @@ open class EditorConfigUI {
                         evt.acceptDrop(DnDConstants.ACTION_COPY)
                         val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
                         LOG.debug("Dropped files: ${droppedFiles.size}")
-                        addToFileListModelInBackground(droppedFiles)
+                        addToFileListModel(droppedFiles)
                     } catch (ex: Exception) {
                         LOG.warn("Drag and drop failed", ex)
                     }

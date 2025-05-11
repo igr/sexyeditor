@@ -9,10 +9,17 @@ class EditorConfigPanel : EditorConfigUI() {
 
     private var config: BackgroundConfiguration = BackgroundConfiguration()
 
+    private var currentlySelected: Int = Int.MIN_VALUE
+
     /**
      * Loads configuration to GUI.
      */
-    fun load(config: BackgroundConfiguration) {
+    fun load(selected: Int, config: BackgroundConfiguration) {
+        if (selected == currentlySelected) {
+            return
+        }
+        currentlySelected = selected
+
         this.config = config
 
         nameTextField.text = config.name

@@ -10,6 +10,7 @@ import com.intellij.uiDesigner.core.GridConstraints.*
 import java.awt.Dimension
 import javax.swing.DefaultListModel
 import javax.swing.JPanel
+import javax.swing.ListSelectionModel
 
 fun uiCreateFileList(panel: JPanel): JBList<ImageFile> {
     val scrollPane = JBScrollPane()
@@ -26,7 +27,7 @@ fun uiCreateFileList(panel: JPanel): JBList<ImageFile> {
 
     val fileList = JBList<ImageFile>().apply {
         model = DefaultListModel()
-        selectionMode = 1
+        selectionMode = ListSelectionModel.SINGLE_INTERVAL_SELECTION
         toolTipText = PluginBundle.message("tooltip.filelist")
         putClientProperty("List.isFileList", java.lang.Boolean.TRUE)
         cellRenderer = ImageListCellRenderer()
