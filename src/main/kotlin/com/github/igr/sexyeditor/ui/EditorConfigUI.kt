@@ -163,7 +163,7 @@ open class EditorConfigUI {
             }
         }
         contextMenu.add(deleteItem)
-        contextMenu.add(JMenuItem(PluginIcons.WARNING))
+        contextMenu.add(JMenuItem("N/A"))
 
         fileList.addMouseListener(object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent) {
@@ -180,7 +180,7 @@ open class EditorConfigUI {
                     fileList.setSelectedIndex(index) // Highlight selected item
                     val elem = fileListModel[index]
 
-                    val icon = loadImageAsIcon(elem.path, 50f) ?: PluginIcons.WARNING
+                    val icon = loadImageAsIcon(elem.path, 80f) ?: PluginIcons.WARNING
                     contextMenu.remove(1)
                     contextMenu.add(JMenuItem(icon))
                     contextMenu.show(fileList, e.getX(), e.getY())
@@ -234,6 +234,7 @@ open class EditorConfigUI {
         }
         uiSetFileListLabelText(fileListLabel, fileListModel.size)
         fileList.setPaintBusy(false)
+        //fileList.repaint()  // trigger repaint
     }
 
     private fun addToFileListModelInBackground(files: List<File>) {

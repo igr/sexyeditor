@@ -9,7 +9,8 @@
 ### Changed
 
 - Better texts.
-- Tips are not random anymore. 
+- Tips are not random anymore.
+- Increase preview to 80px
 
 ### Deprecated
 
