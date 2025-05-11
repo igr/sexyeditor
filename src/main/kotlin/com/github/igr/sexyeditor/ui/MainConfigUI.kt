@@ -46,7 +46,7 @@ open class MainConfigUI {
         )
         hintLabel = JLabel().apply {
             horizontalAlignment = SwingConstants.CENTER
-            text = randomTip()
+            text = defaultTip()
             icon = PluginIcons.TIP
             verticalAlignment = SwingConstants.BOTTOM
             addMouseListener(object : MouseAdapter() {
@@ -256,18 +256,17 @@ open class MainConfigUI {
             return
         }
         editorConfigPanel.rootComponent.isVisible = true
-        hintLabel.apply {
-            text = randomTip()
-            icon = PluginIcons.TIP
-            verticalAlignment = SwingConstants.BOTTOM
-        }
     }
 
-    private fun randomTip(): String = arrayOf(
-        PluginBundle.message("tip.1"),
-        PluginBundle.message("tip.2"),
-        PluginBundle.message("tip.3"),
-        PluginBundle.message("tip.4"),
-    ).random()
+    private fun defaultTip() = PluginBundle.message("tip.3")
+
+    private var tipCount = 3
+    private fun randomTip(): String {
+        tipCount++
+        if (tipCount > 4) {
+            tipCount = 1
+        }
+        return PluginBundle.message("tip.$tipCount")
+    }
 
 }

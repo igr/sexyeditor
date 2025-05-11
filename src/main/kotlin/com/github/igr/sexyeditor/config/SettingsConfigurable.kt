@@ -28,6 +28,7 @@ class SettingsConfigurable: Configurable {
             }
 
             if (state.configs.isEmpty()) {
+                // initial configuration
                 state.configs.add(BackgroundConfiguration())
             }
         }

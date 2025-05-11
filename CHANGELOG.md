@@ -2,7 +2,24 @@
 
 # Awesome Editor Changelog
 
-## [Unreleased]
+## [5.1.1]
+
+### Added
+
+### Changed
+
+- Better texts.
+- Tips are not random anymore. 
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## 5.1.0 - 2025-05-08
 
 ### Added
 
@@ -14,15 +31,9 @@
 - Add a transparent background for previews.
 - Minor UI tweaks.
 
-### Deprecated
-
 ### Removed
 
 - Thumbnails in the file list.
-
-### Fixed
-
-### Security
 
 ## 5.0.0 - 2025-04-05
 
