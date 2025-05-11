@@ -113,6 +113,8 @@ open class EditorConfigUI {
 
         fitTypeComboBoxModel = fitTypeComboBox.model as DefaultComboBoxModel<FitType>
         FitType.entries.forEach { fitTypeComboBoxModel.addElement(it) }
+
+        uiSetFileListLabelText(fileListLabel, fileListModel.size)
     }
 
     private fun createInsertFilesButton(): JButton {
@@ -143,6 +145,7 @@ open class EditorConfigUI {
                     try {
                         evt.acceptDrop(DnDConstants.ACTION_COPY)
                         val droppedFiles = evt.transferable.getTransferData(DataFlavor.javaFileListFlavor) as List<File>
+                        LOG.debug("Dropped files: ${droppedFiles.size}")
                         addToFileListModelInBackground(droppedFiles)
                     } catch (ex: Exception) {
                         LOG.warn("Drag and drop failed", ex)
@@ -216,9 +219,12 @@ open class EditorConfigUI {
     }
 
     internal fun addToFileListModel(files: List<File>) {
+        if (files.isEmpty()) {
+            return
+        }
         fileList.setPaintBusy(true)
 
-        LOG.info("Adding files to list in the background")
+        LOG.info("Adding files to list: ${files.size}")
         for (file in files) {
             if (!file.exists()) {
                 continue
@@ -234,10 +240,13 @@ open class EditorConfigUI {
         }
         uiSetFileListLabelText(fileListLabel, fileListModel.size)
         fileList.setPaintBusy(false)
-        //fileList.repaint()  // trigger repaint
+        fileList.repaint()
     }
 
     private fun addToFileListModelInBackground(files: List<File>) {
+        if (files.isEmpty()) {
+            return
+        }
         ApplicationManager.getApplication().executeOnPooledThread {
             addToFileListModel(files)
         }

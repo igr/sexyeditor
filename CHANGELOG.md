@@ -18,6 +18,8 @@
 
 ### Fixed
 
+- Drag-n-Droped files visibility.
+
 ### Security
 
 ## 5.1.0 - 2025-05-08
