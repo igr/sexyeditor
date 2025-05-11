@@ -19,7 +19,7 @@ class MainConfigPanel : MainConfigUI() {
     }
 
     /**
-     * Saves current changes and creates new configuration list instance.
+     * Saves current changes and creates a new configuration list instance.
      */
     fun save(): MutableList<BackgroundConfiguration> {
         // replace current border config
@@ -29,7 +29,7 @@ class MainConfigPanel : MainConfigUI() {
             editorsList.selectedIndex = selected
         }
 
-        // creates new list
+        // creates the new list
         val newConfigs: MutableList<BackgroundConfiguration> = ArrayList(editorsListModel.size)
         for (i in 0 until editorsListModel.size) {
             newConfigs.add(editorsListModel.getElementAt(i) as BackgroundConfiguration)
@@ -39,8 +39,7 @@ class MainConfigPanel : MainConfigUI() {
 
     private fun saveBackgroundConfig(index: Int) {
         val newConfiguration: BackgroundConfiguration = editorConfigPanel.save()
-        editorsListModel.remove(index)
-        editorsListModel.add(index, newConfiguration)
+        editorsListModel.set(index, newConfiguration)
     }
 
     /**

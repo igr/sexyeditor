@@ -28,7 +28,7 @@ class PluginState : PersistentStateComponent<PluginState> {
     }
 
     /**
-     * Loads state from configuration file.
+     * Loads state from the configuration file.
      */
     override fun loadState(state: PluginState) {
         XmlSerializerUtil.copyBean(state, this)
