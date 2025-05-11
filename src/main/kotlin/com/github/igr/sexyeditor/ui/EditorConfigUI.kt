@@ -114,7 +114,7 @@ open class EditorConfigUI {
         fitTypeComboBoxModel = fitTypeComboBox.model as DefaultComboBoxModel<FitType>
         FitType.entries.forEach { fitTypeComboBoxModel.addElement(it) }
 
-        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        updateFilesCount()
     }
 
     private fun createInsertFilesButton(): JButton {
@@ -210,12 +210,12 @@ open class EditorConfigUI {
 
     private fun removeFromFileListModel(min: Int, max: Int) {
         fileListModel.removeRange(min, max)
-        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        updateFilesCount()
     }
 
     private fun removeFromFileListModel(ndx: Int) {
         fileListModel.removeElementAt(ndx)
-        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        updateFilesCount()
     }
 
     internal fun addToFileListModel(files: List<File>) {
@@ -242,9 +242,13 @@ open class EditorConfigUI {
                 )
             )
         }
-        uiSetFileListLabelText(fileListLabel, fileListModel.size)
+        updateFilesCount()
         fileList.setPaintBusy(false)
         fileList.repaint()
+    }
+
+    private fun updateFilesCount() {
+        uiSetFileListLabelText(fileListLabel, fileListModel.size)
     }
 
     private fun addToFileListModelInBackground(files: List<File>) {
