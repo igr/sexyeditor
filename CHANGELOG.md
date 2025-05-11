@@ -2,9 +2,11 @@
 
 # Awesome Editor Changelog
 
-## [5.1.1]
+## [5.2.0]
 
 ### Added
+
+- Duplicated files removed.
 
 ### Changed
 
@@ -17,8 +19,6 @@
 ### Removed
 
 ### Fixed
-
-- Drag-n-Droped files visibility.
 
 ### Security
 

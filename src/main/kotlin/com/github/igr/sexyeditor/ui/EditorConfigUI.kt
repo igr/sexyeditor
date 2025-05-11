@@ -223,6 +223,7 @@ open class EditorConfigUI {
             return
         }
         fileList.setPaintBusy(true)
+        val existingFiles = fileListModel.elements().toList().map { it.path }
 
         LOG.info("Adding files to list: ${files.size}")
         for (file in files) {
@@ -230,6 +231,9 @@ open class EditorConfigUI {
                 continue
             }
             if (!file.isFile) {
+                continue
+            }
+            if (existingFiles.contains(file.path)) {
                 continue
             }
             fileListModel.addElement(
