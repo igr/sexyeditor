@@ -6,6 +6,20 @@
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## 5.2.0 - 2025-05-12
+
+### Added
+
 - Duplicated files are removed.
 
 ### Changed
@@ -14,15 +28,9 @@
 - Tips are not random anymore.
 - Increase preview to 80px
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - Issue with Github comments.
-
-### Security
 
 ## 5.1.0 - 2025-05-08
 
